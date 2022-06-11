@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/teachme/static/css/main.d84b73c0.css",
+    "main.js": "/teachme/static/js/main.a50f80ba.js",
+    "index.html": "/teachme/index.html",
+    "main.d84b73c0.css.map": "/teachme/static/css/main.d84b73c0.css.map",
+    "main.a50f80ba.js.map": "/teachme/static/js/main.a50f80ba.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d84b73c0.css",
+    "static/js/main.a50f80ba.js"
+  ]
+}
