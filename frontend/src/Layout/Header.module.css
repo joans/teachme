@@ -1,3 +1,5 @@
+/* TODO: Implement responsive design */
+
 .header{
     position: fixed;
     top: 0;
@@ -9,4 +11,16 @@
     align-items: center;
     padding: 0 10%;
     box-sizing: border-box;
+}
+
+.right-side li{
+    list-style-type: none;
+    float: left;
+    height: auto;
+    vertical-align: middle;
+    line-height: 5rem;
+}
+
+.right-side *{
+    margin: 0 .5em;
 }
