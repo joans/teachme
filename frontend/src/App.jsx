@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Header from "./Layout/Header";
 import CreateOffer from "./Pages/CreateOffer";
@@ -10,7 +10,6 @@ import ErrorPage from "./Pages/ErrorPage";
 function App() {
   return (
     <div className="App">
-      <Router>
       <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -19,7 +18,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-      </Router>
     </div>
   );
 }
