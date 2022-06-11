@@ -1,19 +1,30 @@
+:root{
+    --bg-main: #4B497A;
+    --bg-two: #5E7691;
+    --bg-three: #C1BEB7;
+    --bg-four: #E6E3D3;
+    --color-main: #f8f8ff;
+    --color-two: #f8f8ff;
+    --color-three: #444444;
+    --color-four: #444444;
+}
+
 .color-main{
-    background-color: #4B497A;
-    color: #f8f8ff;
+    background-color: var(--bg-main);
+    color: var(--color-main);
 }
 
 .color-two{
-    background-color: #5E7691;
-    color: #f8f8ff;
+    background-color: var(--bg-two);
+    color: var(--color-two);
 }
 
 .color-three{
-    background-color: #C1BEB7;
+    background-color: var(--bg-three);
     color: #444444;
 }
 
 .color-four{
-    background-color: #E6E3D3;
-    color: #444444;
+    background-color: var(--bg-four);
+    color: var(--color-four);
 }
