@@ -11,6 +11,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <div className="page">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create_offer" element={<CreateOffer />} />
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
+      </div>
     </div>
   );
 }

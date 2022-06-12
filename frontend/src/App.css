@@ -1,30 +1,44 @@
-:root{
-    --bg-main: #4B497A;
-    --bg-two: #5E7691;
-    --bg-three: #C1BEB7;
-    --bg-four: #E6E3D3;
-    --color-main: #f8f8ff;
-    --color-two: #f8f8ff;
-    --color-three: #444444;
-    --color-four: #444444;
+:root {
+  --bg-main: #4b497a;
+  --bg-two: #5e7691;
+  --bg-three: #c1beb7;
+  --bg-four: #e6e3d3;
+  --color-main: #f8f8ff;
+  --color-two: #f8f8ff;
+  --color-three: #444444;
+  --color-four: #444444;
+  --page-break: 820px;
+  --padding-mobile: 2%;
+  --padding-desktop-leftright: 4%;
+  --padding-desktop-above: 0.1%;
 }
 
-.color-main{
-    background-color: var(--bg-main);
-    color: var(--color-main);
+.color-main {
+  background-color: var(--bg-main);
+  color: var(--color-main);
 }
 
-.color-two{
-    background-color: var(--bg-two);
-    color: var(--color-two);
+.color-two {
+  background-color: var(--bg-two);
+  color: var(--color-two);
 }
 
-.color-three{
-    background-color: var(--bg-three);
-    color: #444444;
+.color-three {
+  background-color: var(--bg-three);
+  color: #444444;
 }
 
-.color-four{
-    background-color: var(--bg-four);
-    color: var(--color-four);
+.color-four {
+  background-color: var(--bg-four);
+  color: var(--color-four);
+}
+
+.page {
+  padding: var(--padding-mobile);
+}
+
+@media all and (min-width: 820px) {
+  .page {
+    padding: var(--padding-desktop-above) var(--padding-desktop-leftright);
+  }
 }

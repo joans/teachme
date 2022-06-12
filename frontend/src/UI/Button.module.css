@@ -1,12 +1,12 @@
-.button{
-    border-radius: 25px;
-    border: none;
-    padding: 0.75rem 1rem;
-    font-weight: bold;
-    cursor: pointer;
+.button {
+  border-radius: 1em;
+  border: none;
+  padding: 0.8rem 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.button:hover{
-    background: black;
-    color: #f8f8ff;
+.button:hover {
+  background: black;
+  color: #f8f8ff;
 }
