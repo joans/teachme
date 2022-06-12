@@ -1,58 +1,68 @@
 /* TODO: Implement responsive design */
 
-.header{
-    top: 0;
-    left: 0;
-    width: 100%;
-
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 2px solid black;
+  margin: 0 0 10em 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--padding-mobile);
+  box-sizing: border-box;
+  height: 4rem;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
-.icon{
-    vertical-align: middle;
+.text {
+  display: none;
 }
 
-
-.right-side li{
-    list-style-type: none;
+.icon {
+  vertical-align: middle;
+  height: 2rem;
+  width: 2rem;
 }
 
-@media all and (min-width: 730px) {
-    .header{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10%;
-        box-sizing: border-box;
-    }
-    .right-side li{
-        float: left;
-        height: auto;
-        vertical-align: middle;
-        line-height: 5rem;
-    }
-    
-    .right-side *{
-        margin: 0 .3em;
-    }
-
+.right-side li {
+  float: left;
+  height: auto;
+  vertical-align: middle;
+  line-height: 5rem;
+  list-style-type: none;
 }
 
-
+.right-side * {
+  margin: 0 0.1rem;
+}
 
 /* push the content below the header down 4rem to not make the header overlap: */
-.header + *{
-    margin-top: 4rem;
+.header + * {
+  margin-top: 4rem;
 }
 
-a{
-    text-decoration: none;
-    font-weight: bold;
-    color: #f8f8ff;
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #f8f8ff;
 }
 
+@media all and (min-width: 820px) {
+  .header {
+    position: fixed;
+    padding: 0 var(--padding-desktop-leftright);
+  }
 
+  .icon {
+    width: 1em;
+    height: 1em;
+  }
+
+  .text {
+    display: inline;
+  }
+}

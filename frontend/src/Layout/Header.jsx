@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import classes from "./Header.module.css";
 import { TiPlus, TiTags } from "react-icons/ti";
-import { CgLogIn } from "react-icons/cg"
+import { CgLogIn } from "react-icons/cg";
+import { GiSkills } from "react-icons/gi";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,7 +14,10 @@ const Header = () => {
       <header className={`${classes.header} color-main`}>
         <div className={classes["left-side"]}>
           <h1>
-            <Link to="/">Skill Bill</Link>
+            <Link to="/">
+              <GiSkills className={classes.icon} />
+              <span className={classes.text}> Skill Bill</span>
+            </Link>
           </h1>
         </div>
         <div className={classes["right-side"]}>
@@ -21,12 +25,14 @@ const Header = () => {
             <li>
               <Link to="/create_offer">
                 <TiPlus className={classes.icon} />
-                Create Offer
+                <span className={classes.text}>Create Offer</span>
               </Link>
             </li>
             <li>
+              <Link to="/categories">
                 <TiTags className={classes.icon} />
-              <Link to="/categories">Categories</Link>
+                <span className={classes.text}>Categories</span>
+              </Link>
             </li>
             <li>
               <Button
@@ -37,7 +43,7 @@ const Header = () => {
                 variant="contained"
                 className="color-two"
               >
-                <CgLogIn className={classes.icon} />
+                {/* <CgLogIn className={classes.icon} /> */}
                 Log In
               </Button>
             </li>
