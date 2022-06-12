@@ -12,7 +12,9 @@ const CreateOfferHandler = () => {
       {auth.isLoggedIn ? (
         <CreateOffer />
       ) : (
-        <ErrorPage>You are logged out, please log in</ErrorPage>
+        <ErrorPage>
+          You are logged out, please log in to post an offer.
+        </ErrorPage>
       )}
     </>
   );
