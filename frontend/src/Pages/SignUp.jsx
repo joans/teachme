@@ -1,5 +1,4 @@
 import React, { useReducer } from "react";
-import { useEffect } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.Module.css";
@@ -30,10 +29,6 @@ const SignUp = () => {
       kind: event.target.id,
     });
   };
-
-  useEffect(() => {
-    console.log(newUser);
-  }, [newUser]);
 
   return (
     <>
