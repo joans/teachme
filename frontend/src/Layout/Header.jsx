@@ -29,10 +29,12 @@ const Header = () => {
         <div className={classes["right-side"]}>
           <ul>
             <li>
-              <Link to="/create_offer">
-                <TiPlus className={classes.icon} />
-                <span className={classes.text}>Create Offer</span>
-              </Link>
+              {auth.isLoggedIn && (
+                <Link to="/create_offer">
+                  <TiPlus className={classes.icon} />
+                  <span className={classes.text}>Create Offer</span>
+                </Link>
+              )}
             </li>
             <li>
               <Link to="/categories">
