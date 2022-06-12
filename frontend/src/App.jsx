@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Header from "./Layout/Header";
-import CreateOffer from "./Pages/CreateOffer";
+import CreateOfferHandler from "./Pages/CreateOfferHandler";
 import Categories from "./Pages/Categories";
 import SignUp from "./Pages/SignUp";
 import ErrorPage from "./Pages/ErrorPage";
@@ -14,7 +14,7 @@ function App() {
       <div className="page">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create_offer" element={<CreateOffer />} />
+          <Route path="/create_offer" element={<CreateOfferHandler />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<ErrorPage />} />

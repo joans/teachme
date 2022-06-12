@@ -1,10 +1,12 @@
 import React from "react";
 
-const ErrorPage = () => {
-  return <>
-  <h1>ERROR PAGE</h1>
-  <p>This page does not exist (yet)</p>
-  </>;
+const ErrorPage = (props) => {
+  return (
+    <>
+      <h1>ERROR!</h1>
+      {props.children && <p>{props.children}</p>}
+    </>
+  );
 };
 
 export default ErrorPage;
