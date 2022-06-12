@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import classes from "./Header.module.css";
 import { TiPlus, TiTags } from "react-icons/ti";
-import { CgLogIn } from "react-icons/cg";
 import { GiSkills } from "react-icons/gi";
+import AuthContext from "../store/auth-context";
 
 const Header = () => {
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+
+  const loginButtonFn = () => {
+    // navigate("/login");
+    auth.onLogin();
+  };
 
   return (
     <>
@@ -23,10 +29,12 @@ const Header = () => {
         <div className={classes["right-side"]}>
           <ul>
             <li>
-              <Link to="/create_offer">
-                <TiPlus className={classes.icon} />
-                <span className={classes.text}>Create Offer</span>
-              </Link>
+              {auth.isLoggedIn && (
+                <Link to="/create_offer">
+                  <TiPlus className={classes.icon} />
+                  <span className={classes.text}>Create Offer</span>
+                </Link>
+              )}
             </li>
             <li>
               <Link to="/categories">
@@ -35,27 +43,39 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <Button
-                onClick={() => {
-                  navigate("/login");
-                }}
-                to="/login"
-                variant="contained"
-                className="color-two"
-              >
-                {/* <CgLogIn className={classes.icon} /> */}
-                Log In
-              </Button>
+              {auth.isLoggedIn ? (
+                <Button
+                  onClick={auth.onLogout}
+                  variant="contained"
+                  className="color-two"
+                >
+                  {/* <CgLogIn className={classes.icon} /> */}
+                  Log Out
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    loginButtonFn();
+                  }}
+                  variant="contained"
+                  className="color-two"
+                >
+                  {/* <CgLogIn className={classes.icon} /> */}
+                  Log In
+                </Button>
+              )}
             </li>
             <li>
-              <Button
-                onClick={() => {
-                  navigate("/signup");
-                }}
-                className="color-three"
-              >
-                Sign Up
-              </Button>
+              {!auth.isLoggedIn && (
+                <Button
+                  onClick={() => {
+                    navigate("/signup");
+                  }}
+                  className="color-three"
+                >
+                  Sign Up
+                </Button>
+              )}
             </li>
           </ul>
         </div>

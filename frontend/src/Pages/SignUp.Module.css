@@ -1,0 +1,14 @@
+label{
+    display: block;
+    padding: 0 0 .1em 0;
+}
+
+input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: .5em;
+}
+
+button{
+    margin-top: 2em;
+}
