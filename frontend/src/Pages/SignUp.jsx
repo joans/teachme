@@ -13,13 +13,22 @@ const newUserReducer = (state, action) => {
   if (action.type === "UPDATE") {
     return { ...state, [action.kind]: action.value };
   }
+  if (action.type === "SUBMIT_FORM") {
+    return initialState;
+  }
 };
 
 const SignUp = () => {
   const [newUser, dispatchNewUser] = useReducer(newUserReducer, initialState);
 
+  const handleFormSubmit = () => {
+    dispatchNewUser({
+      type: "SUBMIT_FORM",
+    });
+  };
   const submitButtonClick = (event) => {
     event.preventDefault();
+    handleFormSubmit();
   };
 
   const handleInputUpdate = (event) => {
@@ -34,7 +43,7 @@ const SignUp = () => {
     <>
       <Card>
         <h1>Sign Up</h1>
-        <form action="">
+        <form onSubmit={handleFormSubmit}>
           <label htmlFor="username">User Name</label>
           <input
             type="text"

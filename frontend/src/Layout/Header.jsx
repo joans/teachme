@@ -22,7 +22,7 @@ const Header = () => {
           <h1>
             <Link to="/">
               <GiSkills className={classes.icon} />
-              <span className={classes.text}> Skill Bill</span>
+              <span className={classes.text}> Project Skill</span>
             </Link>
           </h1>
         </div>
