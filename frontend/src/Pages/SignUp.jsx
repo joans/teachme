@@ -1,12 +1,25 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.Module.css";
 
-const initialState = {
+import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
+
+const USER_REGEX = /^\w{1,}[\w\d]{2,22}$/;
+const PWD_REGEX = /^.{8,30}$/;
+
+const initialUserState = {
   username: "",
   email: "",
   password: "",
+  repeatPassword: "",
+};
+
+const initialValidState = {
+  usernameValid: null,
+  emailValid: null,
+  passwordValid: null,
+  passwordMatching: null,
 };
 
 const newUserReducer = (state, action) => {
@@ -14,12 +27,22 @@ const newUserReducer = (state, action) => {
     return { ...state, [action.kind]: action.value };
   }
   if (action.type === "SUBMIT_FORM") {
-    return initialState;
+    return initialUserState;
   }
 };
 
+const handleFormChangeReducer = (state, action) => {};
+
 const SignUp = () => {
-  const [newUser, dispatchNewUser] = useReducer(newUserReducer, initialState);
+  const [newUser, dispatchNewUser] = useReducer(
+    newUserReducer,
+    initialUserState
+  );
+
+  const [formIsValid, dispatchFormIsValid] = useReducer(
+    handleFormChangeReducer,
+    initialValidState
+  );
 
   const handleFormSubmit = () => {
     dispatchNewUser({
@@ -48,6 +71,8 @@ const SignUp = () => {
           <input
             type="text"
             id="username"
+            required
+            autoComplete="off"
             onChange={handleInputUpdate}
             value={newUser.username}
           />
@@ -56,6 +81,8 @@ const SignUp = () => {
             type="email"
             name=""
             id="email"
+            required
+            autoComplete="off"
             onChange={handleInputUpdate}
             value={newUser.email}
           />
@@ -64,8 +91,18 @@ const SignUp = () => {
             type="password"
             name=""
             id="password"
+            required
             onChange={handleInputUpdate}
             value={newUser.password}
+          />
+          <label htmlFor="repeatPassword">Repeat Password</label>
+          <input
+            type="password"
+            name=""
+            id="repeatPassword"
+            required
+            onChange={handleInputUpdate}
+            value={newUser.repeatPassword}
           />
           <div className={classes.actions}>
             <Button onClick={submitButtonClick}>Submit</Button>
