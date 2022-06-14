@@ -145,12 +145,10 @@ const SignUp = () => {
         <h1>Sign Up</h1>
         <form onSubmit={handleFormSubmit}>
           <label htmlFor="username">
-            User Name
-            {formIsValid.usernameValid ? (
-              <FaCheck />
-            ) : (
-              <p>User Name is not valid</p>
-            )}
+            User Name {formIsValid.usernameValid && <FaCheck />}
+            {!formIsValid.usernameValid &&
+              curFocus.username &&
+              newUser.username && <p>User Name is not valid</p>}
           </label>
           <input
             type="text"
