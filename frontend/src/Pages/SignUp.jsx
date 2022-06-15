@@ -1,12 +1,11 @@
 import React, { useReducer, useEffect } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
-import classes from "./SignUp.Module.css";
+import styles from "./SignUp.module.css";
 
-import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
-import { useState } from "react";
+import { FaCheck, FaTimes, FaInfoCircle, FaInfo } from "react-icons/fa";
 
-const USER_REGEX = /^\w{1,}[\w\d]{2,22}$/;
+const USER_REGEX = /^\w{1,}[\w\d_-]{2,22}$/;
 const EMAIL_REGEX = /^\S+\@.+\..+$/;
 const PWD_REGEX = /^.{8,30}$/;
 
@@ -146,9 +145,19 @@ const SignUp = () => {
         <form onSubmit={handleFormSubmit}>
           <label htmlFor="username">
             User Name {formIsValid.usernameValid && <FaCheck />}
-            {!formIsValid.usernameValid &&
-              curFocus.username &&
-              newUser.username && <p>User Name is not valid</p>}
+            <p
+              className={
+                !formIsValid.usernameValid &&
+                curFocus.username &&
+                newUser.username
+                  ? styles.howto
+                  : styles.offscreen
+              }
+            >
+              <FaInfoCircle /> 4 to 24 characters <br />
+              Allowed: letters numbers, underscore, hyphen <br />
+              Has to start with a letter
+            </p>
           </label>
           <input
             type="text"
@@ -188,7 +197,7 @@ const SignUp = () => {
             onChange={handleInputUpdate}
             value={newUser.repeatPassword}
           />
-          <div className={classes.actions}>
+          <div className={styles.actions}>
             <Button onClick={submitButtonClick}>Submit</Button>
           </div>
         </form>
