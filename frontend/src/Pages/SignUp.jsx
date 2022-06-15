@@ -107,35 +107,51 @@ const SignUp = () => {
   // Check for matching passwords
   useEffect(() => {
     const passwordValid = PWD_REGEX.test(newUser.password);
-    if (passwordValid) {
-      dispatchFormIsValid({ type: "PASSWORD_CHANGE", value: true });
-    } else {
-      dispatchFormIsValid({ type: "PASSWORD_CHANGE", value: false });
-    }
+    const debouncer = setTimeout(() => {
+      if (passwordValid) {
+        dispatchFormIsValid({ type: "PASSWORD_CHANGE", value: true });
+      } else {
+        dispatchFormIsValid({ type: "PASSWORD_CHANGE", value: false });
+      }
 
-    if (newUser.password === newUser.repeatPassword) {
-      dispatchFormIsValid({ type: "PASSWORD_MATCH", value: true });
-    } else {
-      dispatchFormIsValid({ type: "PASSWORD_MATCH", value: false });
-    }
+      if (newUser.password === newUser.repeatPassword) {
+        dispatchFormIsValid({ type: "PASSWORD_MATCH", value: true });
+      } else {
+        dispatchFormIsValid({ type: "PASSWORD_MATCH", value: false });
+      }
+    }, 300);
+    return () => {
+      clearTimeout(debouncer);
+    };
   }, [newUser.password, newUser.repeatPassword]);
 
   useEffect(() => {
     const emailValid = EMAIL_REGEX.test(newUser.email);
-    if (emailValid) {
-      dispatchFormIsValid({ type: "EMAIL_CHANGE", value: true });
-    } else {
-      dispatchFormIsValid({ type: "EMAIL_CHANGE", value: false });
-    }
+    const debouncer = setTimeout(() => {
+      if (emailValid) {
+        dispatchFormIsValid({ type: "EMAIL_CHANGE", value: true });
+      } else {
+        dispatchFormIsValid({ type: "EMAIL_CHANGE", value: false });
+      }
+    }, 300);
+    return () => {
+      clearTimeout(debouncer);
+    };
   }, [newUser.email]);
 
   useEffect(() => {
     const usernameRegexMatch = USER_REGEX.test(newUser.username);
-    if (usernameRegexMatch) {
-      dispatchFormIsValid({ type: "USERNAME_CHANGE", value: true });
-    } else {
-      dispatchFormIsValid({ type: "USERNAME_CHANGE", value: false });
-    }
+    const debouncer = setTimeout(() => {
+      if (usernameRegexMatch) {
+        dispatchFormIsValid({ type: "USERNAME_CHANGE", value: true });
+      } else {
+        dispatchFormIsValid({ type: "USERNAME_CHANGE", value: false });
+      }
+    }, 300);
+
+    return () => {
+      clearTimeout(debouncer);
+    };
   }, [newUser.username]);
 
   return (
