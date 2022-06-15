@@ -1,13 +1,13 @@
 import React, { useReducer, useEffect } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
-import styles from "./SignUp.module.css";
+import classes from "./SignUp.module.css";
 
 import { FaCheck, FaTimes, FaInfoCircle, FaInfo } from "react-icons/fa";
 
-const USER_REGEX = /^\w{1,}[\w\d_-]{2,22}$/;
-const EMAIL_REGEX = /^\S+\@.+\..+$/;
-const PWD_REGEX = /^.{8,30}$/;
+const USER_REGEX = /^\w{1,}[\w\d_-]{3,22}$/;
+const EMAIL_REGEX = /^\S+@.+\..+$/;
+const PWD_REGEX = /^.{8,64}$/;
 
 const initialUserState = {
   username: "",
@@ -143,15 +143,15 @@ const SignUp = () => {
       <Card>
         <h1>Sign Up</h1>
         <form onSubmit={handleFormSubmit}>
-          <label htmlFor="username">
+          <label htmlFor="username" className={classes.label}>
             User Name {formIsValid.usernameValid && <FaCheck />}
             <p
               className={
                 !formIsValid.usernameValid &&
                 curFocus.username &&
                 newUser.username
-                  ? styles.howto
-                  : styles.offscreen
+                  ? classes.howto
+                  : classes.offscreen
               }
             >
               <FaInfoCircle /> 4 to 24 characters <br />
@@ -168,8 +168,20 @@ const SignUp = () => {
             value={newUser.username}
             onFocus={handleFocusChange}
             onBlur={handleFocusChange}
+            className={classes.input}
           />
-          <label htmlFor="email">E-Mail</label>
+          <label htmlFor="email" className={classes.label}>
+            E-Mail {formIsValid.emailValid && <FaCheck />}
+            <p
+              className={
+                !formIsValid.emailValid && curFocus.email && newUser.email
+                  ? classes.howto
+                  : classes.offscreen
+              }
+            >
+              <FaInfoCircle /> E-Mail Address not valid
+            </p>
+          </label>
           <input
             type="email"
             name=""
@@ -177,27 +189,63 @@ const SignUp = () => {
             required
             autoComplete="off"
             onChange={handleInputUpdate}
+            onFocus={handleFocusChange}
+            onBlur={handleFocusChange}
             value={newUser.email}
+            className={classes.input}
           />
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className={classes.label}>
+            Password {formIsValid.passwordValid && <FaCheck />}
+            <p
+              className={
+                !formIsValid.passwordValid &&
+                curFocus.password &&
+                newUser.password
+                  ? classes.howto
+                  : classes.offscreen
+              }
+            >
+              <FaInfoCircle /> 8 to 64 characters <br />
+            </p>
+          </label>
           <input
             type="password"
             name=""
             id="password"
             required
             onChange={handleInputUpdate}
+            onFocus={handleFocusChange}
+            onBlur={handleFocusChange}
             value={newUser.password}
+            className={classes.input}
           />
-          <label htmlFor="repeatPassword">Repeat Password</label>
+          <label htmlFor="repeatPassword" className={classes.label}>
+            Repeat Password{" "}
+            {formIsValid.passwordMatching && newUser.password && <FaCheck />}
+            <p
+              className={
+                !formIsValid.passwordMatching &&
+                curFocus.repeatPassword &&
+                newUser.repeatPassword
+                  ? classes.howto
+                  : classes.offscreen
+              }
+            >
+              <FaInfoCircle /> Passwords are not matching
+            </p>
+          </label>
           <input
             type="password"
             name=""
             id="repeatPassword"
             required
             onChange={handleInputUpdate}
+            onFocus={handleFocusChange}
+            onBlur={handleFocusChange}
             value={newUser.repeatPassword}
+            className={classes.input}
           />
-          <div className={styles.actions}>
+          <div className={classes.actions}>
             <Button onClick={submitButtonClick}>Submit</Button>
           </div>
         </form>

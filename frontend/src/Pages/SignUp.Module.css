@@ -1,16 +1,18 @@
-label{
+.label{
     display: block;
     padding: 0 0 .1em 0;
 }
 
-input{
+.input{
     width: 100%;
     box-sizing: border-box;
     padding: .5em;
 }
 
-button{
+
+.actions{
     margin-top: 2em;
+
 }
 
 .offscreen{
