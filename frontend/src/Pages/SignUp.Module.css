@@ -22,5 +22,8 @@
 
 .howto{
     font-size: small;
-    background-color: yellow;
+    background-color: #0f0f0f;
+    border-radius: 5px;
+    color: #fefefe;
+    padding: 1%;
 }

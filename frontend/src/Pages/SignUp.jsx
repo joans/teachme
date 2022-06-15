@@ -35,7 +35,7 @@ const newUserReducer = (state, action) => {
     return { ...state, [action.kind]: action.value };
   }
   if (action.type === "SUBMIT_FORM") {
-    return initialUserState;
+    // TODO: Send Data to Backend here!
   }
 };
 
@@ -161,19 +161,6 @@ const SignUp = () => {
         <form onSubmit={handleFormSubmit}>
           <label htmlFor="username" className={classes.label}>
             User Name {formIsValid.usernameValid && <FaCheck />}
-            <p
-              className={
-                !formIsValid.usernameValid &&
-                curFocus.username &&
-                newUser.username
-                  ? classes.howto
-                  : classes.offscreen
-              }
-            >
-              <FaInfoCircle /> 4 to 24 characters <br />
-              Allowed: letters numbers, underscore, hyphen <br />
-              Has to start with a letter
-            </p>
           </label>
           <input
             type="text"
@@ -186,17 +173,21 @@ const SignUp = () => {
             onBlur={handleFocusChange}
             className={classes.input}
           />
+          <p
+            className={
+              !formIsValid.usernameValid &&
+              !curFocus.username &&
+              newUser.username
+                ? classes.howto
+                : classes.offscreen
+            }
+          >
+            <FaInfoCircle /> 4 to 24 characters <br />
+            Allowed: letters numbers, underscore, hyphen <br />
+            Has to start with a letter
+          </p>
           <label htmlFor="email" className={classes.label}>
             E-Mail {formIsValid.emailValid && <FaCheck />}
-            <p
-              className={
-                !formIsValid.emailValid && curFocus.email && newUser.email
-                  ? classes.howto
-                  : classes.offscreen
-              }
-            >
-              <FaInfoCircle /> E-Mail Address not valid
-            </p>
           </label>
           <input
             type="email"
@@ -210,19 +201,17 @@ const SignUp = () => {
             value={newUser.email}
             className={classes.input}
           />
+          <p
+            className={
+              !formIsValid.emailValid && !curFocus.email && newUser.email
+                ? classes.howto
+                : classes.offscreen
+            }
+          >
+            <FaInfoCircle /> E-Mail Address not valid
+          </p>
           <label htmlFor="password" className={classes.label}>
             Password {formIsValid.passwordValid && <FaCheck />}
-            <p
-              className={
-                !formIsValid.passwordValid &&
-                curFocus.password &&
-                newUser.password
-                  ? classes.howto
-                  : classes.offscreen
-              }
-            >
-              <FaInfoCircle /> 8 to 64 characters <br />
-            </p>
           </label>
           <input
             type="password"
@@ -235,20 +224,21 @@ const SignUp = () => {
             value={newUser.password}
             className={classes.input}
           />
+          <p
+            className={
+              !formIsValid.passwordValid &&
+              !curFocus.password &&
+              newUser.password
+                ? classes.howto
+                : classes.offscreen
+            }
+          >
+            <FaInfoCircle /> 8 to 64 characters <br />
+          </p>
           <label htmlFor="repeatPassword" className={classes.label}>
             Repeat Password{" "}
+            {/* TODO: Password matching checkmark is shown shortly after first letter of password is typed in */}
             {formIsValid.passwordMatching && newUser.password && <FaCheck />}
-            <p
-              className={
-                !formIsValid.passwordMatching &&
-                curFocus.repeatPassword &&
-                newUser.repeatPassword
-                  ? classes.howto
-                  : classes.offscreen
-              }
-            >
-              <FaInfoCircle /> Passwords are not matching
-            </p>
           </label>
           <input
             type="password"
@@ -261,8 +251,31 @@ const SignUp = () => {
             value={newUser.repeatPassword}
             className={classes.input}
           />
+          <p
+            className={
+              !formIsValid.passwordMatching &&
+              !curFocus.repeatPassword &&
+              newUser.repeatPassword
+                ? classes.howto
+                : classes.offscreen
+            }
+          >
+            <FaInfoCircle /> Passwords are not matching
+          </p>
           <div className={classes.actions}>
-            <Button onClick={submitButtonClick}>Submit</Button>
+            <Button
+              disabled={
+                !formIsValid.usernameValid ||
+                !formIsValid.emailValid ||
+                !formIsValid.passwordValid ||
+                !formIsValid.passwordMatching
+                  ? true
+                  : false
+              }
+              onClick={submitButtonClick}
+            >
+              Submit
+            </Button>
           </div>
         </form>
       </Card>
