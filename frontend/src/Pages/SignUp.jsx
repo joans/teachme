@@ -3,7 +3,7 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
 
-import { FaCheck, FaTimes, FaInfoCircle, FaInfo } from "react-icons/fa";
+import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 
 const USER_REGEX = /^\w{1,}[\w\d_-]{3,22}$/;
 const EMAIL_REGEX = /^\S+@.+\..+$/;
