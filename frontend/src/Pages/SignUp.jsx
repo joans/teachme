@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
@@ -24,10 +24,10 @@ const initialValidState = {
 };
 
 const initialFocusState = {
-  username: false,
-  email: false,
-  password: false,
-  repeatPassword: false,
+  username: true,
+  email: true,
+  password: true,
+  repeatPassword: true,
 };
 
 const newUserReducer = (state, action) => {
@@ -35,8 +35,10 @@ const newUserReducer = (state, action) => {
     return { ...state, [action.kind]: action.value };
   }
   if (action.type === "SUBMIT_FORM") {
+    console.log(state);
     // TODO: Send Data to Backend here!
   }
+  return state;
 };
 
 const handleFormChangeReducer = (state, action) => {
@@ -52,12 +54,14 @@ const handleFormChangeReducer = (state, action) => {
   if (action.type === "EMAIL_CHANGE") {
     return { ...state, emailValid: action.value };
   }
+  return state;
 };
 
 const userFocusReducer = (state, action) => {
   if (action.type === "FOCUS") {
     return { ...state, [action.kind]: action.value };
   }
+  return state;
 };
 
 const SignUp = () => {
@@ -76,7 +80,16 @@ const SignUp = () => {
     initialValidState
   );
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const valid1 = USER_REGEX.test(newUser.username);
+    const valid2 = PWD_REGEX.test(newUser.password);
+    const valid3 = EMAIL_REGEX.test(newUser.email);
+
+    if (!valid1 || !valid2 || !valid3) {
+      return;
+    }
+
     dispatchNewUser({
       type: "SUBMIT_FORM",
     });
@@ -96,9 +109,9 @@ const SignUp = () => {
 
   const handleFocusChange = (event) => {
     const focusEvent = event._reactName;
-    if (focusEvent === "onFocus") {
-      disptachCurFocus({ type: "FOCUS", value: true, kind: event.target.id });
-    }
+    // if (focusEvent === "onFocus") {
+    //   disptachCurFocus({ type: "FOCUS", value: true, kind: event.target.id });
+    // }
     if (focusEvent === "onBlur") {
       disptachCurFocus({ type: "FOCUS", value: false, kind: event.target.id });
     }
@@ -107,52 +120,40 @@ const SignUp = () => {
   // Check for matching passwords
   useEffect(() => {
     const passwordValid = PWD_REGEX.test(newUser.password);
-    const debouncer = setTimeout(() => {
-      if (passwordValid) {
-        dispatchFormIsValid({ type: "PASSWORD_CHANGE", value: true });
-      } else {
-        dispatchFormIsValid({ type: "PASSWORD_CHANGE", value: false });
-      }
+    if (passwordValid) {
+      dispatchFormIsValid({ type: "PASSWORD_CHANGE", value: true });
+    } else {
+      dispatchFormIsValid({ type: "PASSWORD_CHANGE", value: false });
+    }
 
-      if (newUser.password === newUser.repeatPassword) {
-        dispatchFormIsValid({ type: "PASSWORD_MATCH", value: true });
-      } else {
-        dispatchFormIsValid({ type: "PASSWORD_MATCH", value: false });
-      }
-    }, 300);
-    return () => {
-      clearTimeout(debouncer);
-    };
+    if (newUser.password === newUser.repeatPassword) {
+      dispatchFormIsValid({ type: "PASSWORD_MATCH", value: true });
+    } else {
+      dispatchFormIsValid({ type: "PASSWORD_MATCH", value: false });
+    }
   }, [newUser.password, newUser.repeatPassword]);
 
   useEffect(() => {
     const emailValid = EMAIL_REGEX.test(newUser.email);
-    const debouncer = setTimeout(() => {
-      if (emailValid) {
-        dispatchFormIsValid({ type: "EMAIL_CHANGE", value: true });
-      } else {
-        dispatchFormIsValid({ type: "EMAIL_CHANGE", value: false });
-      }
-    }, 300);
-    return () => {
-      clearTimeout(debouncer);
-    };
+
+    if (emailValid) {
+      dispatchFormIsValid({ type: "EMAIL_CHANGE", value: true });
+    } else {
+      dispatchFormIsValid({ type: "EMAIL_CHANGE", value: false });
+    }
   }, [newUser.email]);
 
   useEffect(() => {
     const usernameRegexMatch = USER_REGEX.test(newUser.username);
-    const debouncer = setTimeout(() => {
-      if (usernameRegexMatch) {
-        dispatchFormIsValid({ type: "USERNAME_CHANGE", value: true });
-      } else {
-        dispatchFormIsValid({ type: "USERNAME_CHANGE", value: false });
-      }
-    }, 300);
 
-    return () => {
-      clearTimeout(debouncer);
-    };
+    if (usernameRegexMatch) {
+      dispatchFormIsValid({ type: "USERNAME_CHANGE", value: true });
+    } else {
+      dispatchFormIsValid({ type: "USERNAME_CHANGE", value: false });
+    }
   }, [newUser.username]);
+
+  useEffect(() => {}, [newUser]);
 
   return (
     <>
@@ -272,7 +273,6 @@ const SignUp = () => {
                   ? true
                   : false
               }
-              onClick={submitButtonClick}
             >
               Submit
             </Button>
