@@ -6,6 +6,7 @@ import CreateOfferHandler from "./Pages/CreateOfferHandler";
 import Categories from "./Pages/Categories";
 import SignUp from "./Pages/SignUp";
 import ErrorPage from "./Pages/ErrorPage";
+import Login from "./Pages/Login";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/create_offer" element={<CreateOfferHandler />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

@@ -4,6 +4,7 @@ import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
 
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const USER_REGEX = /^\w{1,}[\w\d_-]{3,22}$/;
 const EMAIL_REGEX = /^\S+@.+\..+$/;
@@ -156,126 +157,139 @@ const SignUp = () => {
 
   return (
     <Card>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleFormSubmit}>
-        <span className={errMsg ? classes.errMsg : classes.offscreen}>
-          <FaTimes />
-          {errMsg}
-        </span>
-        <label htmlFor="username" className={classes.label}>
-          User Name {formIsValid.usernameValid && <FaCheck />}
-        </label>
-        <input
-          type="text"
-          id="username"
-          required
-          autoComplete="off"
-          onChange={handleInputUpdate}
-          value={newUser.username}
-          onFocus={handleFocusChange}
-          onBlur={handleFocusChange}
-          className={classes.input}
-        />
-        <p
-          className={
-            !formIsValid.usernameValid && !curFocus.username && newUser.username
-              ? classes.howto
-              : classes.offscreen
-          }
-        >
-          <FaInfoCircle /> 4 to 24 characters <br />
-          Allowed: letters numbers, underscore, hyphen <br />
-          Has to start with a letter
-        </p>
-        <label htmlFor="email" className={classes.label}>
-          E-Mail {formIsValid.emailValid && <FaCheck />}
-        </label>
-        <input
-          type="email"
-          name=""
-          id="email"
-          required
-          autoComplete="off"
-          onChange={handleInputUpdate}
-          onFocus={handleFocusChange}
-          onBlur={handleFocusChange}
-          value={newUser.email}
-          className={classes.input}
-        />
-        <p
-          className={
-            !formIsValid.emailValid && !curFocus.email && newUser.email
-              ? classes.howto
-              : classes.offscreen
-          }
-        >
-          <FaInfoCircle /> E-Mail Address not valid
-        </p>
-        <label htmlFor="password" className={classes.label}>
-          Password {formIsValid.passwordValid && <FaCheck />}
-        </label>
-        <input
-          type="password"
-          name=""
-          id="password"
-          required
-          onChange={handleInputUpdate}
-          onFocus={handleFocusChange}
-          onBlur={handleFocusChange}
-          value={newUser.password}
-          className={classes.input}
-        />
-        <p
-          className={
-            !formIsValid.passwordValid && !curFocus.password && newUser.password
-              ? classes.howto
-              : classes.offscreen
-          }
-        >
-          <FaInfoCircle /> 8 to 64 characters <br />
-        </p>
-        <label htmlFor="repeatPassword" className={classes.label}>
-          Repeat Password{" "}
-          {/* TODO: Password matching checkmark is shown shortly after first letter of password is typed in */}
-          {formIsValid.passwordMatching && newUser.password && <FaCheck />}
-        </label>
-        <input
-          type="password"
-          name=""
-          id="repeatPassword"
-          required
-          onChange={handleInputUpdate}
-          onFocus={handleFocusChange}
-          onBlur={handleFocusChange}
-          value={newUser.repeatPassword}
-          className={classes.input}
-        />
-        <p
-          className={
-            !formIsValid.passwordMatching &&
-            !curFocus.repeatPassword &&
-            newUser.repeatPassword
-              ? classes.howto
-              : classes.offscreen
-          }
-        >
-          <FaInfoCircle /> Passwords are not matching
-        </p>
-        <div className={classes.actions}>
-          <Button
-            disabled={
-              !formIsValid.usernameValid ||
-              !formIsValid.emailValid ||
-              !formIsValid.passwordValid ||
-              !formIsValid.passwordMatching
-                ? true
-                : false
+      <section className={classes.signup}>
+        <h1>Sign Up</h1>
+        <form onSubmit={handleFormSubmit}>
+          <span className={errMsg ? classes.errMsg : classes.offscreen}>
+            <FaTimes />
+            {errMsg}
+          </span>
+          <label htmlFor="username" className={classes.label}>
+            User Name {formIsValid.usernameValid && <FaCheck />}
+          </label>
+          <input
+            type="text"
+            id="username"
+            required
+            autoComplete="off"
+            onChange={handleInputUpdate}
+            value={newUser.username}
+            onFocus={handleFocusChange}
+            onBlur={handleFocusChange}
+            className={classes.input}
+          />
+          <p
+            className={
+              !formIsValid.usernameValid &&
+              !curFocus.username &&
+              newUser.username
+                ? classes.howto
+                : classes.offscreen
             }
           >
-            Submit
-          </Button>
-        </div>
-      </form>
+            <FaInfoCircle /> 4 to 24 characters <br />
+            Allowed: letters numbers, underscore, hyphen <br />
+            Has to start with a letter
+          </p>
+          <label htmlFor="email" className={classes.label}>
+            E-Mail {formIsValid.emailValid && <FaCheck />}
+          </label>
+          <input
+            type="email"
+            name=""
+            id="email"
+            required
+            autoComplete="off"
+            onChange={handleInputUpdate}
+            onFocus={handleFocusChange}
+            onBlur={handleFocusChange}
+            value={newUser.email}
+            className={classes.input}
+          />
+          <p
+            className={
+              !formIsValid.emailValid && !curFocus.email && newUser.email
+                ? classes.howto
+                : classes.offscreen
+            }
+          >
+            <FaInfoCircle /> E-Mail Address not valid
+          </p>
+          <label htmlFor="password" className={classes.label}>
+            Password {formIsValid.passwordValid && <FaCheck />}
+          </label>
+          <input
+            type="password"
+            name=""
+            id="password"
+            required
+            onChange={handleInputUpdate}
+            onFocus={handleFocusChange}
+            onBlur={handleFocusChange}
+            value={newUser.password}
+            className={classes.input}
+          />
+          <p
+            className={
+              !formIsValid.passwordValid &&
+              !curFocus.password &&
+              newUser.password
+                ? classes.howto
+                : classes.offscreen
+            }
+          >
+            <FaInfoCircle /> 8 to 64 characters <br />
+          </p>
+          <label htmlFor="repeatPassword" className={classes.label}>
+            Repeat Password{" "}
+            {/* TODO: Password matching checkmark is shown shortly after first letter of password is typed in */}
+            {formIsValid.passwordMatching && newUser.password && <FaCheck />}
+          </label>
+          <input
+            type="password"
+            name=""
+            id="repeatPassword"
+            required
+            onChange={handleInputUpdate}
+            onFocus={handleFocusChange}
+            onBlur={handleFocusChange}
+            value={newUser.repeatPassword}
+            className={classes.input}
+          />
+          <p
+            className={
+              !formIsValid.passwordMatching &&
+              !curFocus.repeatPassword &&
+              newUser.repeatPassword
+                ? classes.howto
+                : classes.offscreen
+            }
+          >
+            <FaInfoCircle /> Passwords are not matching
+          </p>
+          <div className={classes.actions}>
+            <Button
+              className={classes.button}
+              disabled={
+                !formIsValid.usernameValid ||
+                !formIsValid.emailValid ||
+                !formIsValid.passwordValid ||
+                !formIsValid.passwordMatching
+                  ? true
+                  : false
+              }
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+        <p className={classes["already-account-message"]}>
+          Already have an account? <br />
+          <Link to="/login" className={classes.link}>
+            Log in
+          </Link>
+        </p>
+      </section>
     </Card>
   );
 };
