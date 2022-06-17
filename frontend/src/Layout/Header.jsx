@@ -10,17 +10,12 @@ const Header = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
 
-  const loginButtonFn = () => {
-    // navigate("/login");
-    auth.onLogin();
-  };
-
   return (
     <>
       <header className={`${classes.header} color-main`}>
         <div className={classes["left-side"]}>
           <h1>
-            <Link to="/">
+            <Link to="/" className={classes.link}>
               <GiSkills className={classes.icon} />
               <span className={classes.text}> Project Skill</span>
             </Link>
@@ -30,14 +25,14 @@ const Header = () => {
           <ul>
             <li>
               {auth.isLoggedIn && (
-                <Link to="/create_offer">
+                <Link to="/create_offer" className={classes.link}>
                   <TiPlus className={classes.icon} />
                   <span className={classes.text}>Create Offer</span>
                 </Link>
               )}
             </li>
             <li>
-              <Link to="/categories">
+              <Link to="/categories" className={classes.link}>
                 <TiTags className={classes.icon} />
                 <span className={classes.text}>Categories</span>
               </Link>
@@ -55,7 +50,7 @@ const Header = () => {
               ) : (
                 <Button
                   onClick={() => {
-                    loginButtonFn();
+                    navigate("/login");
                   }}
                   variant="contained"
                   className="color-two"
