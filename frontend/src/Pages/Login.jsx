@@ -43,7 +43,7 @@ const Login = () => {
           onChange={updateUser}
           value={user.email}
           autoComplete="off"
-          className={classes.input}
+          className={`${classes.input} ${classes["input-invalid"]}`}
         />
         <label htmlFor="password" className={classes.label}>
           Password
@@ -54,7 +54,7 @@ const Login = () => {
           onChange={updateUser}
           value={user.password}
           autoComplete="off"
-          className={classes.input}
+          className={`${classes.input} ${classes["input-invalid"]}`}
         />
         <div className={classes.actions}>
           <Button className={classes.button}>Submit</Button>

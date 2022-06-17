@@ -4,9 +4,10 @@ import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
 
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
+import { MdArrowForwardIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const USER_REGEX = /^\w{1,}[\w\d_-]{3,22}$/;
+const USER_REGEX = /^[\w\d_-]{4,24}$/;
 const EMAIL_REGEX = /^\S+@.+\..+$/;
 const PWD_REGEX = /^.{8,64}$/;
 
@@ -157,7 +158,7 @@ const SignUp = () => {
 
   return (
     <Card>
-      <section className={classes.signup}>
+      <div className={classes.signup}>
         <h1>Sign Up</h1>
         <form onSubmit={handleFormSubmit}>
           <span className={errMsg ? classes.errMsg : classes.offscreen}>
@@ -165,7 +166,7 @@ const SignUp = () => {
             {errMsg}
           </span>
           <label htmlFor="username" className={classes.label}>
-            User Name {formIsValid.usernameValid && <FaCheck />}
+            User Name
           </label>
           <input
             type="text"
@@ -176,7 +177,11 @@ const SignUp = () => {
             value={newUser.username}
             onFocus={handleFocusChange}
             onBlur={handleFocusChange}
-            className={classes.input}
+            className={`${classes.input} ${
+              formIsValid.usernameValid
+                ? classes["input-valid"]
+                : classes["input-invalid"]
+            }`}
           />
           <p
             className={
@@ -189,10 +194,9 @@ const SignUp = () => {
           >
             <FaInfoCircle /> 4 to 24 characters <br />
             Allowed: letters numbers, underscore, hyphen <br />
-            Has to start with a letter
           </p>
           <label htmlFor="email" className={classes.label}>
-            E-Mail {formIsValid.emailValid && <FaCheck />}
+            E-Mail
           </label>
           <input
             type="email"
@@ -204,7 +208,11 @@ const SignUp = () => {
             onFocus={handleFocusChange}
             onBlur={handleFocusChange}
             value={newUser.email}
-            className={classes.input}
+            className={`${classes.input} ${
+              formIsValid.emailValid
+                ? classes["input-valid"]
+                : classes["input-invalid"]
+            }`}
           />
           <p
             className={
@@ -216,7 +224,7 @@ const SignUp = () => {
             <FaInfoCircle /> E-Mail Address not valid
           </p>
           <label htmlFor="password" className={classes.label}>
-            Password {formIsValid.passwordValid && <FaCheck />}
+            Password
           </label>
           <input
             type="password"
@@ -227,7 +235,11 @@ const SignUp = () => {
             onFocus={handleFocusChange}
             onBlur={handleFocusChange}
             value={newUser.password}
-            className={classes.input}
+            className={`${classes.input} ${
+              formIsValid.passwordValid
+                ? classes["input-valid"]
+                : classes["input-invalid"]
+            }`}
           />
           <p
             className={
@@ -242,8 +254,6 @@ const SignUp = () => {
           </p>
           <label htmlFor="repeatPassword" className={classes.label}>
             Repeat Password{" "}
-            {/* TODO: Password matching checkmark is shown shortly after first letter of password is typed in */}
-            {formIsValid.passwordMatching && newUser.password && <FaCheck />}
           </label>
           <input
             type="password"
@@ -254,7 +264,11 @@ const SignUp = () => {
             onFocus={handleFocusChange}
             onBlur={handleFocusChange}
             value={newUser.repeatPassword}
-            className={classes.input}
+            className={`${classes.input} ${
+              formIsValid.passwordMatching && newUser.repeatPassword
+                ? classes["input-valid"]
+                : classes["input-invalid"]
+            }`}
           />
           <p
             className={
@@ -289,7 +303,7 @@ const SignUp = () => {
             Log in
           </Link>
         </p>
-      </section>
+      </div>
     </Card>
   );
 };
