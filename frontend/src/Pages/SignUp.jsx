@@ -154,6 +154,10 @@ const SignUp = () => {
     }
   }, [newUser.username]);
 
+  useEffect(() => {
+    setErrMsg("");
+  }, [newUser]);
+
   useEffect(() => {}, [newUser]);
 
   return (
@@ -283,7 +287,13 @@ const SignUp = () => {
           </p>
           <div className={classes.actions}>
             <Button
-              className={classes.button}
+              className={`${classes.button} ${
+                (!formIsValid.usernameValid ||
+                  !formIsValid.emailValid ||
+                  !formIsValid.passwordValid ||
+                  !formIsValid.passwordMatching) &&
+                classes.buttonInvalid
+              }`}
               disabled={
                 !formIsValid.usernameValid ||
                 !formIsValid.emailValid ||

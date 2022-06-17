@@ -67,3 +67,17 @@
     margin: 1em 0 0 0;
     font-size: small;
 }
+
+.errMsg{
+    color:red;
+    margin: 2em;
+}
+
+.errMsg svg{
+    vertical-align: middle;
+    padding: 0 .5em 0 0;
+}
+
+.buttonInvalid{
+    pointer-events: none;
+}
