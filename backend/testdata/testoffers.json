@@ -1,3 +1,11 @@
+[
+{
+    "title": "Piano basics",
+    "description":"Learn how to play simple songs on the piano.",
+    "UserID":29813459048,
+    "points": 1,
+    "category":"music"
+},
 {
     "title": "Pasta recipes",
     "description":"Learn how to cook very good pasta with different sauces.",
@@ -5,3 +13,4 @@
     "points": 2,
     "category":"cooking"
 }
+]
