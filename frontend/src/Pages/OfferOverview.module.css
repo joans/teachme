@@ -1,0 +1,10 @@
+.offerContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.offerCard{
+  width: 400px;
+  height: 12em;
+}

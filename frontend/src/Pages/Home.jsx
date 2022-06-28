@@ -1,10 +1,12 @@
 import React from "react";
+import OfferOverview from "./OfferOverview";
 
 const Home = () => {
   return (
     <>
       <div>
         <h1>Home</h1>
+        <OfferOverview />
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
           ratione molestiae blanditiis iure obcaecati delectus. Non, minus
