@@ -3,8 +3,7 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
 
-import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
-import { MdArrowForwardIos } from "react-icons/md";
+import { FaTimes, FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const USER_REGEX = /^[\w\d_-]{4,24}$/;
