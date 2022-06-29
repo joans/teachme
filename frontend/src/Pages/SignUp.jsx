@@ -2,6 +2,7 @@ import React, { useReducer, useEffect, useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
+import Axios from "axios";
 
 import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import { MdArrowForwardIos } from "react-icons/md";
@@ -38,6 +39,18 @@ const newUserReducer = (state, action) => {
   }
   if (action.type === "SUBMIT_FORM") {
     console.log(state);
+    Axios.post("http://localhost:3307/register", {
+      username: state.username,
+      email: state.email,
+      password: state.password,
+    }).then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     // TODO: Send Data to Backend here!
   }
   return state;
