@@ -40,7 +40,9 @@ const newUserReducer = (state, action) => {
   if (action.type === "SUBMIT_FORM") {
     console.log(state);
     Axios.post("http://localhost:3307/register",
-    {username: newUser.username},
+    {username: state.username,
+    email: state.email,
+    password: state.password,},
     ).then((response) => {
       console.log(response);
     }, (error) => {
