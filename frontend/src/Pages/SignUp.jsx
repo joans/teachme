@@ -39,6 +39,13 @@ const newUserReducer = (state, action) => {
   }
   if (action.type === "SUBMIT_FORM") {
     console.log(state);
+    Axios.post("http://localhost:3307/register",
+    {username: newUser.username},
+    ).then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
     // TODO: Send Data to Backend here!
   }
   return state;
@@ -161,20 +168,6 @@ const SignUp = () => {
 
   useEffect(() => {}, [newUser]);
 
-  function App(){                                            // HINZUGEFÜGT von NILS
-    const [usernameReg, setUsernameReg] = useState("");
-    const [passwordReg, setPasswordReg] = useState("")};
-
-    const register = () => {
-      Axios.post("http://localhost:3307/register", {
-        username: usernameReg,
-        password: passwordReg,
-      }).then((response) => {
-        console.log(response);
-      });
-    };
-
-
   return (
     <Card>
       <div className={classes.signup}>
@@ -192,7 +185,6 @@ const SignUp = () => {
             id="username"
             required
             autoComplete="off"
-            onChange={(e) => {setUsernameReg(e.target.value);}}    //von Nils
             onChange={handleInputUpdate}
             value={newUser.username}
             onFocus={handleFocusChange}
@@ -251,7 +243,6 @@ const SignUp = () => {
             name=""
             id="password"
             required
-            onChange={(e) => {setPasswordReg(e.target.value);}}    //von Nils
             onChange={handleInputUpdate}
             onFocus={handleFocusChange}
             onBlur={handleFocusChange}
@@ -319,7 +310,6 @@ const SignUp = () => {
                   ? true
                   : false
               }
-              onClick={register}    //von Nils
             >
               Submit
             </Button>
