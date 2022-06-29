@@ -7,8 +7,12 @@ const testoffers = require("../data/testoffers.json");
 const OfferOverview = () => {
   return (
     <div className={classes.offerContainer}>
-      {testoffers.map((singleItem) => (
-        <SingleOffer className={classes.offerCard} item={singleItem} />
+      {testoffers.map((singleItem, key) => (
+        <SingleOffer
+          className={classes.offerCard}
+          key={key} // should be replaced by the offer ID later
+          item={singleItem}
+        />
       ))}
     </div>
   );
