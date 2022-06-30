@@ -1,7 +1,8 @@
 [
 {
-    "title": "Piano basics",
+    "title": "Piano basics with amazing coach",
     "description":"Learn how to play simple songs on the piano.",
+    "PostID":"156479567",
     "UserID":29813459048,
     "points": 1,
     "category":"music"
@@ -9,6 +10,7 @@
 {
     "title": "Pasta recipes",
     "description":"Learn how to cook very good pasta with different sauces.",
+    "PostID":"75618753",
     "UserID":29813459049,
     "points": 2,
     "category":"cooking"

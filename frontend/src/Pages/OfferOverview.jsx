@@ -1,5 +1,5 @@
 import React from "react";
-import SingleOffer from "./SingleOffer";
+import SingleOffer from "../partials/SingleOffer";
 import classes from "./OfferOverview.module.css";
 
 const testoffers = require("../data/testoffers.json");
