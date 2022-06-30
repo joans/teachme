@@ -38,18 +38,6 @@ const newUserReducer = (state, action) => {
   }
   if (action.type === "SUBMIT_FORM") {
     console.log(state);
-    Axios.post("http://localhost:3307/register", {
-      username: state.username,
-      email: state.email,
-      password: state.password,
-    }).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
     // TODO: Send Data to Backend here!
   }
   return state;
@@ -106,6 +94,19 @@ const SignUp = () => {
       setErrMsg("Invalid form!");
       return;
     }
+
+    Axios.post("http://localhost:3307/register", {
+      username: newUser.username,
+      email: newUser.email,
+      password: newUser.password,
+    }).then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     dispatchNewUser({
       type: "SUBMIT_FORM",
