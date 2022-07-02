@@ -8,6 +8,7 @@ const filterCurID = (offerID) => {
     if (item.PostID === offerID) {
       return item;
     }
+    return null;
   })[0];
 };
 
