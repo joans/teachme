@@ -1,51 +1,49 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Post extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Post }) {
+    static associate({ User }) {
       // define association here
-      this.hasMany(Post, { foreignKey: "userID" });
+      this.belongsTo(User, { foreignKey: "userID" });
     }
-
-    // overrides the default JSON returned to the user of the API
     toJSON() {
       // hide the "id" and "password"-field in the API as a default behaviour
       return {
         ...this.get(),
         id: undefined,
-        password: undefined,
+        userID: undefined,
       };
     }
   }
-  User.init(
+  Post.init(
     {
       uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      username: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      email: {
+      category: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      password: {
+      body: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     },
     {
       sequelize,
-      tableName: "users",
-      modelName: "User",
+      tableName: "posts",
+      modelName: "Post",
     }
   );
-  return User;
+  return Post;
 };
