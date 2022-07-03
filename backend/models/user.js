@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ Post }) {
       // define association here
-      this.hasMany(Post, { foreignKey: "userID" });
+      this.hasMany(Post, { foreignKey: "userID", as: "posts" });
     }
 
     // overrides the default JSON returned to the user of the API
@@ -31,14 +31,29 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
+        validate: {
+          is: /^[\w\d_-]{4,24}$/,
+          // Same Regex as in Frontend
+        },
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
+        validate: {
+          notNull: { msg: "The E-Mail Address must be given" },
+          notEmpty: { msg: "The E-Mail Address cannot be empty" },
+          isEmail: { msg: "The E-Mail Address must be valid" },
+        },
       },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          is: /^.{8,64}$/,
+          // Same Regex as in Frontend
+        },
       },
     },
     {

@@ -34,7 +34,11 @@ app.get("/users", async (req, res) => {
 app.get("/users/:uuid", async (req, res) => {
   const uuid = req.params.uuid;
   try {
-    const user = await User.findOne({ where: { uuid: uuid } });
+    const user = await User.findOne({
+      attributes: ["uuid", "username"],
+      where: { uuid: uuid },
+      include: ["posts"],
+    });
 
     return res.json(user);
   } catch (err) {
@@ -58,6 +62,20 @@ app.post("/create_post", async (req, res) => {
     res
       .status(500)
       .json({ error: `Could not create Post with UUID ${userUUID}` });
+  }
+});
+
+app.get("/posts", async (req, res) => {
+  try {
+    const posts = await Post.findAll({
+      // include: ["user"],
+      // Code appends the user data to the corresponding post data
+    });
+
+    return res.json(posts);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: `Could not find any Posts` });
   }
 });
 

@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({ User }) {
       // define association here
-      this.belongsTo(User, { foreignKey: "userID" });
+      this.belongsTo(User, { foreignKey: "userID", as: "user" });
     }
     toJSON() {
       // hide the "id" and "password"-field in the API as a default behaviour
