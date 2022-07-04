@@ -1,8 +1,8 @@
 import React from "react";
 import { useContext } from "react";
 import AuthContext from "../store/auth-context";
-import CreateOffer from "./CreateOffer";
-import ErrorPage from "./ErrorPage";
+import CreateOffer from "../Pages/CreateOffer";
+import ErrorPage from "../Pages/ErrorPage";
 
 const CreateOfferHandler = () => {
   const auth = useContext(AuthContext);

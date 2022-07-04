@@ -1,0 +1,18 @@
+.singleCard{
+  margin: 1em 0;
+  padding: .5em;
+
+  border: 1px solid black;
+}
+
+.title{
+  margin-top: .5em;
+}
+
+.meta{
+  font-size: small;
+}
+
+.category{
+  float: right;
+}
