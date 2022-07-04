@@ -5,6 +5,7 @@ import AuthContext from "../store/auth-context";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
+import Axios from "axios";
 
 const Login = () => {
   const auth = useContext(AuthContext);
@@ -25,6 +26,17 @@ const Login = () => {
 
   const formSubmit = (e) => {
     e.preventDefault();
+    Axios.post("http://localhost:3307/login", {
+      email: user.email,
+      password: user.password,
+    }).then(
+      (response) => {
+        console.log(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     auth.onLogin();
     navigate("/");
   };
@@ -71,5 +83,7 @@ const Login = () => {
     </Card>
   );
 };
+
+<h1>"Hallo" + loginStatus</h1>;
 
 export default Login;
