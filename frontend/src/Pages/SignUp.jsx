@@ -301,19 +301,12 @@ const SignUp = () => {
           <div className={classes.actions}>
             <Button
               className={`${classes.button} ${
-                (!formIsValid.usernameValid ||
-                  !formIsValid.emailValid ||
-                  !formIsValid.passwordValid ||
-                  !formIsValid.passwordMatching) &&
-                classes.buttonInvalid
+                Object.values(formIsValid).every(Boolean)
+                  ? ""
+                  : classes.buttonInvalid
               }`}
               disabled={
-                !formIsValid.usernameValid ||
-                !formIsValid.emailValid ||
-                !formIsValid.passwordValid ||
-                !formIsValid.passwordMatching
-                  ? true
-                  : false
+                Object.values(formIsValid).every(Boolean) ? false : true
               }
             >
               Submit
