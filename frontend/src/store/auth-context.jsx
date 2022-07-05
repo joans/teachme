@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 const AuthContext = React.createContext({
   isLoggedIn: false,
   auth: {},
-  setAuth: () => {},
   onLogout: () => {},
   onLogin: (email, password) => {},
 });
@@ -15,18 +14,23 @@ export const AuthContextProvider = (props) => {
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") === "1") {
       setIsLoggedIn(true);
+      setAuth(JSON.parse(localStorage.getItem("userObj")));
     }
   }, []);
 
-  const loginFunction = (email, password) => {
+  const loginFunction = (auth, email, password) => {
     // check email and password for validity on backend!
+    setAuth(auth);
     localStorage.setItem("isLoggedIn", "1");
+    localStorage.setItem("userObj", JSON.stringify(auth));
     setIsLoggedIn(true);
   };
 
   const logoutFunction = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userObj");
     setIsLoggedIn(false);
+    setAuth({});
   };
 
   return (
@@ -34,7 +38,6 @@ export const AuthContextProvider = (props) => {
       value={{
         isLoggedIn: isLoggedIn,
         auth: auth,
-        setAuth: setAuth,
         onLogout: logoutFunction,
         onLogin: loginFunction,
       }}
