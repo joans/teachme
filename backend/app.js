@@ -68,7 +68,23 @@ app.post("/create_post", async (req, res) => {
 app.get("/posts", async (req, res) => {
   try {
     const posts = await Post.findAll({
-      // include: ["user"],
+      include: ["user"],
+      // Code appends the user data to the corresponding post data
+    });
+
+    return res.json(posts);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: `Could not find any Posts` });
+  }
+});
+
+app.get("/posts/:uuid", async (req, res) => {
+  const uuid = req.params.uuid;
+  try {
+    const posts = await Post.findOne({
+      where: { uuid: uuid },
+      include: ["user"],
       // Code appends the user data to the corresponding post data
     });
 
