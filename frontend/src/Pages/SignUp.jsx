@@ -95,19 +95,19 @@ const SignUp = () => {
       return;
     }
 
-    Axios.post("http://localhost:3307/register", {
-      username: newUser.username,
-      email: newUser.email,
-      password: newUser.password,
-    }).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
+    const postFormData = async () => {
+      try {
+        const resp = await Axios.post(
+          "http://localhost:3307/register",
+          newUser
+        );
+        console.log(resp.data);
+      } catch (err) {
+        console.log(err);
       }
-    );
+    };
 
+    postFormData();
     dispatchNewUser({
       type: "SUBMIT_FORM",
     });
