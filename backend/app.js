@@ -2,17 +2,25 @@ const express = require("express");
 const cors = require("cors");
 const { sequelize, User, Post } = require("./models");
 const { raw } = require("mysql");
+const { authJwt } = require("./middleware");
+var bcrypt = require("bcryptjs");
+var jwt = require("jsonwebtoken");
+const config = require("./config/auth.config");
+
+
 
 const app = express();
+
 
 app.use(express.json());
 app.use(cors());
 
 app.post("/register", async (req, res) => {
-  const { username, password, email } = req.body;
-
   try {
-    const user = await User.create({ username, password, email });
+    const user = await User.create({ 
+      username: req.body.username,
+      password: bcrypt.hashSync(req.body.password),
+      email: req.body.email });
 
     return res.json(user);
   } catch (err) {
@@ -21,7 +29,47 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
+app.post("/login", async (req, res) => {
+
+  console.log("test");
+  User.findOne({
+    where: {
+      username: req.body.username
+
+    }
+  })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+      console.log("username: "+req.body.password +"found");
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          accessToken: null,
+          message: "Invalid Password!"
+        });
+      }
+      var token = jwt.sign({ id: user.id }, config.secret, {
+        expiresIn: 86400 // 24 hours
+      });
+      res.status(200).send({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        accessToken: token
+      });
+    })
+    .catch(err => {
+      res.status(500).send({ message: err.message });
+    });
+});
+
+
+app.get("/users", authJwt.verifyToken, async (req, res) => {
   try {
     const users = await User.findAll({ attributes: ["uuid", "username"] });
 
