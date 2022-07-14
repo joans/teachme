@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import classes from "./PostDetails.module.css";
 import Axios from "axios";
+import Card from "../UI/Card";
 
 const PostDetail = () => {
-  const [singlePost, updateSinglePost] = useState("");
+  const [singlePost, updateSinglePost] = useState({
+    user: { uuid: null, username: null },
+  });
 
   const { id } = useParams();
 
@@ -18,10 +21,19 @@ const PostDetail = () => {
   }, [id]);
 
   return (
-    <div className={classes.postDetail}>
-      <h1>{singlePost.title}</h1>
-      <p>{singlePost.body}</p>
-    </div>
+    <Card>
+      <div className={classes.postDetail}>
+        <h1>{singlePost.title}</h1>
+        <p>{singlePost.body}</p>
+        <p>Category: {singlePost.category}</p>
+        <p>
+          Posted by:{" "}
+          <Link to={`/users/${singlePost.user.uuid}`}>
+            {singlePost.user.username}
+          </Link>
+        </p>
+      </div>
+    </Card>
   );
 };
 
