@@ -3,10 +3,16 @@
   padding: .5em;
 
   border: 1px solid black;
+  border-radius: .5em;
+}
+
+.singleCard a{
+  text-decoration: none;
+  color: var(--color-three);
 }
 
 .title{
-  margin-top: .5em;
+  margin-top: .1em;
 }
 
 .meta{

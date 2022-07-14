@@ -1,14 +1,15 @@
 .offerContainer{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-rows: minmax(100px auto);
+  /* row-gap: 1em; */
+  column-gap: 1em;
+  justify-content: center;
 }
 
 
 .offerCard{
-  width: 400px;
-  flex: auto;
-  height: 12em;
-  padding: 1em;
-  overflow: hidden;
+  width: 10em;
+  /* height: 12em; */
+  /* overflow: hidden; */
 }
