@@ -20,8 +20,8 @@ app.post("/register", async (req, res) => {
     const user = await User.create({ 
       username: req.body.username,
       password: bcrypt.hashSync(req.body.password),
-      email: req.body.email });
-
+      email: req.body.email 
+    });
     return res.json(user);
   } catch (err) {
     console.log(err);
@@ -57,7 +57,7 @@ app.post("/login", async (req, res) => {
         expiresIn: 86400 // 24 hours
       });
       res.status(200).send({
-        id: user.id,
+        id: user.uuid,
         username: user.username,
         email: user.email,
         accessToken: token
