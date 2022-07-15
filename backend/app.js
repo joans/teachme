@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const { sequelize, User, Post } = require("./models");
-const { raw } = require("mysql");
 const { authJwt } = require("./middleware");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -13,11 +12,12 @@ app.use(express.json());
 app.use(cors());
 
 app.post("/register", async (req, res) => {
+  const { username, password, email } = req.body;
   try {
     const user = await User.create({
-      username: req.body.username,
-      password: bcrypt.hashSync(req.body.password),
-      email: req.body.email,
+      username: username,
+      password: bcrypt.hashSync(password),
+      email: email,
     });
     return res.json(user);
   } catch (err) {
@@ -27,34 +27,32 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
   console.log("test");
-  User.findOne({
+  await User.findOne({
     where: {
-      username: req.body.username,
+      username: username,
     },
   })
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
       }
-      console.log("username: " + req.body.password + "found");
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
+      console.log("username: " + password + "found");
+      var passwordIsValid = bcrypt.compareSync(password, user.password);
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
           message: "Invalid Password!",
         });
       }
-      var token = jwt.sign({ id: user.id }, config.secret, {
+      var token = jwt.sign({ uuid: user.uuid }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
       res.status(200).send({
-        id: user.uuid,
+        uuid: user.uuid,
         username: user.username,
-        email: user.email,
+        // email: user.email, // no sensitive info in the front-end
         accessToken: token,
       });
     })
@@ -90,7 +88,7 @@ app.get("/users/:uuid", async (req, res) => {
   }
 });
 
-app.post("/create_post", async (req, res) => {
+app.post("/create_post", authJwt.verifyToken, async (req, res) => {
   const { userUUID, title, category, body } = req.body;
 
   try {

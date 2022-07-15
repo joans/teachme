@@ -6,13 +6,16 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
 import Axios from "axios";
+import { FaTimes } from "react-icons/fa";
 
 const Login = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const emailRef = useRef();
-  const [user, setUser] = useState({ email: "", password: "" });
+  const usernameRef = useRef();
+  const [user, setUser] = useState({ username: "", password: "" });
+
+  const [errMsg, setErrMsg] = useState();
 
   const updateUser = (e) => {
     setUser((oldstate) => {
@@ -21,18 +24,27 @@ const Login = () => {
   };
 
   useEffect(() => {
-    emailRef.current.focus();
+    usernameRef.current.focus();
   }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [user]);
 
   const formSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await Axios.get("http://localhost:3307/users");
-    // For test purposes only: Pick a random index from the array and use this users uuid as a login param
-    const randIndex = Math.floor(Math.random() * res.data.length);
-    const loggedinUser = res.data[randIndex];
+    try {
+      const resp = await Axios.post("http://localhost:3307/login", user);
+      console.log(resp.data);
+      auth.onLogin(resp.data);
+    } catch (err) {
+      console.log(err);
+      setErrMsg(err.message);
+    }
 
-    auth.onLogin(loggedinUser);
+    // For test purposes only: Pick a random index from the array and use this users uuid as a login param
+
     navigate("/");
   };
 
@@ -40,15 +52,19 @@ const Login = () => {
     <Card>
       <h1>Login</h1>
       <form onSubmit={formSubmit}>
-        <label htmlFor="email" className={classes.label}>
-          Email
+        <span className={errMsg ? classes.errMsg : classes.offscreen}>
+          <FaTimes />
+          {errMsg}
+        </span>
+        <label htmlFor="username" className={classes.label}>
+          Username
         </label>
         <input
-          type="email"
-          id="email"
-          ref={emailRef}
+          type="username"
+          id="username"
+          ref={usernameRef}
           onChange={updateUser}
-          value={user.email}
+          value={user.username}
           autoComplete="off"
           className={`${classes.input} ${classes["input-invalid"]}`}
         />

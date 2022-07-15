@@ -30,11 +30,11 @@ const CreateOffer = () => {
     offerText: false,
   });
 
-  const [showInfoBox, updateShowInfoBox] = useState({
-    title: false,
-    category: false,
-    offerText: false,
-  });
+  // const [showInfoBox, updateShowInfoBox] = useState({
+  //   title: false,
+  //   category: false,
+  //   offerText: false,
+  // });
 
   const updateArticleState = (e) => {
     const { value, id } = e.target;
@@ -73,13 +73,16 @@ const CreateOffer = () => {
   useEffect(() => {}, []);
 
   const handleSubmit = (e) => {
-    console.log(authCtx.auth.uuid);
-    Axios.post("http://localhost:3307/create_post", {
-      userUUID: authCtx.auth.uuid,
-      title: newArticle.title,
-      category: newArticle.category,
-      body: newArticle.offerText,
-    }).then(
+    Axios.post(
+      "http://localhost:3307/create_post",
+      {
+        userUUID: authCtx.auth.uuid,
+        title: newArticle.title,
+        category: newArticle.category,
+        body: newArticle.offerText,
+      },
+      { headers: { "x-access-token": authCtx.auth.accessToken } }
+    ).then(
       (response) => {
         console.log(response);
       },
