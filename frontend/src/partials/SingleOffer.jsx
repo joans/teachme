@@ -9,18 +9,19 @@ const truncate = (string, maxlength = 50) => {
 };
 
 const SingleOffer = ({ item, className }) => {
+  // console.log(item);
   return (
     <div className={`${classes.singleCard} ${className}`}>
       <h2 className={classes.title}>
-        <Link to={`offer/${item.PostID}`}>{truncate(item.title, 30)}</Link>
+        <Link to={`offer/${item.uuid}`}>{truncate(item.title, 30)}</Link>
       </h2>
-      <p className={classes.description}>{truncate(item.description)}</p>
-      <div className={classes.meta}>
-        <span className={classes.points}>
+      <p className={classes.body}>{truncate(item.body)}</p>
+      {/* <div className={classes.meta}> */}
+      {/* <span className={classes.points}>
           {item.points} {item.points > 1 ? "Points" : "Point"}
-        </span>
-        <span className={classes.category}>category: {item.category}</span>
-      </div>
+        </span> */}
+      <span className={classes.category}>category: {item.category}</span>
+      {/* </div> */}
     </div>
   );
 };

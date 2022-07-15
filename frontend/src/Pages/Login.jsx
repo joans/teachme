@@ -5,6 +5,7 @@ import AuthContext from "../store/auth-context";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./SignUp.module.css";
+import Axios from "axios";
 
 const Login = () => {
   const auth = useContext(AuthContext);
@@ -23,9 +24,15 @@ const Login = () => {
     emailRef.current.focus();
   }, []);
 
-  const formSubmit = (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
-    auth.onLogin();
+
+    const res = await Axios.get("http://localhost:3307/users");
+    // For test purposes only: Pick a random index from the array and use this users uuid as a login param
+    const randIndex = Math.floor(Math.random() * res.data.length);
+    const loggedinUser = res.data[randIndex];
+
+    auth.onLogin(loggedinUser);
     navigate("/");
   };
 
