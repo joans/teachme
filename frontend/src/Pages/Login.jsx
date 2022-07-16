@@ -38,14 +38,13 @@ const Login = () => {
       const resp = await Axios.post("http://localhost:3307/login", user);
       console.log(resp.data);
       auth.onLogin(resp.data);
+      navigate("/");
     } catch (err) {
       console.log(err);
       setErrMsg(err.message);
     }
 
     // For test purposes only: Pick a random index from the array and use this users uuid as a login param
-
-    navigate("/");
   };
 
   return (
