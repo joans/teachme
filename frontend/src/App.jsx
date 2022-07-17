@@ -8,6 +8,7 @@ import SignUp from "./Pages/SignUp";
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login";
 import PostDetail from "./Pages/PostDetail";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/offer/:id" element={<PostDetail />} />
+          <Route path="/user/:id" element={<Profile />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

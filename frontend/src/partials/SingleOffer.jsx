@@ -13,7 +13,7 @@ const SingleOffer = ({ item, className }) => {
   return (
     <div className={`${classes.singleCard} ${className}`}>
       <h2 className={classes.title}>
-        <Link to={`offer/${item.uuid}`}>{truncate(item.title, 20)}</Link>
+        <Link to={`/offer/${item.uuid}`}>{truncate(item.title, 20)}</Link>
       </h2>
       <p className={classes.body}>{truncate(item.body)}</p>
       {/* <div className={classes.meta}> */}

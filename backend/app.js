@@ -71,11 +71,10 @@ app.get("/users", authJwt.verifyToken, async (req, res) => {
   }
 });
 
-app.get("/users/:uuid", async (req, res) => {
+app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
   const uuid = req.params.uuid;
   try {
     const user = await User.findOne({
-      attributes: ["uuid", "username"],
       where: { uuid: uuid },
       include: ["posts"],
     });
