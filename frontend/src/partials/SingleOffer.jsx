@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./SingleOffer.module.css";
 
-const truncate = (string, maxlength = 50) => {
+const truncate = (string, maxlength = 30) => {
   return string.length > maxlength
     ? `${string.substring(0, maxlength - 3)}...`
     : string;
@@ -13,7 +13,7 @@ const SingleOffer = ({ item, className }) => {
   return (
     <div className={`${classes.singleCard} ${className}`}>
       <h2 className={classes.title}>
-        <Link to={`offer/${item.uuid}`}>{truncate(item.title, 30)}</Link>
+        <Link to={`/offer/${item.uuid}`}>{truncate(item.title, 20)}</Link>
       </h2>
       <p className={classes.body}>{truncate(item.body)}</p>
       {/* <div className={classes.meta}> */}

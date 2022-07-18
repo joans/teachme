@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
-import signupClass from "./SignUp.module.css";
+import signupClasses from "./SignUp.module.css";
 import classes from "./CreateOffer.module.css";
 import AuthContext from "../store/auth-context";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const CreateOffer = () => {
   const authCtx = useContext(AuthContext);
@@ -22,6 +23,18 @@ const CreateOffer = () => {
     category: false,
     offerText: false,
   });
+
+  const [formBlur, updateFormBlur] = useState({
+    title: false,
+    category: false,
+    offerText: false,
+  });
+
+  // const [showInfoBox, updateShowInfoBox] = useState({
+  //   title: false,
+  //   category: false,
+  //   offerText: false,
+  // });
 
   const updateArticleState = (e) => {
     const { value, id } = e.target;
@@ -47,14 +60,29 @@ const CreateOffer = () => {
     }
   };
 
+  const handleFocusChange = (e) => {
+    const { id } = e.target;
+    updateFormBlur((state) => ({ ...state, [id]: true }));
+  };
+
+  const handleBlurChange = (e) => {
+    const { id } = e.target;
+    updateFormBlur((state) => ({ ...state, [id]: false }));
+  };
+
+  useEffect(() => {}, []);
+
   const handleSubmit = (e) => {
-    console.log(authCtx.auth.uuid);
-    Axios.post("http://localhost:3307/create_post", {
-      userUUID: authCtx.auth.uuid,
-      title: newArticle.title,
-      category: newArticle.category,
-      body: newArticle.offerText,
-    }).then(
+    Axios.post(
+      "http://localhost:3307/create_post",
+      {
+        userUUID: authCtx.auth.uuid,
+        title: newArticle.title,
+        category: newArticle.category,
+        body: newArticle.offerText,
+      },
+      { headers: { "x-access-token": authCtx.auth.accessToken } }
+    ).then(
       (response) => {
         console.log(response);
       },
@@ -70,25 +98,27 @@ const CreateOffer = () => {
     <Card>
       <h1>Create Offer</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title" className={signupClass.label}>
+        <label htmlFor="title" className={signupClasses.label}>
           Title
         </label>
         <input
           type="text"
           id="title"
           onChange={updateArticleState}
+          onFocus={handleFocusChange}
+          onBlur={handleBlurChange}
           value={newArticle.title}
-          className={`${signupClass.input}`}
+          className={`${signupClasses.input}`}
           placeholder="The Title of your offer"
         />
-        <label htmlFor="category" className={signupClass.label}>
+        <label htmlFor="category" className={signupClasses.label}>
           Category
         </label>
         <select
           name=""
           id="category"
           onChange={updateArticleState}
-          className={signupClass.input}
+          className={signupClasses.input}
           defaultValue="none"
         >
           <option value="none" disabled hidden>
@@ -99,26 +129,28 @@ const CreateOffer = () => {
           <option value="art">Art</option>
           <option value="cooking">Cooking</option>
         </select>
-        <label htmlFor="offerText" className={signupClass.label}>
+        <label htmlFor="offerText" className={signupClasses.label}>
           Description
         </label>
         <textarea
-          className={`${signupClass.input} ${classes.textarea}`}
+          className={`${signupClasses.input} ${classes.textarea}`}
           name=""
           id="offerText"
           value={newArticle.offerText}
+          onFocus={handleFocusChange}
+          onBlur={handleBlurChange}
           onChange={updateArticleState}
           cols="30"
           rows="10"
           placeholder="Please write at least 30 characters."
         ></textarea>
-        <div className={signupClass.actions}>
+        <div className={signupClasses.actions}>
           <Button
             type="submit"
-            className={`${classes.button} ${signupClass.button} ${
+            className={`${classes.button} ${signupClasses.button} ${
               Object.values(formIsValid).every(Boolean)
                 ? ""
-                : signupClass.buttonInvalid
+                : signupClasses.buttonInvalid
             }`}
             disabled={Object.values(formIsValid).every(Boolean) ? false : true}
           >

@@ -1,12 +1,20 @@
 .singleCard{
   margin: 1em 0;
-  padding: .5em;
+  padding: 1em;
 
   border: 1px solid black;
+  border-radius: .5em;
+  /* for keeping the category inside the borders of the div */
+  overflow: hidden;
+}
+
+.singleCard a{
+  text-decoration: none;
+  color: var(--color-three);
 }
 
 .title{
-  margin-top: .5em;
+  margin-top: .1em;
 }
 
 .meta{

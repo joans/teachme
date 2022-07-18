@@ -104,6 +104,7 @@ const SignUp = () => {
         console.log(resp.data);
       } catch (err) {
         console.log(err);
+        setErrMsg(err.message);
       }
     };
 
