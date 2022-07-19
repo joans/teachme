@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { sequelize, User, Post } = require("./models");
+const { Op } = require("sequelize");
 const { authJwt } = require("./middleware");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -115,6 +116,26 @@ app.get("/posts", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: `Could not find any Posts` });
+  }
+});
+
+app.post("/search", async (req, res) => {
+  const { searchquery } = req.body;
+
+  const options = {
+    where: {
+      [Op.or]: [
+        { body: { [Op.like]: "%" + searchquery + "%" } },
+        { title: { [Op.like]: "%" + searchquery + "%" } },
+      ],
+    },
+    // include: ["user"],
+  };
+  try {
+    const posts = await Post.findAndCountAll(options);
+    return res.json(posts);
+  } catch (err) {
+    console.log(err);
   }
 });
 
