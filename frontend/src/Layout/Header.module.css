@@ -28,16 +28,23 @@
   width: 2rem;
 }
 
+.input {
+  padding: 1em;
+  border-radius: 0.5em;
+  border: none;
+  margin: 0 0.5em 0 0;
+}
+
+.right-side * {
+  margin: 0 0.1rem;
+}
+
 .right-side li {
   float: left;
   height: auto;
   vertical-align: middle;
   line-height: 5rem;
   list-style-type: none;
-}
-
-.right-side * {
-  margin: 0 0.1rem;
 }
 
 /* push the content below the header down 4rem to not make the header overlap: */

@@ -119,8 +119,8 @@ app.get("/posts", async (req, res) => {
   }
 });
 
-app.post("/search", async (req, res) => {
-  const { searchquery } = req.body;
+app.get("/search/:searchterm", async (req, res) => {
+  const searchquery = req.params.searchterm;
 
   const options = {
     where: {

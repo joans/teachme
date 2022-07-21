@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import classes from "./Header.module.css";
@@ -9,6 +9,13 @@ import AuthContext from "../store/auth-context";
 const Header = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const [searchTerm, updateSearchTerm] = useState("");
+
+  const searchBackend = (e) => {
+    e.preventDefault();
+    const searchTermURIEncoded = encodeURI(searchTerm);
+    navigate(`/search/${searchTermURIEncoded}`);
+  };
 
   return (
     <>
@@ -20,6 +27,21 @@ const Header = () => {
               <span className={classes.text}> Project Skill</span>
             </Link>
           </h1>
+        </div>
+        <div className={classes["middle-side"]}>
+          <form onSubmit={searchBackend}>
+            <input
+              type="text"
+              id="searchterm"
+              placeholder="Search Term"
+              className={classes.input}
+              value={searchTerm}
+              onChange={(e) => {
+                updateSearchTerm(e.target.value);
+              }}
+            />
+            <Button>Go</Button>
+          </form>
         </div>
         <div className={classes["right-side"]}>
           <ul>
