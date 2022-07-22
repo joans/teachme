@@ -29,4 +29,4 @@ Here is a [work-in-progress live demo](https://joans.github.io/teachme/).
 
 - Frontend: [@joans](https://github.com/joans), [@Gabriela-So](https://github.com/Gabriela-So), [@SvenjaP3sto](https://github.com/SvenjaP3sto)
 - Backend: [@joans](https://github.com/joans), [@LHMoritz](https://github.com/LHMoritz), [@NillemitBrille](https://github.com/NillemitBrille)
-- Mentor: [@lisa1lynn](https://github.com/lisa1lynn)
+- Mentor: [@lisa1ynn](https://github.com/lisa1ynn)
