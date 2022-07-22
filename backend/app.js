@@ -122,11 +122,17 @@ app.get("/posts", async (req, res) => {
 app.get("/search/:searchterm", async (req, res) => {
   const searchquery = req.params.searchterm;
 
+  const querySplit = searchquery.split(" ");
+  const querySplitMap = querySplit.map((item) => ({
+    [Op.like]: "%" + item + "%",
+  }));
+  console.log(querySplitMap);
+
   const options = {
     where: {
       [Op.or]: [
-        { body: { [Op.like]: "%" + searchquery + "%" } },
-        { title: { [Op.like]: "%" + searchquery + "%" } },
+        { body: { [Op.or]: querySplitMap } },
+        { title: { [Op.or]: querySplitMap } },
       ],
     },
     // include: ["user"],
@@ -136,6 +142,7 @@ app.get("/search/:searchterm", async (req, res) => {
     return res.json(posts);
   } catch (err) {
     console.log(err);
+    res.status(500);
   }
 });
 
