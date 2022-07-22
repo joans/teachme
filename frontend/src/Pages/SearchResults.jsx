@@ -9,7 +9,7 @@ import { FaTimes } from "react-icons/fa";
 const SearchResults = () => {
   const { searchTerm } = useParams();
   const [searchResults, updateSearchResults] = useState({
-    count: null,
+    count: 0,
     rows: [],
   });
   const [errMsg, updateErrMsg] = useState();
@@ -28,8 +28,6 @@ const SearchResults = () => {
     };
     fetchData();
   }, [searchTerm]);
-
-  const regularOutput = () => {};
 
   return (
     <Card>
