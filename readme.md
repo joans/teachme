@@ -27,6 +27,6 @@ Here is a [work-in-progress live demo](https://joans.github.io/teachme/).
 
 ## Team
 
-Frontend: @joans, @Gabriela-So, @SvenjaP3sto
-Backend: @joans, @LHMoritz, @NillemitBrille
-Mentor: @lisa1lynn
+- Frontend: [@joans](https://github.com/joans), [@Gabriela-So](https://github.com/Gabriela-So), [@SvenjaP3sto](https://github.com/SvenjaP3sto)
+- Backend: [@joans](https://github.com/joans), [@LHMoritz](https://github.com/LHMoritz), [@NillemitBrille](https://github.com/NillemitBrille)
+- Mentor: [@lisa1lynn](https://github.com/Llisa1lynn)
