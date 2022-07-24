@@ -16,6 +16,7 @@
   width: 100%;
   top: 0;
   left: 0;
+  background-color: #fefefe;
 }
 
 .text {
@@ -23,9 +24,29 @@
 }
 
 .icon {
-  vertical-align: middle;
+  vertical-align: text-bottom;
   height: 2rem;
   width: 2rem;
+}
+
+.input {
+  padding: 1em;
+  /* border-radius: 0.5em; */
+  border: 1px solid grey;
+  border-right: none;
+  margin: 0;
+}
+
+.search-button {
+  border-radius: 0%;
+  border: 1px solid grey;
+  border-left: none;
+  padding: 1em 0.5em;
+  margin: 0;
+}
+
+.right-side * {
+  margin: 0 0.1rem;
 }
 
 .right-side li {
@@ -36,10 +57,6 @@
   list-style-type: none;
 }
 
-.right-side * {
-  margin: 0 0.1rem;
-}
-
 /* push the content below the header down 4rem to not make the header overlap: */
 .header + * {
   margin-top: 4rem;
@@ -48,10 +65,10 @@
 .link {
   text-decoration: none;
   font-weight: bold;
-  color: #f8f8ff;
+  color: var(--color-three);
 }
 
-@media all and (min-width: 820px) {
+@media all and (min-width: 900px) {
   .header {
     position: fixed;
     padding: 0 var(--padding-desktop-leftright);

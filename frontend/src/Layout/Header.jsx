@@ -1,25 +1,48 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import classes from "./Header.module.css";
 import { TiPlus, TiTags } from "react-icons/ti";
-import { GiSkills } from "react-icons/gi";
+import { FaChalkboardTeacher } from "react-icons/fa";
+
 import AuthContext from "../store/auth-context";
 
 const Header = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+  const [searchTerm, updateSearchTerm] = useState("");
+
+  const searchBackend = (e) => {
+    e.preventDefault();
+    const searchTermURIEncoded = encodeURI(searchTerm);
+    navigate(`/search/${searchTermURIEncoded}`);
+  };
 
   return (
     <>
-      <header className={`${classes.header} color-main`}>
+      <header className={`${classes.header}`}>
         <div className={classes["left-side"]}>
           <h1>
             <Link to="/" className={classes.link}>
-              <GiSkills className={classes.icon} />
-              <span className={classes.text}> Project Skill</span>
+              <FaChalkboardTeacher className={classes.icon} />
+              <span className={classes.text}> TeachMe</span>
             </Link>
           </h1>
+        </div>
+        <div className={classes["middle-side"]}>
+          <form onSubmit={searchBackend}>
+            <input
+              type="text"
+              id="searchterm"
+              placeholder="Search Offers"
+              className={classes.input}
+              value={searchTerm}
+              onChange={(e) => {
+                updateSearchTerm(e.target.value);
+              }}
+            />
+            <Button className={classes["search-button"]}>Go</Button>
+          </form>
         </div>
         <div className={classes["right-side"]}>
           <ul>

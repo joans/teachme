@@ -9,6 +9,7 @@ import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login";
 import PostDetail from "./Pages/PostDetail";
 import Profile from "./Pages/Profile";
+import SearchResults from "./Pages/SearchResults";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/offer/:id" element={<PostDetail />} />
           <Route path="/user/:id" element={<Profile />} />
+          <Route path="/search/:searchTerm" element={<SearchResults />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
