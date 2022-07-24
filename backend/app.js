@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { sequelize, User, Post } = require("./models");
+const { sequelize, User, Post, Category } = require("./models");
 const { Op } = require("sequelize");
 const { authJwt } = require("./middleware");
 const bcrypt = require("bcryptjs");
@@ -92,16 +92,32 @@ app.post("/create_post", authJwt.verifyToken, async (req, res) => {
   const { userUUID, title, category, body } = req.body;
 
   try {
-    const user = await User.findOne({ where: { uuid: userUUID } });
+    const dbUser = await User.findOne({ where: { uuid: userUUID } });
+    const dbCategory = await Category.findOne({
+      where: { name: category },
+    });
 
-    const post = await Post.create({ title, category, body, userID: user.id });
+    const post = await Post.create({
+      title,
+      categoryID: dbCategory.id,
+      body,
+      userID: dbUser.id,
+    });
 
     return res.json(post);
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .json({ error: `Could not create Post with UUID ${userUUID}` });
+    res.status(500).json(err);
+  }
+});
+
+app.get("/categories", async (req, res) => {
+  try {
+    const categories = await Category.findAll();
+    return res.json(categories);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
@@ -162,8 +178,42 @@ app.get("/posts/:uuid", async (req, res) => {
   }
 });
 
+const createCategory = async (name, displayName) => {
+  try {
+    const category = await Category.create({
+      name: name,
+      displayName: displayName,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// route for initializing the categories for the user
+const createDefaultCategories = () => {
+  createCategory("handicraft", "Handicraft");
+  createCategory("sports_fitness", "Sports/Fitness");
+  createCategory("art", "Art");
+  createCategory("cooking", "Cooking");
+};
+
+// // No public route for creating categories!
+// app.post("/categories/create", async (req, res) => {
+//   const { name, displayName } = req.body;
+
+//   createCategory(name, displayName);
+// });
+
 app.listen({ port: 3307 }, async () => {
   console.log("Running server http://localhost:3307");
   await sequelize.authenticate();
   console.log("Database Connected!");
 });
+
+// // Table creation with the following function:
+// async function main() {
+//   await sequelize.sync();
+//   createDefaultCategories();
+// }
+
+// main();
