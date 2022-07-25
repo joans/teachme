@@ -38,13 +38,28 @@ const PostDetail = () => {
           {errMsg}
         </span>
         <h1>{singlePost.title}</h1>
-        <p>{singlePost.body}</p>
+        <div className={classes.grid}>
+          <div>
+            <img
+              src="https://autorhodes.com/sites/default/files/special-offer_4.jpg"
+              alt="test"
+            />
+          </div>
+          <div>Description: {singlePost.body}</div>
+        </div>
         <p>Category: {singlePost.category}</p>
         <p>
           Posted by:{" "}
           <Link to={`/user/${singlePost.user.uuid}`}>
             {singlePost.user.username}
           </Link>
+        </p>
+        <p>
+          Last updated on:{" "}
+          <Link to={`/post/${singlePost.updatedAt}`}>
+            {singlePost.updatedAt}
+          </Link>
+          {/* How do I format date information from database? */}
         </p>
       </div>
     </Card>
