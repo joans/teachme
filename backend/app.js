@@ -77,7 +77,7 @@ app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
   try {
     const user = await User.findOne({
       where: { uuid: uuid },
-      include: ["posts"],
+      include: [{ all: true, nested: true }],
     });
 
     return res.json(user);
@@ -124,7 +124,7 @@ app.get("/categories", async (req, res) => {
 app.get("/posts", async (req, res) => {
   try {
     const posts = await Post.findAll({
-      include: ["user"],
+      include: ["user", "category"],
       // Code appends the user data to the corresponding post data
     });
 
@@ -167,7 +167,7 @@ app.get("/posts/:uuid", async (req, res) => {
   try {
     const posts = await Post.findOne({
       where: { uuid: uuid },
-      include: ["user"],
+      include: ["user", "category"],
       // Code appends the user data to the corresponding post data
     });
 
