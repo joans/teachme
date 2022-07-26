@@ -121,6 +121,16 @@ app.get("/categories", async (req, res) => {
   }
 });
 
+app.get("/categories_entries", async (req, res) => {
+  try {
+    const categories = await Category.findAll({ include: ["posts"] });
+    return res.json(categories);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 app.get("/posts", async (req, res) => {
   try {
     const posts = await Post.findAll({
