@@ -87,6 +87,25 @@ app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
   }
 });
 
+app.post("/edituser/:uuid", authJwt.verifyToken, async (req, res) => {
+  const uuid = req.params.uuid;
+  try {
+    const user = await User.findOne({
+      where: { uuid: uuid },
+      include: ["posts"],
+    });
+    try{
+      const { creatorUUID, password } = req.body;
+      const { username, newPassword, email} = req.body;
+
+    return res.json(user);
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: `Couldn't resolve the user with UUID ${uuid}` });
+  }
+});
+
 app.post("/create_post", authJwt.verifyToken, async (req, res) => {
   const { userUUID, title, category, body } = req.body;
 
