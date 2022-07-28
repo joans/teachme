@@ -11,56 +11,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.post("/register", async (req, res) => {
-  const { username, password, email } = req.body;
-  try {
-    const user = await User.create({
-      username: username,
-      password: bcrypt.hashSync(password),
-      email: email,
-    });
-    return res.json(user);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  }
-});
-
-app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-  console.log("test");
-  await User.findOne({
-    where: {
-      username: username,
-    },
-  })
-    .then((user) => {
-      if (!user) {
-        return res.status(404).send({ message: "User Not found." });
-      }
-      console.log("username: " + password + "found");
-      var passwordIsValid = bcrypt.compareSync(password, user.password);
-      if (!passwordIsValid) {
-        return res.status(401).send({
-          accessToken: null,
-          message: "Invalid Password!",
-        });
-      }
-      var token = jwt.sign({ uuid: user.uuid }, config.secret, {
-        expiresIn: 86400, // 24 hours
-      });
-      res.status(200).send({
-        uuid: user.uuid,
-        username: user.username,
-        // email: user.email, // no sensitive info in the front-end
-        accessToken: token,
-      });
-    })
-    .catch((err) => {
-      res.status(500).send({ message: err.message });
-    });
-});
-
 app.get("/users", authJwt.verifyToken, async (req, res) => {
   try {
     const users = await User.findAll({ attributes: ["uuid", "username"] });
@@ -139,3 +89,6 @@ app.listen({ port: 3307 }, async () => {
   await sequelize.authenticate();
   console.log("Database Connected!");
 });
+
+// routes
+require('./routes')(app);
