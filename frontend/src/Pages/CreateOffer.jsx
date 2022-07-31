@@ -90,6 +90,11 @@ const CreateOffer = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    updateErrMsg("");
+    // reset the error message when the form is interacted with
+  }, [formBlur]);
+
   const handleSubmit = (e) => {
     Axios.post(
       "http://localhost:3307/create_post",

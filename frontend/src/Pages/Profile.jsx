@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Axios from "axios";
 import AuthContext from "../store/auth-context";
 import Card from "../UI/Card";
