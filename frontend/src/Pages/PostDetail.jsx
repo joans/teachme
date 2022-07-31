@@ -10,6 +10,7 @@ import { FaTimes } from "react-icons/fa";
 const PostDetail = () => {
   const [singlePost, updateSinglePost] = useState({
     user: { uuid: null, username: null },
+    category: { displayName: null },
   });
   const [errMsg, updateErrMsg] = useState();
 
@@ -39,7 +40,7 @@ const PostDetail = () => {
         </span>
         <h1>{singlePost.title}</h1>
         <p>{singlePost.body}</p>
-        <p>Category: {singlePost.category}</p>
+        <p>Category: {singlePost.category.displayName}</p>
         <p>
           Posted by:{" "}
           <Link to={`/user/${singlePost.user.uuid}`}>
