@@ -4,8 +4,11 @@ import classes from "./PostDetails.module.css";
 import signUpClasses from "../Pages/SignUp.module.css";
 import Axios from "axios";
 import Card from "../UI/Card";
+import Button from "../UI/Button";
+import AuthContext from "../store/auth-context";
 
 import { FaTimes } from "react-icons/fa";
+import { useContext } from "react";
 
 const PostDetail = () => {
   const [singlePost, updateSinglePost] = useState({
@@ -13,8 +16,10 @@ const PostDetail = () => {
     category: { displayName: null },
   });
   const [errMsg, updateErrMsg] = useState();
+  const [showEditButton, updateShowEditButton] = useState(false);
 
   const { id } = useParams();
+  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +36,12 @@ const PostDetail = () => {
     };
     fetchData();
   }, [id]);
+
+  useEffect(() => {
+    if (authCtx.isLoggedIn && singlePost.user.uuid === authCtx.auth.uuid) {
+      updateShowEditButton(true);
+    }
+  }, [singlePost, authCtx]);
 
   return (
     <Card>
@@ -50,6 +61,7 @@ const PostDetail = () => {
             {singlePost.user.username}
           </Link>
         </p>
+        {showEditButton && <Button>Edit Offer</Button>}
       </div>
     </Card>
   );
