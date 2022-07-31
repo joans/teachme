@@ -81,8 +81,10 @@ const CreateOffer = () => {
         const res = await Axios.get("http://localhost:3307/categories");
         updateCategories(res.data);
       } catch (err) {
-        updateErrMsg("Could not fetch categories from backend");
-        console.log(err);
+        const completeErrorBackend = JSON.parse(err.request.response);
+        const errMsgBackend = completeErrorBackend.error;
+        console.log(JSON.parse(err.request.response));
+        updateErrMsg(errMsgBackend);
       }
     };
     fetchData();

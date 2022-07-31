@@ -107,8 +107,12 @@ const SignUp = () => {
         // Maybe navigate to a "success" page, where the user gets informed about the login success?
         // or maybe create a modal dialogue which pops up when the user is successfully signed up and needs to sign in
       } catch (err) {
-        console.log(err);
-        setErrMsg(err.message);
+        // err returns an Axios err object, the original error message from the backend is stored as
+        // stringified version of the err object and must be parsed
+        const completeErrorBackend = JSON.parse(err.request.response);
+        const errMsgBackend = completeErrorBackend.errors[0].message;
+        console.log(completeErrorBackend);
+        setErrMsg(errMsgBackend);
       }
     };
 
