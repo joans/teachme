@@ -29,20 +29,19 @@
   width: 2rem;
 }
 
+.form {
+  width: 10px;
+  height: 50px;
+}
+
 .input {
   padding: 1em;
   /* border-radius: 0.5em; */
   border: 1px solid grey;
-  border-right: none;
-  margin: 0;
+  width: 900%;
 }
-
 .search-button {
-  border-radius: 0%;
-  border: 1px solid grey;
-  border-left: none;
-  padding: 1em 0.5em;
-  margin: 0;
+  visibility: hidden;
 }
 
 .right-side * {
@@ -72,6 +71,28 @@
   .header {
     position: fixed;
     padding: 0 var(--padding-desktop-leftright);
+  }
+
+  .form {
+    width: auto;
+    height: auto;
+  }
+  .input {
+    padding: 1em;
+    width: auto;
+    /* border-radius: 0.5em; */
+    border: 1px solid grey;
+    border-right: none;
+    margin: 0;
+  }
+
+  .search-button {
+    visibility: visible;
+    border-radius: 0%;
+    border: 1px solid grey;
+    border-left: none;
+    padding: 1em 0.5em;
+    margin: 0;
   }
 
   .icon {
