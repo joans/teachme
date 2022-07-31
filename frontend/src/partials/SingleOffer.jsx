@@ -20,7 +20,9 @@ const SingleOffer = ({ item, className }) => {
       {/* <span className={classes.points}>
           {item.points} {item.points > 1 ? "Points" : "Point"}
         </span> */}
-      <span className={classes.category}>category: {item.category}</span>
+      <span className={classes.category}>
+        category: {item.category.displayName}
+      </span>
       {/* </div> */}
     </div>
   );

@@ -23,7 +23,7 @@ const SearchResults = () => {
         updateSearchResults(res.data);
         console.log(res.data);
       } catch (err) {
-        updateErrMsg(err.message);
+        updateErrMsg(err);
       }
     };
     fetchData();

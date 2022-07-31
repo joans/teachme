@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Axios from "axios";
 import AuthContext from "../store/auth-context";
 import Card from "../UI/Card";
+import signUpClasses from "../Pages/SignUp.module.css";
 import SingleOffer from "../partials/SingleOffer";
+
+import { FaTimes } from "react-icons/fa";
 
 const Profile = () => {
   const [errMsg, updateErrMsg] = useState();
@@ -26,7 +29,10 @@ const Profile = () => {
         updateUserData(res.data);
         console.log(res.data);
       } catch (err) {
-        updateErrMsg(err.message);
+        const completeErrorBackend = JSON.parse(err.request.response);
+        const errMsgBackend = completeErrorBackend.error;
+        console.log(JSON.parse(err.request.response));
+        updateErrMsg(errMsgBackend);
       }
     };
     fetchData();
@@ -34,6 +40,10 @@ const Profile = () => {
 
   return (
     <Card>
+      <span className={errMsg ? signUpClasses.errMsg : signUpClasses.offscreen}>
+        <FaTimes />
+        {errMsg}
+      </span>
       <h1>{userData.username}</h1>
       <p>{userData.email}</p>
       <p>User since: {userData.createdAt}</p>
