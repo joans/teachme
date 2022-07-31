@@ -161,7 +161,7 @@ app.get("/search/:searchterm", async (req, res) => {
         { title: { [Op.or]: querySplitMap } },
       ],
     },
-    // include: ["user"],
+    include: ["category"],
   };
   try {
     const posts = await Post.findAndCountAll(options);
