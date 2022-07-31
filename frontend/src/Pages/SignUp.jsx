@@ -5,7 +5,7 @@ import classes from "./SignUp.module.css";
 import Axios from "axios";
 
 import { FaTimes, FaInfoCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const USER_REGEX = /^[\w\d_-]{4,24}$/;
 const EMAIL_REGEX = /^\S+@.+\..+$/;
@@ -68,6 +68,7 @@ const userFocusReducer = (state, action) => {
 
 const SignUp = () => {
   const [errMsg, setErrMsg] = useState("");
+  const navigate = useNavigate();
 
   const [curFocus, disptachCurFocus] = useReducer(
     userFocusReducer,
@@ -102,6 +103,9 @@ const SignUp = () => {
           newUser
         );
         console.log(resp.data);
+        navigate("/login");
+        // Maybe navigate to a "success" page, where the user gets informed about the login success?
+        // or maybe create a modal dialogue which pops up when the user is successfully signed up and needs to sign in
       } catch (err) {
         console.log(err);
         setErrMsg(err.message);
@@ -171,8 +175,6 @@ const SignUp = () => {
   useEffect(() => {
     setErrMsg("");
   }, [newUser]);
-
-  useEffect(() => {}, [newUser]);
 
   return (
     <Card>
