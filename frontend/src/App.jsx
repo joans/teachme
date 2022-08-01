@@ -10,6 +10,7 @@ import Login from "./Pages/Login";
 import PostDetail from "./Pages/PostDetail";
 import Profile from "./Pages/Profile";
 import SearchResults from "./Pages/SearchResults";
+import Copyright from "./Layout/Copyright";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
+      <Copyright />
     </div>
   );
 }
