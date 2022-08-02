@@ -37,14 +37,14 @@ app.post("/login", async (req, res) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(404).send({ message: "User Not found." });
+        return res.status(404).send({ error: "User Not found." });
       }
       console.log("username: " + password + "found");
       var passwordIsValid = bcrypt.compareSync(password, user.password);
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
-          message: "Invalid Password!",
+          error: "Invalid Password!",
         });
       }
       var token = jwt.sign({ uuid: user.uuid }, config.secret, {
@@ -58,7 +58,7 @@ app.post("/login", async (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(500).send({ message: err.message });
+      res.status(500).send({ error: err.message });
     });
 });
 
@@ -80,11 +80,15 @@ app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
       include: [{ all: true, nested: true }],
     });
 
-    return res.json(user);
+    if (user) {
+      return res.json(user);
+    } else {
+      return res
+        .status(404)
+        .json({ error: `Couldn't resolve any users with this ID` });
+    }
   } catch (err) {
-    return res
-      .status(500)
-      .json({ error: `Couldn't resolve the user with UUID ${uuid}` });
+    return res.status(500).json({ error: err });
   }
 });
 
@@ -107,17 +111,23 @@ app.post("/create_post", authJwt.verifyToken, async (req, res) => {
     return res.json(post);
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    return res.status(500).json({ error: err });
   }
 });
 
 app.get("/categories", async (req, res) => {
   try {
     const categories = await Category.findAll();
-    return res.json(categories);
+    if (categories) {
+      return res.json(categories);
+    } else {
+      return res
+        .status(404)
+        .json({ error: `Couldn't resolve any categories.` });
+    }
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    return res.status(500).json({ error: err });
   }
 });
 
@@ -127,7 +137,7 @@ app.get("/categories_entries", async (req, res) => {
     return res.json(categories);
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(500).json({ error: err });
   }
 });
 
@@ -175,16 +185,23 @@ app.get("/search/:searchterm", async (req, res) => {
 app.get("/posts/:uuid", async (req, res) => {
   const uuid = req.params.uuid;
   try {
-    const posts = await Post.findOne({
+    const post = await Post.findOne({
       where: { uuid: uuid },
       include: ["user", "category"],
       // Code appends the user data to the corresponding post data
     });
 
-    return res.json(posts);
+    if (post) {
+      return res.json(post);
+    } else {
+      return res
+        .status(404)
+        .json({ error: `Couldn't resolve any Posts with this ID.` });
+    }
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: `Could not find any Posts` });
+
+    return res.status(500).json({ error: `Could not find any Post` });
   }
 });
 
