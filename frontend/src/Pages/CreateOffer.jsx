@@ -7,6 +7,7 @@ import AuthContext from "../store/auth-context";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { FaTimes } from "react-icons/fa";
 
 const CreateOffer = () => {
   const authCtx = useContext(AuthContext);
@@ -29,6 +30,10 @@ const CreateOffer = () => {
     category: false,
     offerText: false,
   });
+
+  const [errMsg, updateErrMsg] = useState();
+
+  const [categories, updateCategories] = useState([]);
 
   // const [showInfoBox, updateShowInfoBox] = useState({
   //   title: false,
@@ -70,7 +75,18 @@ const CreateOffer = () => {
     updateFormBlur((state) => ({ ...state, [id]: false }));
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await Axios.get("http://localhost:3307/categories");
+        updateCategories(res.data);
+      } catch (err) {
+        updateErrMsg("Could not fetch categories from backend");
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = (e) => {
     Axios.post(
@@ -98,6 +114,12 @@ const CreateOffer = () => {
     <Card>
       <h1>Create Offer</h1>
       <form onSubmit={handleSubmit}>
+        <span
+          className={errMsg ? signupClasses.errMsg : signupClasses.offscreen}
+        >
+          <FaTimes />
+          {errMsg}
+        </span>
         <label htmlFor="title" className={signupClasses.label}>
           Title
         </label>
@@ -124,10 +146,11 @@ const CreateOffer = () => {
           <option value="none" disabled hidden>
             Select an option...
           </option>
-          <option value="handicraft">Handicraft</option>
-          <option value="sports_fitness">Sports/Fitness</option>
-          <option value="art">Art</option>
-          <option value="cooking">Cooking</option>
+          {categories.map((category, key) => (
+            <option key={key} value={category.name}>
+              {category.displayName}
+            </option>
+          ))}
         </select>
         <label htmlFor="offerText" className={signupClasses.label}>
           Description
