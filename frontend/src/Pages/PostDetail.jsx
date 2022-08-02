@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import classes from "./PostDetails.module.css";
 import signUpClasses from "../Pages/SignUp.module.css";
 import Axios from "axios";
@@ -20,12 +20,12 @@ const PostDetail = () => {
 
   const { id } = useParams();
   const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await Axios.get(`http://localhost:3307/posts/${id}`);
-        // For test purposes only: Pick a random index from the array and use this users uuid as a login param
         updateSinglePost(res.data);
       } catch (err) {
         const completeErrorBackend = JSON.parse(err.request.response);
@@ -61,7 +61,17 @@ const PostDetail = () => {
             {singlePost.user.username}
           </Link>
         </p>
-        {showEditButton && <Button>Edit Offer</Button>}
+        {showEditButton && (
+          <Button
+            onClick={() => {
+              navigate(`/offer/edit/${singlePost.uuid}`);
+            }}
+            variant="contained"
+            className="color-two"
+          >
+            Edit Offer
+          </Button>
+        )}
       </div>
     </Card>
   );

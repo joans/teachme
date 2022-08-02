@@ -9,15 +9,18 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
-const CreateOffer = () => {
+const CreateOffer = ({ id }) => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [newArticle, updateNewArticle] = useState({
+  const defaultArticleState = {
     title: "",
-    category: "",
+    category: "none",
     offerText: "",
-  });
+    uuid: "",
+  };
+
+  const [newArticle, updateNewArticle] = useState(defaultArticleState);
 
   const [formIsValid, updateFormIsValid] = useState({
     title: false,
@@ -95,17 +98,62 @@ const CreateOffer = () => {
     // reset the error message when the form is interacted with
   }, [formBlur]);
 
+  // Fetch data when there is an ID passed to the component -> Edit Post Functionality
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await Axios.get(`http://localhost:3307/posts/${id}`);
+        const { uuid, category, title, body } = res.data;
+        console.log(res.data);
+        updateNewArticle({
+          title: title,
+          category: category.name,
+          offerText: body,
+          uuid: uuid,
+        });
+      } catch (err) {
+        console.log(err);
+        // const completeErrorBackend = JSON.parse(err.request.response);
+        // const errMsgBackend = completeErrorBackend.error;
+        // updateErrMsg(errMsgBackend);
+      }
+    };
+    if (id) {
+      fetchData();
+      updateFormIsValid({ title: true, category: true, offerText: true });
+    } else {
+      // resetting the info when changing from an edit article to posting a new article
+      updateNewArticle({
+        title: "",
+        category: "none",
+        offerText: "",
+        uuid: "",
+      });
+      updateFormIsValid({
+        title: false,
+        category: false,
+        offerText: false,
+      });
+    }
+  }, [id]);
+
   const handleSubmit = (e) => {
-    Axios.post(
-      "http://localhost:3307/create_post",
-      {
-        userUUID: authCtx.auth.uuid,
-        title: newArticle.title,
-        category: newArticle.category,
-        body: newArticle.offerText,
-      },
-      { headers: { "x-access-token": authCtx.auth.accessToken } }
-    ).then(
+    let payloadData = {
+      userUUID: authCtx.auth.uuid,
+      title: newArticle.title,
+      category: newArticle.category,
+      body: newArticle.offerText,
+    };
+    let dataEndpoint = "http://localhost:3307/create_post";
+
+    if (id) {
+      payloadData = { ...payloadData, postUUID: newArticle.uuid };
+      dataEndpoint = "http://localhost:3307/update_post";
+    }
+
+    Axios.post(dataEndpoint, payloadData, {
+      headers: { "x-access-token": authCtx.auth.accessToken },
+    }).then(
       (response) => {
         console.log(response);
       },
@@ -119,7 +167,9 @@ const CreateOffer = () => {
 
   return (
     <Card>
-      <h1>Create Offer</h1>
+      {/* "id" is a shortcut for when the offer is updated instead of creating a new offer */}
+      {/* When there is no id passed to the Component, then the form will create a new offer */}
+      <h1> {id ? "Update" : "Create"} Offer</h1>
       <form onSubmit={handleSubmit}>
         <span
           className={errMsg ? signupClasses.errMsg : signupClasses.offscreen}
@@ -148,7 +198,7 @@ const CreateOffer = () => {
           id="category"
           onChange={updateArticleState}
           className={signupClasses.input}
-          defaultValue="none"
+          value={newArticle.category}
         >
           <option value="none" disabled hidden>
             Select an option...
@@ -184,7 +234,7 @@ const CreateOffer = () => {
             }`}
             disabled={Object.values(formIsValid).every(Boolean) ? false : true}
           >
-            Post
+            {id ? "Save Changes" : "Post Offer"}
           </Button>
         </div>
       </form>

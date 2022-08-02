@@ -19,7 +19,6 @@ const OfferOverview = () => {
         updateErrMsg(err.message);
         console.log(err);
       }
-      // For test purposes only: Pick a random index from the array and use this users uuid as a login param
     };
     fetchData();
   }, []);
@@ -33,7 +32,7 @@ const OfferOverview = () => {
       {posts.map((singleItem, key) => (
         <SingleOffer
           className={classes.offerCard}
-          key={key} // should be replaced by the offer ID later
+          key={key}
           item={singleItem}
         />
       ))}
