@@ -17,7 +17,6 @@ const CreateOffer = ({ id }) => {
     title: "",
     category: "none",
     offerText: "",
-    uuid: "",
   };
 
   const [newArticle, updateNewArticle] = useState(defaultArticleState);
@@ -103,13 +102,12 @@ const CreateOffer = ({ id }) => {
     const fetchData = async () => {
       try {
         const res = await Axios.get(`http://localhost:3307/posts/${id}`);
-        const { uuid, category, title, body } = res.data;
+        const { category, title, body } = res.data;
         console.log(res.data);
         updateNewArticle({
           title: title,
           category: category.name,
           offerText: body,
-          uuid: uuid,
         });
       } catch (err) {
         console.log(err);
@@ -127,7 +125,6 @@ const CreateOffer = ({ id }) => {
         title: "",
         category: "none",
         offerText: "",
-        uuid: "",
       });
       updateFormIsValid({
         title: false,
@@ -147,20 +144,33 @@ const CreateOffer = ({ id }) => {
     let dataEndpoint = "http://localhost:3307/create_post";
 
     if (id) {
-      payloadData = { ...payloadData, postUUID: newArticle.uuid };
+      // if there is an id use it to update the post
+      payloadData = { ...payloadData, postUUID: id };
       dataEndpoint = "http://localhost:3307/update_post";
+
+      Axios.put(dataEndpoint, payloadData, {
+        headers: { "x-access-token": authCtx.auth.accessToken },
+      }).then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      Axios.post(dataEndpoint, payloadData, {
+        headers: { "x-access-token": authCtx.auth.accessToken },
+      }).then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
 
-    Axios.post(dataEndpoint, payloadData, {
-      headers: { "x-access-token": authCtx.auth.accessToken },
-    }).then(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
     e.preventDefault();
     navigate("/");
   };
