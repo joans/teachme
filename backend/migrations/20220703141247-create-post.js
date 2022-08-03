@@ -24,6 +24,10 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      categoryID: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
