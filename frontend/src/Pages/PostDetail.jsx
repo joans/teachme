@@ -37,13 +37,10 @@ const PostDetail = () => {
           <FaTimes />
           {errMsg}
         </span>
-        <h1>{singlePost.title}</h1>
+        <h1 className={classes.title}>{singlePost.title}</h1>
         <div className={classes.grid}>
           <div>
-            <img
-              src="https://autorhodes.com/sites/default/files/special-offer_4.jpg"
-              alt="test"
-            />
+            <img src="https://unsplash.com/photos/GI1hwOGqGtE" alt="test" />
           </div>
           <div>Description: {singlePost.body}</div>
         </div>
@@ -56,10 +53,10 @@ const PostDetail = () => {
         </p>
         <p>
           Last updated on:{" "}
-          <Link to={`/post/${singlePost.updatedAt}`}>
+          <Link to={`/user/${singlePost.updatedAt}`}>
             {singlePost.updatedAt}
+            {/* moment().format('YYYY-MM-DD') to format date */}
           </Link>
-          {/* How do I format date information from database? */}
         </p>
       </div>
     </Card>
