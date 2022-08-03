@@ -10,6 +10,7 @@ import { FaTimes } from "react-icons/fa";
 const PostDetail = () => {
   const [singlePost, updateSinglePost] = useState({
     user: { uuid: null, username: null },
+    category: { displayName: null },
   });
   const [errMsg, updateErrMsg] = useState();
 
@@ -22,7 +23,10 @@ const PostDetail = () => {
         // For test purposes only: Pick a random index from the array and use this users uuid as a login param
         updateSinglePost(res.data);
       } catch (err) {
-        updateErrMsg(err.message);
+        const completeErrorBackend = JSON.parse(err.request.response);
+        const errMsgBackend = completeErrorBackend.error;
+        console.log(JSON.parse(err.request.response));
+        updateErrMsg(errMsgBackend);
       }
     };
     fetchData();

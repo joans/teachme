@@ -40,8 +40,11 @@ const Login = () => {
       auth.onLogin(resp.data);
       navigate("/");
     } catch (err) {
-      console.log(err);
-      setErrMsg(err.message);
+      // err returns an Axios err object, the original error message from the backend is stored as
+      // stringified version of the err object and must be parsed
+      const errMsgBackend = err.response.data.error;
+      console.log(errMsgBackend);
+      setErrMsg(errMsgBackend);
     }
 
     // For test purposes only: Pick a random index from the array and use this users uuid as a login param
