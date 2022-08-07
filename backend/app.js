@@ -27,33 +27,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.put("/update_user", authJwt.verifyToken, async (req, res) => {
-  const { userUUID, postUUID, title, category, body } = req.body;
-
-  try {
-    const post = await Post.findOne({
-      where: { uuid: postUUID },
-      include: ["user", "category"],
-    });
-
-    const dbCategory = await Category.findOne({
-      where: { name: category },
-    });
-    // is the user from the post the same as the user from the JWT-Token?
-    if (post.user.uuid === req.userId) {
-      await post.update({ title, body, categoryID: dbCategory.id });
-      return res.json(post);
-    } else {
-      return res
-        .status(401)
-        .json({ error: "You are unauthorized to perform this action!" });
-    }
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({ error: err });
-  }
-});
-
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   console.log("test");
