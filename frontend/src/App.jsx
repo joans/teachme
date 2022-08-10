@@ -10,6 +10,8 @@ import Login from "./Pages/Login";
 import PostDetail from "./Pages/PostDetail";
 import Profile from "./Pages/Profile";
 import SearchResults from "./Pages/SearchResults";
+import Imprint from "./Pages/Imprint";
+import PrivacyStatement from "./Pages/PrivacyStatement";
 import Footer from "./Layout/Footer";
 
 function App() {
@@ -26,10 +28,12 @@ function App() {
           <Route path="/offer/:id" element={<PostDetail />} />
           <Route path="/user/:id" element={<Profile />} />
           <Route path="/search/:searchTerm" element={<SearchResults />} />
+          <Route path="/imprint" element={<Imprint />} />
+          <Route path="/privacy_statement" element={<PrivacyStatement />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
-      <Footer />
+      <Footer className="footer" />
     </div>
   );
 }

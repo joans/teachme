@@ -1,24 +1,28 @@
 /* TODO: Implement responsive design */
 
 .footer {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #fefefe;
   position: bottom;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
   border-top: 2px solid black;
-  margin: 0 0 10em 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 var(--padding-mobile);
-  box-sizing: border-box;
-  height: 4rem;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background-color: #fefefe;
 }
 
-.copyright_text {
+.contact_buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.footer_nav {
+  display: flex;
+  justify-content: center;
   align-items: center;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
 }

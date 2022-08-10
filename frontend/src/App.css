@@ -42,3 +42,7 @@
     padding: var(--padding-desktop-above) var(--padding-desktop-leftright);
   }
 }
+
+.footer {
+  margin-top: auto;
+}

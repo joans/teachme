@@ -2,60 +2,60 @@ import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./Footer.module.css";
 import HeaderClasses from "./Header.module.css";
-import { RiCopyrightLine } from "react-icons/ri";
-import { FaFacebookSquare } from "react-icons/fa";
-import { FaInstagramSquare } from "react-icons/fa";
+import { BsGithub } from "react-icons/bs";
+import Grid from "@mui/material/Unstable_Grid2";
+import Item from "@mui/material/Unstable_Grid2";
 
 const Footer = () => {
   return (
     <footer className={classes.footer}>
-      {/* Footer navigation */}
-      <ul className={classes.footer_nav}>
-        <li>
-          <Link to="/Privacy_Statement" className={HeaderClasses.link}>
-            {" "}
-            <span className={HeaderClasses.text}>Privacy Statement</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/Imprint" className={HeaderClasses.link}>
-            {" "}
-            <span className={HeaderClasses.text}>Imprint</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/Contact" className={HeaderClasses.link}>
-            {" "}
-            <span className={HeaderClasses.text}>Contact</span>
-          </Link>
-        </li>
-      </ul>
-      {/* End footer navigation */}
+      {/* Contact */}
+      <section className={classes.contact_buttons}>
+        <div>
+          <span>Visit our project respository: </span>
+        </div>
 
-      {/* Contact buttons */}
-      <div className={classes.footer_contact}>
-        <Link to="/Contact">
-          <span>
-            <FaFacebookSquare />
-          </span>
-        </Link>
-        <Link to="/Contact">
-          <span>
-            <FaInstagramSquare />
-          </span>
-        </Link>
-      </div>
-      {/* End contact buttons */}
+        <div>
+          <a
+            href="https://github.com/joans/teachme"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span>
+              {" "}
+              <BsGithub />
+            </span>
+          </a>
+        </div>
+      </section>
+      {/* End contact */}
+
+      {/* Footer navigation */}
+      <Grid container spacing={2} className={classes.footer_nav}>
+        <Grid>
+          <Item>
+            <Link to="/privacy_statement" className={HeaderClasses.link}>
+              <span className={HeaderClasses.text}>Privacy Statement</span>
+            </Link>
+          </Item>
+        </Grid>
+        <Grid>
+          <Item>
+            <Link to="/imprint" className={HeaderClasses.link}>
+              <span className={HeaderClasses.text}>Imprint</span>
+            </Link>
+          </Item>
+        </Grid>
+      </Grid>
+      {/* End footer navigation */}
 
       {/* Copyright notice */}
       <div className={classes.copyright}>
-        <p className={classes.copyright_text}>
-          <RiCopyrightLine /> 2022{" "}
-          <Link to="/" className={HeaderClasses.link}>
-            <span className={HeaderClasses.text}>TeachMe</span>
-          </Link>
-          . All rights reserved.
-        </p>
+        &copy; {new Date().getFullYear()} Copyright:{" "}
+        <Link to="/" className={HeaderClasses.link}>
+          <span className={HeaderClasses.text}> Skillpact</span>
+        </Link>
+        . All rights reserved.
       </div>
       {/* End copyright notice */}
     </footer>

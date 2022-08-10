@@ -6,11 +6,10 @@
 }
 
 .grid {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: flex-start;
+  display: flex;
 }
 
-img {
+.grid_img {
   width: 50%;
+  margin-right: 10px;
 }

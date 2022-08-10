@@ -4,8 +4,8 @@ import classes from "./PostDetails.module.css";
 import signUpClasses from "../Pages/SignUp.module.css";
 import Axios from "axios";
 import Card from "../UI/Card";
-
 import { FaTimes } from "react-icons/fa";
+import Moment from "react-moment";
 
 const PostDetail = () => {
   const [singlePost, updateSinglePost] = useState({
@@ -43,12 +43,15 @@ const PostDetail = () => {
         </span>
         <h1 className={classes.title}>{singlePost.title}</h1>
         <div className={classes.grid}>
-          <div>
-            <img src="https://unsplash.com/photos/GI1hwOGqGtE" alt="test" />
-          </div>
-          <div>Description: {singlePost.body}</div>
+          <img
+            src={process.env.PUBLIC_URL + "/testimage.jpg"}
+            alt="test"
+            className={classes.grid_img}
+          />
+          {/* this needs to be updated once we have images in the database! */}
+          <p>Description: {singlePost.body}</p>
         </div>
-        <p>Category: {singlePost.category}</p>
+        <p>Category: {singlePost.category.displayName}</p>
         <p>
           Posted by:{" "}
           <Link to={`/user/${singlePost.user.uuid}`}>
@@ -57,10 +60,7 @@ const PostDetail = () => {
         </p>
         <p>
           Last updated on:{" "}
-          <Link to={`/user/${singlePost.updatedAt}`}>
-            {singlePost.updatedAt}
-            {/* moment().format('YYYY-MM-DD') to format date */}
-          </Link>
+          <Moment format="DD/MM/YYYY, HH:mm:ss">{singlePost.updatedAt}</Moment>
         </p>
       </div>
     </Card>
