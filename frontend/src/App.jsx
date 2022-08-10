@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Header from "./Layout/Header";
+import SplashPage from "./Pages/SplashPage";
 import CreateOfferHandler from "./utils/CreateOfferHandler";
 import Categories from "./Pages/Categories";
 import SignUp from "./Pages/SignUp";
@@ -15,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <SplashPage />
       <div className="page">
         <Routes>
           <Route path="/" element={<Home />} />

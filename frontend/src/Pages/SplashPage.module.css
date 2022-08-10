@@ -1,0 +1,16 @@
+.team {
+  background-image: url(../assets/homescreen_team_2000px_guetzli.jpg);
+  margin-bottom: auto;
+  font-size: medium;
+  text-align: center;
+  line-height: 1.6;
+  color: rgb(251, 249, 249);
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  background-size: cover;
+  background-position: center;
+  padding: 12px;
+}
+h1 {
+  font-weight: bolder;
+}

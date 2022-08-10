@@ -1,11 +1,13 @@
 import React from "react";
 import OfferOverview from "./OfferOverview";
+import SplashPage from "./SplashPage";
 
 const Home = () => {
   return (
     <>
       <div>
         <h1>Home</h1>
+        {/* <SplashPage /> */}
         <OfferOverview />
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
