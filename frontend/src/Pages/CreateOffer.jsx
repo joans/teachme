@@ -135,6 +135,7 @@ const CreateOffer = ({ id }) => {
   }, [id]);
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     let payloadData = {
       userUUID: authCtx.auth.uuid,
       title: newArticle.title,
@@ -156,6 +157,7 @@ const CreateOffer = ({ id }) => {
         },
         (error) => {
           console.log(error);
+          updateErrMsg(error.response.data.error);
         }
       );
     } else {
@@ -167,12 +169,15 @@ const CreateOffer = ({ id }) => {
         },
         (error) => {
           console.log(error);
+          updateErrMsg(error.response.data.error);
         }
       );
     }
-
-    e.preventDefault();
-    navigate("/");
+    if (id) {
+      navigate(`/offer/${id}`);
+    } else {
+      navigate("/");
+    }
   };
 
   return (
