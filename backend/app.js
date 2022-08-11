@@ -50,11 +50,10 @@ app.post("/login", async (req, res) => {
       var token = jwt.sign({ uuid: user.uuid }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
-      res.status(200).send({
+      res.status(200).cookie('jwt', token).send({
         uuid: user.uuid,
         username: user.username,
         // email: user.email, // no sensitive info in the front-end
-        accessToken: token,
       });
     })
     .catch((err) => {

@@ -4,7 +4,7 @@ const db = require("../models");
 const User = db.user;
 verifyToken = (req, res, next) => {
   console.log(req.headers);
-  let token = req.headers["x-access-token"];
+  let token = req.cookies.jwt
   if (!token) {
     return res.status(403).send({
       message: "No token provided!",
