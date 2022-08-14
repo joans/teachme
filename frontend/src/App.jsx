@@ -10,6 +10,7 @@ import Login from "./Pages/Login";
 import PostDetail from "./Pages/PostDetail";
 import Profile from "./Pages/Profile";
 import SearchResults from "./Pages/SearchResults";
+import "@fontsource/ubuntu";
 
 function App() {
   return (
