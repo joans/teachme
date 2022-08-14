@@ -151,32 +151,35 @@ const CreateOffer = ({ id }) => {
 
       Axios.put(dataEndpoint, payloadData, {
         headers: { "x-access-token": authCtx.auth.accessToken },
-      }).then(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-          updateErrMsg(error.response.data.error);
-        }
-      );
+      })
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+            updateErrMsg(error.response.data.error);
+          }
+        )
+        .then(() => {
+          navigate(`/offer/${id}`);
+        });
     } else {
       Axios.post(dataEndpoint, payloadData, {
         headers: { "x-access-token": authCtx.auth.accessToken },
-      }).then(
-        (response) => {
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-          updateErrMsg(error.response.data.error);
-        }
-      );
-    }
-    if (id) {
-      navigate(`/offer/${id}`);
-    } else {
-      navigate("/");
+      })
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+            updateErrMsg(error.response.data.error);
+          }
+        )
+        .then(() => {
+          navigate("/");
+        });
     }
   };
 
