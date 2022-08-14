@@ -6,14 +6,28 @@
 .category-picker {
   display: flex;
   flex-direction: column;
-  width: 5em;
+  width: 10em;
   box-sizing: border-box;
   height: 5em;
   margin: 1em 2em 0 0;
+  box-sizing: border-box;
+}
+
+.category-picker * {
+  margin: 0.5em 0;
 }
 
 .post-list {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+}
+
+.button-active {
+  background-color: var(--color-three);
+  color: var(--color-two);
+}
+
+.custom-button {
+  width: 10em;
 }
