@@ -1,0 +1,19 @@
+.complete-container {
+  display: flex;
+  /* padding: 5em 0 0 6em; */
+}
+
+.category-picker {
+  display: flex;
+  flex-direction: column;
+  width: 5em;
+  box-sizing: border-box;
+  height: 5em;
+  margin: 1em 2em 0 0;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
