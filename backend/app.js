@@ -8,9 +8,12 @@ const jwt = require("jsonwebtoken");
 const config = require("./config/auth.config");
 
 const app = express();
+// for cookie-parsing:
+// const cookies = require("cookie-parser");
 
 app.use(express.json());
 app.use(cors());
+// app.use(cookies());
 
 app.post("/register", async (req, res) => {
   const { username, password, email } = req.body;
@@ -50,10 +53,13 @@ app.post("/login", async (req, res) => {
       var token = jwt.sign({ uuid: user.uuid }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
-      res.status(200).cookie('jwt', token).send({
+      // alternatively for cookies use this code:
+      // res.status(200).cookie('jwt', token).send({
+      res.status(200).send({
         uuid: user.uuid,
         username: user.username,
         // email: user.email, // no sensitive info in the front-end
+        accessToken: token,
       });
     })
     .catch((err) => {
