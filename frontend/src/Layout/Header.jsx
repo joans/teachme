@@ -25,7 +25,7 @@ const Header = () => {
           <h1>
             <Link to="/" className={classes.link}>
               <FaChalkboardTeacher className={classes.icon} />
-              <span className={classes.text}> TeachMe</span>
+              <span className={classes.text}> Skillpact</span>
             </Link>
           </h1>
         </div>

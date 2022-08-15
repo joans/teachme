@@ -1,16 +1,17 @@
 .singleCard {
+  color: var(--color-main);
   margin: 1em 0;
   padding: 1em;
 
-  border: 1px solid black;
-  border-radius: 0.5em;
+  border-radius: 1em;
   /* for keeping the category inside the borders of the div */
   overflow: hidden;
+  background-color: var(--bg-four);
 }
 
 .singleCard a {
   text-decoration: none;
-  color: var(--color-three);
+  color: var(--color-main);
 }
 
 .title {
@@ -23,4 +24,5 @@
 
 .category {
   float: right;
+  font-size: x-small;
 }

@@ -1,9 +1,9 @@
 :root {
   --bg-main: #606c38;
   --bg-two: #283618;
-  --bg-three: #d3bfa9;
-  --bg-four: #dda15e;
-  --color-main: #f8f8ff;
+  --bg-three: #04330d36;
+  --bg-four: #232528;
+  --color-main: #f2f2f3;
   --color-two: #f8f8ff;
   --color-three: #444444;
   --color-four: #444444;
@@ -15,6 +15,7 @@
 
 body {
   font-family: "Ubuntu";
+  background-color: var(--color-main);
 }
 
 .color-main {

@@ -67,7 +67,6 @@ const Categories = () => {
     <Card>
       <div className={classes["complete-container"]}>
         <div className={classes["category-picker"]}>
-          Categories:
           {origPosts.map((post) => (
             <Button
               onClick={cateogryButtonOnClick}
