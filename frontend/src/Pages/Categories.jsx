@@ -5,7 +5,6 @@ import SingleOffer from "../partials/SingleOffer";
 import Card from "../UI/Card";
 import classes from "./Categories.module.css";
 import Button from "../UI/Button";
-import { useRef } from "react";
 
 const Categories = () => {
   const [origPosts, updateOrigPosts] = useState([]);
@@ -14,6 +13,7 @@ const Categories = () => {
   const [filteredPosts, updateFilteredPosts] = useState([]);
 
   useEffect(() => {
+    // fetch posts from backend
     const fetchData = async () => {
       try {
         const res = await Axios.get("http://localhost:3307/categories_entries");
@@ -29,19 +29,25 @@ const Categories = () => {
 
   const cateogryButtonOnClick = (e) => {
     const selectedCategory = e.target.name;
-    updateSelectState((prevState) => [...prevState, selectedCategory]);
 
+    // check if the selected state is already in the selectState array
     if (selectState.includes(selectedCategory)) {
       updateSelectState((prevState) =>
         prevState.filter((e) => e !== selectedCategory)
       );
       return;
     }
+    // add the selected category to the selectState array
+    updateSelectState((prevState) => [...prevState, selectedCategory]);
   };
 
+  // Effect that checks if the selectState array with the selected categories
+  // or the origPosts were changed.
   useEffect(() => {
+    // filter the origPost array with the selectState array. Only
+    // posts that have matching categories with that in the selectState array get into the newPost array
     const newPosts = origPosts.filter((post) => {
-      console.log(selectState);
+      // post.name is the name of the category, because the backend returns all posts by category
       if (selectState.includes(post.name)) {
         return post;
       } else {
@@ -49,12 +55,13 @@ const Categories = () => {
       }
     });
 
+    // if the selectState array is empty, include all posts in the filteredPosts array
     if (selectState.length === 0) {
       updateFilteredPosts(origPosts);
       return;
     }
     updateFilteredPosts(newPosts);
-  }, [selectState]);
+  }, [selectState, origPosts]);
 
   return (
     <Card>
@@ -65,6 +72,8 @@ const Categories = () => {
             <Button
               onClick={cateogryButtonOnClick}
               className={`${
+                // apply the "button-active" class if the current button is in the selectState
+                // array. The "post.name" is the category of the post.
                 selectState.includes(post.name) && classes["button-active"]
               } ${classes["custom-button"]}`}
               name={post.name}
@@ -76,7 +85,6 @@ const Categories = () => {
         <div className={classes["post-list"]}>
           {filteredPosts.map((post, key) => (
             <>
-              <h1>{post.displayName}</h1>
               {post.posts.map((singlepost, key) => (
                 <SingleOffer key={key} item={singlepost} doTruncate={false} />
               ))}
