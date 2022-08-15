@@ -242,6 +242,8 @@ app.get("/posts", async (req, res) => {
   try {
     const posts = await Post.findAll({
       include: ["user", "category"],
+      limit: 12,
+      order: [["createdAt", "DESC"]],
       // Code appends the user data to the corresponding post data
     });
 
