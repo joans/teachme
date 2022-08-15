@@ -5,22 +5,23 @@
   top: 0;
   left: 0;
   width: 100%;
-  border-bottom: 2px solid black;
+  border-bottom: 0.5px solid black;
   margin: 0 0 10em 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--padding-mobile);
   box-sizing: border-box;
-  height: 4rem;
+  height: 5rem;
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #fefefe;
+  background-color: var(--color-main);
 }
 
 .text {
   display: none;
+  font-size: larger;
 }
 
 .icon {
@@ -58,7 +59,7 @@
 
 /* push the content below the header down 4rem to not make the header overlap: */
 .header + * {
-  margin-top: 4rem;
+  margin-top: 5rem;
 }
 
 .link {
@@ -67,7 +68,7 @@
   color: var(--color-three);
 }
 
-@media all and (min-width: 900px) {
+@media all and (min-width: 930px) {
   .header {
     position: fixed;
     padding: 0 var(--padding-desktop-leftright);

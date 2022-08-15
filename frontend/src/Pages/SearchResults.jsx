@@ -47,6 +47,7 @@ const SearchResults = () => {
           className=""
           key={key} // should be replaced by the offer ID later
           item={singleItem}
+          doTruncate={false}
         />
       ))}
     </Card>

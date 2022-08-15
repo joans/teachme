@@ -14,13 +14,15 @@
 }
 
 .category-picker * {
-  margin: 0.5em 0;
+  margin: 0 0 1em 0;
 }
 
 .post-list {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  min-height: 18em;
+  width: 100%;
 }
 
 .button-active {
