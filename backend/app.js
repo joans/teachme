@@ -36,7 +36,7 @@ app.put("/update_user", authJwt.verifyToken, async (req, res) => {
     });
     // is the user the same as the user from the JWT-Token?
     if (dbUser.uuid === req.userId) {
-      await dbUser.update({ username, password, email });
+      await dbUser.update({ username, password: bcrypt.hashSync(password), email });
       return res.json(dbUser);
     } else {
       return res
@@ -94,29 +94,6 @@ app.get("/users", authJwt.verifyToken, async (req, res) => {
   }
 });
 
-function verifyTokenUser(){
-
-  console.log("##############")
-
-  verifyTokenforUserEndpoint = (req, res, next) => {
-    console.log(req.headers);
-    let token = req.headers["x-access-token"];
-    if (!token) { 
-      console.log("##############")
-      return res.json("username", "fritz")
-    }
-    jwt.verify(token, config.secret, (err, decoded) => {
-      if (err) {
-        return res.status(401).send({
-          message: "Unauthorized!",
-        });
-      }
-      req.userId = decoded.uuid;
-      next();
-    });
-  };
-}
-
 app.get("/users/:uuid", async (req, res) => {
   
   const uuid = req.params.uuid;
@@ -126,7 +103,6 @@ app.get("/users/:uuid", async (req, res) => {
       where: { uuid: uuid },
       include: [{ all: true, nested: true }],
     });
-    verifyTokenUser();
     const user = await User.findOne({
       where: { uuid: uuid },
       include: [{ all: true, nested: true }],
