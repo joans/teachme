@@ -94,18 +94,34 @@ app.get("/users", authJwt.verifyToken, async (req, res) => {
   }
 });
 
-app.get("/users/:uuid", async (req, res) => {
+app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
   
   const uuid = req.params.uuid;
   try {
-    const liteuser = await User.findOne({
-      attributes:['username'],
-      where: { uuid: uuid },
-      include: [{ all: true, nested: true }],
-    });
     const user = await User.findOne({
       where: { uuid: uuid },
       include: [{ all: true, nested: true }],
+    });
+    if (user) {
+      return res.json(user);
+    } else {
+      return res
+        .status(404)
+        .json({ error: `Couldn't resolve any users with this ID` });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+});
+
+//public route for user information
+app.get("/userLite/:uuid", async (req, res) => {
+  
+  const uuid = req.params.uuid;
+  try {
+    const user = await User.findOne({
+      where: { uuid: uuid },
+      attributes: ["uuid", "username"]
     });
     if (user) {
       return res.json(user);
