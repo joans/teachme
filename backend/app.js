@@ -185,6 +185,33 @@ app.put("/update_post", authJwt.verifyToken, async (req, res) => {
   }
 });
 
+app.delete("/delete_post/:postuuid/:useruuid", authJwt.verifyToken, async (req, res) => {
+  const postuuid = req.params.postuuid;
+  const useruuid = req.params.useruuid;
+
+  try {
+    const post = await Post.findOne({
+      where: { uuid: postuuid },
+      include: ["user"],
+    });
+
+    // is the user from the post the same as the user from the JWT-Token?
+    if (post.user.uuid === useruuid) {
+      await post.destroy({ where: {uuid: postuuid} });
+      return res
+      .status(200)
+      .json({ message: "Post with uuid " + postuuid + " deleted" });;
+    } else {
+      return res
+        .status(401)
+        .json({ error: "You are unauthorized to perform this action!" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
+  }
+});
+
 app.get("/categories", async (req, res) => {
   try {
     const categories = await Category.findAll();
