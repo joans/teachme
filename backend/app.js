@@ -8,9 +8,12 @@ const jwt = require("jsonwebtoken");
 const config = require("./config/auth.config");
 
 const app = express();
+// for cookie-parsing:
+// const cookies = require("cookie-parser");
 
 app.use(express.json());
 app.use(cors());
+// app.use(cookies());
 
 app.post("/register", async (req, res) => {
   const { username, password, email } = req.body;
@@ -50,6 +53,8 @@ app.post("/login", async (req, res) => {
       var token = jwt.sign({ uuid: user.uuid }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
+      // alternatively for cookies use this code:
+      // res.status(200).cookie('jwt', token).send({
       res.status(200).send({
         uuid: user.uuid,
         username: user.username,
@@ -109,6 +114,33 @@ app.post("/create_post", authJwt.verifyToken, async (req, res) => {
     });
 
     return res.json(post);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
+  }
+});
+
+app.put("/update_post", authJwt.verifyToken, async (req, res) => {
+  const { userUUID, postUUID, title, category, body } = req.body;
+
+  try {
+    const post = await Post.findOne({
+      where: { uuid: postUUID },
+      include: ["user", "category"],
+    });
+
+    const dbCategory = await Category.findOne({
+      where: { name: category },
+    });
+    // is the user from the post the same as the user from the JWT-Token?
+    if (post.user.uuid === req.userId) {
+      await post.update({ title, body, categoryID: dbCategory.id });
+      return res.json(post);
+    } else {
+      return res
+        .status(401)
+        .json({ error: "You are unauthorized to perform this action!" });
+    }
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: err });

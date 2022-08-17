@@ -25,6 +25,7 @@ function App() {
           <Route path="/offer/:id" element={<PostDetail />} />
           <Route path="/user/:id" element={<Profile />} />
           <Route path="/search/:searchTerm" element={<SearchResults />} />
+          <Route path="/offer/edit/:id" element={<CreateOfferHandler />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

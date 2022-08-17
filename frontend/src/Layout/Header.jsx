@@ -30,7 +30,7 @@ const Header = () => {
           </h1>
         </div>
         <div className={classes["middle-side"]}>
-          <form onSubmit={searchBackend}>
+          <form className={classes.form} onSubmit={searchBackend}>
             <input
               type="text"
               id="searchterm"
