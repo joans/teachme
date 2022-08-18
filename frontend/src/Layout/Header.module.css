@@ -87,7 +87,7 @@
   }
   .hrule {
     position: fixed;
-    border-bottom: 10px solid black;
+    border-bottom: 10px solid var(--bg-four);
     margin: 0 var(--padding-desktop-leftright);
     width: 92%;
     box-sizing: border-box;
