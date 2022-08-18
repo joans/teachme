@@ -23,7 +23,7 @@ const Header = () => {
         <div className={classes["left-side"]}>
           <h1>
             <Link to="/" className={classes.link}>
-              <span className={classes["s-icon"]}>Skill</span>
+              <span className={classes["s-icon"]}>skill</span>
               <span className={classes.text}>pact</span>
             </Link>
           </h1>
