@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../UI/Button";
 import classes from "./Header.module.css";
 import { TiPlus, TiTags } from "react-icons/ti";
-import { FaChalkboardTeacher } from "react-icons/fa";
 
 import AuthContext from "../store/auth-context";
 
@@ -19,13 +18,13 @@ const Header = () => {
   };
 
   return (
-    <>
-      <header className={`${classes.header}`}>
+    <div className={classes.header}>
+      <header className={classes["header-content"]}>
         <div className={classes["left-side"]}>
           <h1>
             <Link to="/" className={classes.link}>
-              <FaChalkboardTeacher className={classes.icon} />
-              <span className={classes.text}> Skillpact</span>
+              <span className={classes["s-icon"]}>Skill</span>
+              <span className={classes.text}>pact</span>
             </Link>
           </h1>
         </div>
@@ -98,7 +97,8 @@ const Header = () => {
           </ul>
         </div>
       </header>
-    </>
+      <hr className={classes.hrule} />
+    </div>
   );
 };
 
