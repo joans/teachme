@@ -139,7 +139,8 @@ app.get("/user_lite/:uuid", async (req, res) => {
 });
 
 app.post("/create_post", authJwt.verifyToken, async (req, res) => {
-  const { userUUID, title, category, body } = req.body;
+  const { title, category, body } = req.body;
+  const userUUID = req.userId;
 
   try {
     const dbUser = await User.findOne({ where: { uuid: userUUID } });
@@ -162,7 +163,8 @@ app.post("/create_post", authJwt.verifyToken, async (req, res) => {
 });
 
 app.put("/update_post", authJwt.verifyToken, async (req, res) => {
-  const { userUUID, postUUID, title, category, body } = req.body;
+  const { postUUID, title, category, body } = req.body;
+  const userUUID = req.userId;
 
   try {
     const post = await Post.findOne({
@@ -174,7 +176,7 @@ app.put("/update_post", authJwt.verifyToken, async (req, res) => {
       where: { name: category },
     });
     // is the user from the post the same as the user from the JWT-Token?
-    if (post.user.uuid === req.userId) {
+    if (post.user.uuid === userUUID) {
       await post.update({ title, body, categoryID: dbCategory.id });
       return res.json(post);
     } else {
