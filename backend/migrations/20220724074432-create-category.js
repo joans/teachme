@@ -18,6 +18,11 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      symbol: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: false,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
