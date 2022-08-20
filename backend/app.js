@@ -239,42 +239,8 @@ app.get("/posts/:uuid", async (req, res) => {
   }
 });
 
-const createCategory = async (name, displayName) => {
-  try {
-    const category = await Category.create({
-      name: name,
-      displayName: displayName,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-// route for initializing the categories for the user
-const createDefaultCategories = () => {
-  createCategory("handicraft", "Handicraft");
-  createCategory("sports_fitness", "Sports/Fitness");
-  createCategory("art", "Art");
-  createCategory("cooking", "Cooking");
-};
-
-// // No public route for creating categories!
-// app.post("/categories/create", async (req, res) => {
-//   const { name, displayName } = req.body;
-
-//   createCategory(name, displayName);
-// });
-
 app.listen({ port: 3307 }, async () => {
   console.log("Running server http://localhost:3307");
   await sequelize.authenticate();
   console.log("Database Connected!");
 });
-
-// // Table creation with the following function:
-// async function main() {
-//   await sequelize.sync();
-//   createDefaultCategories();
-// }
-
-// main();
