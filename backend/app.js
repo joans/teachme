@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { sequelize, User, Post, Category } = require("./models");
+const { sequelize, User, Post, Category, Like } = require("./models");
 const { Op } = require("sequelize");
 const { authJwt } = require("./middleware");
 const bcrypt = require("bcryptjs");
@@ -96,6 +96,32 @@ app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
     return res.status(500).json({ error: err });
   }
 });
+
+app.get(
+  "/toggle_like_post/:postuuid",
+  authJwt.verifyToken,
+  async (req, res) => {
+    const postuuid = req.params.postuuid;
+    const useruuid = req.userId;
+    try {
+      const user = await User.findOne({
+        where: { uuid: useruuid },
+      });
+      const post = await Post.findOne({
+        where: { uuid: postuuid },
+      });
+      console.log("I ran until here!");
+      console.log(user);
+      const like = await Like.create({
+        userID: user.id,
+        postID: post.id,
+      });
+      return res.json(like);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 
 app.post("/create_post", authJwt.verifyToken, async (req, res) => {
   const { userUUID, title, category, body } = req.body;
