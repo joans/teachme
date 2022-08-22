@@ -1,16 +1,23 @@
 :root {
   --bg-main: #606c38;
   --bg-two: #283618;
-  --bg-three: #d3bfa9;
-  --bg-four: #dda15e;
-  --color-main: #f8f8ff;
+  --bg-three: #04330d36;
+  --bg-four: #232528;
+  --color-main: #f2f2f3;
   --color-two: #f8f8ff;
   --color-three: #444444;
   --color-four: #444444;
   --page-break: 820px;
   --padding-mobile: 2%;
   --padding-desktop-leftright: 4%;
-  --padding-desktop-above: 0.1%;
+  --padding-desktop-above: 2rem;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  background-color: var(--color-main);
 }
 
 .color-main {
@@ -37,7 +44,7 @@
   padding: var(--padding-mobile);
 }
 
-@media all and (min-width: 820px) {
+@media all and (min-width: 930px) {
   .page {
     padding: var(--padding-desktop-above) var(--padding-desktop-leftright);
   }

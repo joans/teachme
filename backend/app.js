@@ -28,7 +28,8 @@ app.post("/register", async (req, res) => {
 });
 
 app.put("/update_user", authJwt.verifyToken, async (req, res) => {
-  const { userUUID, username, password, email } = req.body;
+  const { username, password, email } = req.body;
+  const userUUID = req.userId;
 
   try {
     const dbUser = await User.findOne({
@@ -36,7 +37,11 @@ app.put("/update_user", authJwt.verifyToken, async (req, res) => {
     });
     // is the user the same as the user from the JWT-Token?
     if (dbUser.uuid === req.userId) {
-      await dbUser.update({ username, password: bcrypt.hashSync(password), email });
+      await dbUser.update({
+        username,
+        password: bcrypt.hashSync(password),
+        email,
+      });
       return res.json(dbUser);
     } else {
       return res
@@ -95,7 +100,6 @@ app.get("/users", authJwt.verifyToken, async (req, res) => {
 });
 
 app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
-  
   const uuid = req.params.uuid;
   try {
     const user = await User.findOne({
@@ -115,13 +119,12 @@ app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
 });
 
 //public route for user information
-app.get("/userLite/:uuid", async (req, res) => {
-  
+app.get("/user_lite/:uuid", async (req, res) => {
   const uuid = req.params.uuid;
   try {
     const user = await User.findOne({
       where: { uuid: uuid },
-      attributes: ["uuid", "username"]
+      attributes: ["uuid", "username"],
     });
     if (user) {
       return res.json(user);
@@ -136,7 +139,8 @@ app.get("/userLite/:uuid", async (req, res) => {
 });
 
 app.post("/create_post", authJwt.verifyToken, async (req, res) => {
-  const { userUUID, title, category, body } = req.body;
+  const { title, category, body } = req.body;
+  const userUUID = req.userId;
 
   try {
     const dbUser = await User.findOne({ where: { uuid: userUUID } });
@@ -159,7 +163,8 @@ app.post("/create_post", authJwt.verifyToken, async (req, res) => {
 });
 
 app.put("/update_post", authJwt.verifyToken, async (req, res) => {
-  const { userUUID, postUUID, title, category, body } = req.body;
+  const { postUUID, title, category, body } = req.body;
+  const userUUID = req.userId;
 
   try {
     const post = await Post.findOne({
@@ -171,7 +176,7 @@ app.put("/update_post", authJwt.verifyToken, async (req, res) => {
       where: { name: category },
     });
     // is the user from the post the same as the user from the JWT-Token?
-    if (post.user.uuid === req.userId) {
+    if (post.user.uuid === userUUID) {
       await post.update({ title, body, categoryID: dbCategory.id });
       return res.json(post);
     } else {
@@ -185,9 +190,9 @@ app.put("/update_post", authJwt.verifyToken, async (req, res) => {
   }
 });
 
-app.delete("/delete_post/:postuuid/:useruuid", authJwt.verifyToken, async (req, res) => {
+app.delete("/delete_post/:postuuid", authJwt.verifyToken, async (req, res) => {
   const postuuid = req.params.postuuid;
-  const useruuid = req.params.useruuid;
+  const useruuid = req.userId;
 
   try {
     const post = await Post.findOne({
@@ -197,10 +202,10 @@ app.delete("/delete_post/:postuuid/:useruuid", authJwt.verifyToken, async (req, 
 
     // is the user from the post the same as the user from the JWT-Token?
     if (post.user.uuid === useruuid) {
-      await post.destroy({ where: {uuid: postuuid} });
+      await post.destroy({ where: { uuid: postuuid } });
       return res
-      .status(200)
-      .json({ message: "Post with uuid " + postuuid + " deleted" });;
+        .status(200)
+        .json({ message: "Post with uuid " + postuuid + " deleted" });
     } else {
       return res
         .status(401)
@@ -242,6 +247,8 @@ app.get("/posts", async (req, res) => {
   try {
     const posts = await Post.findAll({
       include: ["user", "category"],
+      limit: 12,
+      order: [["createdAt", "DESC"]],
       // Code appends the user data to the corresponding post data
     });
 
