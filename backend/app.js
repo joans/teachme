@@ -35,19 +35,12 @@ app.put("/update_user", authJwt.verifyToken, async (req, res) => {
     const dbUser = await User.findOne({
       where: { uuid: userUUID },
     });
-    // is the user the same as the user from the JWT-Token?
-    if (dbUser.uuid === req.userId) {
-      await dbUser.update({
-        username,
-        password: bcrypt.hashSync(password),
-        email,
-      });
+    await dbUser.update({
+      username,
+      password: bcrypt.hashSync(password),
+      email,
+    });
       return res.json(dbUser);
-    } else {
-      return res
-        .status(401)
-        .json({ error: "You are unauthorized to perform this action!" });
-    }
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: err });
