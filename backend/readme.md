@@ -6,29 +6,33 @@
 
 Installs [homebrew](https://brew.sh)
 
-## Set up mysql
+## Set up mySQL
 
 ### `brew install mysql`
 
-Installs mysql
+Installs mySQL
 
 ### `brew services start mysql`
 
-Starts mysql
+Starts the mySQL service
 
 ### `mysqladmin -u root password 'password'`
 
-Sets password
+Sets password for root user
+
+## `mysql -u root -p`
+
+Asks you for the above password and accesses mySQL
 
 ## sequelize commands
 
 ### `npm i -g sequelize-cli`
 
-Installs sequelize
+Installs sequelize command line interface
 
 ## Choose location
 
-`cd` into a directory with an Express app
+`cd` into backend
 
 ### `sequelize db:create`
 
@@ -36,7 +40,9 @@ Creates your database
 
 ### `sequelize db:migrate`
 
-Tests your connection
+Migrates database models into database
+
+## Run `npm install` to install all packages
 
 ## nodemon
 
@@ -47,3 +53,13 @@ Installs [nodemon](https://nodemon.io), a utility that monitors for any changes 
 ### `nodemon app.js`
 
 Starts the backend
+
+## Useful software for macOS
+
+### Beekeeper Studio
+
+We recommend installing [`Beekeeper Studio`](https://www.beekeeperstudio.io/), an open source SQL editor and database manager.
+
+### Insomnia
+
+We recommend installing [Insomnia](https://insomnia.rest/download), a collaborative API client and design tool to build and test the APIs.
