@@ -7,10 +7,11 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ User, Category }) {
+    static associate({ User, Category, Like }) {
       // define association here
       this.belongsTo(User, { foreignKey: "userID", as: "user" });
       this.belongsTo(Category, { foreignKey: "categoryID", as: "category" });
+      this.hasMany(Like, { foreignKey: "postID", as: "likedBy" });
     }
     toJSON() {
       // hide the "id" and "password"-field in the API as a default behaviour

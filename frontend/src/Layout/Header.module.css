@@ -1,32 +1,46 @@
 /* TODO: Implement responsive design */
+:root {
+  --header-height: 5rem;
+}
 
-.header {
+.header-content {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  border-bottom: 2px solid black;
   margin: 0 0 10em 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 var(--padding-mobile);
   box-sizing: border-box;
-  height: 4rem;
+  height: var(--header-height);
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #fefefe;
+  background-color: var(--color-main);
+}
+
+.hrule {
+  border-bottom: 10px solid black;
+  width: 96%;
+  /* margin: 0; */
+  margin-top: var(--header-height);
 }
 
 .text {
   display: none;
+  font-size: larger;
 }
 
 .icon {
   vertical-align: middle;
   height: 2rem;
   width: 2rem;
+}
+
+.s-icon {
+  font-size: larger;
 }
 
 .form {
@@ -52,13 +66,8 @@
   float: left;
   height: auto;
   vertical-align: middle;
-  line-height: 5rem;
+  line-height: var(--header-height);
   list-style-type: none;
-}
-
-/* push the content below the header down 4rem to not make the header overlap: */
-.header + * {
-  margin-top: 4rem;
 }
 
 .link {
@@ -67,10 +76,21 @@
   color: var(--color-three);
 }
 
-@media all and (min-width: 900px) {
-  .header {
+@media all and (min-width: 930px) {
+  /* push the content below the header down 5rem to not make the header overlap: */
+  .header + * {
+    margin-top: var(--header-height);
+  }
+  .header-content {
     position: fixed;
     padding: 0 var(--padding-desktop-leftright);
+  }
+  .hrule {
+    position: fixed;
+    border-bottom: 10px solid var(--bg-four);
+    margin: 0 var(--padding-desktop-leftright);
+    width: 92%;
+    box-sizing: border-box;
   }
 
   .form {
@@ -102,5 +122,10 @@
 
   .text {
     display: inline;
+  }
+
+  .s-icon {
+    display: inline;
+    /* font-size: x-large; */
   }
 }

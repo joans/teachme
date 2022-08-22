@@ -225,6 +225,7 @@ const createDefaultUsersAndPosts = async () => {
     "Delicious tiramisu",
     "cooking",
     "Probably the best desert on earth and well...it is also quite easy to make it yourself, if you know how. I am happy to teach you how to make a really good tiramisu - the original way with coffee and bisquit."
+
   );
 };
 

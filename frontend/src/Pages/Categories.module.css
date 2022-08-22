@@ -1,0 +1,35 @@
+.complete-container {
+  display: flex;
+  /* padding: 5em 0 0 6em; */
+}
+
+.category-picker {
+  display: flex;
+  flex-direction: column;
+  width: 10em;
+  box-sizing: border-box;
+  height: 5em;
+  margin: 1em 2em 0 0;
+  box-sizing: border-box;
+}
+
+.category-picker * {
+  margin: 0 0 1em 0;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 18em;
+  width: 100%;
+}
+
+.button-active {
+  background-color: var(--color-three);
+  color: var(--color-two);
+}
+
+.custom-button {
+  width: 10em;
+}

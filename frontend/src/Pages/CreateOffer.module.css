@@ -1,15 +1,14 @@
-.label{
+.label {
   display: block;
   font: 24px;
-  margin: .5em 0 .2em;
+  margin: 0.5em 0 0.2em;
 }
 
-.textarea{
+.textarea {
   font-family: sans-serif;
 }
 
-.button{
+.button {
   width: 100%;
   font-size: x-large;
-  border-radius: 3px;
 }
