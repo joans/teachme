@@ -30,6 +30,26 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.put("/update_user", authJwt.verifyToken, async (req, res) => {
+  const { username, password, email } = req.body;
+  const userUUID = req.userId;
+
+  try {
+    const dbUser = await User.findOne({
+      where: { uuid: userUUID },
+    });
+    await dbUser.update({
+      username,
+      password: bcrypt.hashSync(password),
+      email,
+    });
+      return res.json(dbUser);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
+  }
+});
+
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   console.log("test");
@@ -84,7 +104,26 @@ app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
       where: { uuid: uuid },
       include: [{ all: true, nested: true }],
     });
+    if (user) {
+      return res.json(user);
+    } else {
+      return res
+        .status(404)
+        .json({ error: `Couldn't resolve any users with this ID` });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+});
 
+//public route for user information
+app.get("/user_lite/:uuid", async (req, res) => {
+  const uuid = req.params.uuid;
+  try {
+    const user = await User.findOne({
+      where: { uuid: uuid },
+      attributes: ["uuid", "username"],
+    });
     if (user) {
       return res.json(user);
     } else {
@@ -98,7 +137,8 @@ app.get("/users/:uuid", authJwt.verifyToken, async (req, res) => {
 });
 
 app.post("/create_post", authJwt.verifyToken, async (req, res) => {
-  const { userUUID, title, category, body } = req.body;
+  const { title, category, body } = req.body;
+  const userUUID = req.userId;
 
   try {
     const dbUser = await User.findOne({ where: { uuid: userUUID } });
@@ -121,7 +161,8 @@ app.post("/create_post", authJwt.verifyToken, async (req, res) => {
 });
 
 app.put("/update_post", authJwt.verifyToken, async (req, res) => {
-  const { userUUID, postUUID, title, category, body } = req.body;
+  const { postUUID, title, category, body } = req.body;
+  const userUUID = req.userId;
 
   try {
     const post = await Post.findOne({
@@ -133,9 +174,36 @@ app.put("/update_post", authJwt.verifyToken, async (req, res) => {
       where: { name: category },
     });
     // is the user from the post the same as the user from the JWT-Token?
-    if (post.user.uuid === req.userId) {
+    if (post.user.uuid === userUUID) {
       await post.update({ title, body, categoryID: dbCategory.id });
       return res.json(post);
+    } else {
+      return res
+        .status(401)
+        .json({ error: "You are unauthorized to perform this action!" });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
+  }
+});
+
+app.delete("/delete_post/:postuuid", authJwt.verifyToken, async (req, res) => {
+  const postuuid = req.params.postuuid;
+  const useruuid = req.userId;
+
+  try {
+    const post = await Post.findOne({
+      where: { uuid: postuuid },
+      include: ["user"],
+    });
+
+    // is the user from the post the same as the user from the JWT-Token?
+    if (post.user.uuid === useruuid) {
+      await post.destroy({ where: { uuid: postuuid } });
+      return res
+        .status(200)
+        .json({ message: "Post with uuid " + postuuid + " deleted" });
     } else {
       return res
         .status(401)
