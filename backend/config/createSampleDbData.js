@@ -72,38 +72,160 @@ const createDefaultCategories = () => {
 };
 
 const createDefaultUsersAndPosts = async () => {
-  await createUser("Jean", "supersecret", "zoe@gmail.com");
-  await createUser("Jens", "supersecret", "jens@techlabs.com");
-  await createUser("Annika", "supersecret", "annika@techlabs.com");
+  await createUser("Jens", "supersecret", "jens@skillpact.org");
+  await createUser("Jessie", "supersecret", "jessie@gmail.de");
+  await createUser("Stefan", "supersecret", "stefan@t-online.de");
+  await createUser("Tanja", "supersecret", "tanja@posteo.de");
+  await createUser("David", "supersecret", "david@gmail.com");
+  await createUser("Julia", "supersecret", "julia@hotmail.com");
+  await createUser("Tim", "supersecret", "tim@techlabs.org");
+  await createUser("Vanessa", "supersecret", "vanessa@yahoo.de");
+  await createUser("Akio", "supersecret", "akio@meta.com");
+  await createUser("Sakura", "supersecret", "sakura@gmail.com");
+  await createUser("Kim", "supersecret", "kim@meta.com");
+  await createUser("Stephanie", "supersecret", "stephanie@posteo.net");
+  await createUser("Guiseppe", "supersecret", "guiseppe@posteo.net");
+  await createUser("Hanna", "supersecret", "hanna@skillpact.org");
+  await createUser("Judith", "supersecret", "judith@wordpress.com");
+  await createUser("Florian", "supersecret", "florian@massage-for-all.de");
   await createPost(
-    "Jean",
+    "David",
     "Drawing portraits",
     "art",
-    "I'd love to teach you more about drawing. I was drawing portraits since I was five years old and I would love to teach you how to draw amazing art!"
+    "I'd love to teach you more about drawing. For as long as I can think of, I have been a huge Bob Ross fan. I'd love to create the same love for paiting in you - with guided painting of amazing art!"
+  );
+  await createPost(
+    "Tanja",
+    "Photography for your product or service",
+    "art",
+    "I can help you create professional-looking pictures for your business, online shop, social media, etc. I will teach you everything about equipment, lighting, positioning of your products, etc."
   );
   await createPost(
     "Jens",
-    "I will teach you to make pasta from scratch",
-    "cooking",
-    "I love to make pasta and I want to share with you the love for this simple but amazing dish!"
+    "Learn how to use photoshop",
+    "art",
+    "Touch up, manipulate, or recreate your imagination in photoshop. I will teach you fundamental skills to get started in photoshop."
   );
   await createPost(
-    "Annika",
-    "Cooking Udon",
-    "cooking",
-    "I will teach you how to cook udon properly."
+    "Sakura",
+    "How to decorate your home",
+    "art",
+    "I am an interior designer and I am on a mission to make as many homes feel like home as possible. If you are looking for decoration tips, do not hesitate to contact me. I will help you make the most comfortable version of your home with the available things you already own."
   );
   await createPost(
-    "Jens",
-    "Basic Fitness",
-    "sports_fitness",
-    "I can teach you about calisthenics."
+    "Akio",
+    "Cartoon styled art",
+    "art",
+    "Hello, I can teach you how to do very simple cartoon drawing! Once you get to know these basics, you can become an artist or cartoonist in no time!"
   );
   await createPost(
-    "Annika",
-    "Build a Table",
+    "Stephanie",
+    "How to write a short story",
+    "art",
+    "Get to know the basics on how to write your own short story. We will develop your characters and plot together. I am happy to help you with copy-editing as well. I have been writing my own stories for 10 years now and have just published my first novel."
+  );
+  await createPost(
+    "Julia",
+    "Build your own table",
     "handicraft",
-    "You want to know how to build a table? I will teach you every step of the way how to do exactly that!"
+    "You want to know how to build a table? I will teach you every step of how to do exactly that! I have just finished renovating my dream house - an old farm house in the countryside - and I have built most of the furniture myself."
+  );
+  await createPost(
+    "Sakura",
+    "Upcycling Christmas gifts",
+    "handicraft",
+    "I believe that anything you can be upcycled and used for another purpose. The idea of this offer is to identify things we own, but do not need anymore to upcycle them into a perfect gift for Christmas for a loved one."
+  );
+  await createPost(
+    "Julia",
+    "Green balcony - How to...",
+    "handicraft",
+    "You would like to vegetate your balcony, but you don't know how and where to start? I can help you pick the right plants for your balcony and provide basic tips on how to grow and take care of your plants."
+  );
+  await createPost(
+    "Sakura",
+    "DIY macrame hanging basket",
+    "handicraft",
+    "You've always wanted to make use of that bad looking hook in your ceiling? Why not use it to hang a plant in your DIY macrame hanging basket? I will help you pick the right yarn and yarn lengths, and teach you 4 different kinds of knot styles."
+  );
+  await createPost(
+    "Stefan",
+    "Basic fitness at no cost",
+    "sports_fitness",
+    "I can teach you about calisthenics. Never heard about it before? We use our bodyweight to form strength by excercising large muscle groups. We perform movements such as pulling, pushing, bending, jumping, or swinging. As there are no extra costs for equipment, there are also no excuses! ;-)"
+  );
+  await createPost(
+    "Vanessa",
+    "Dribbling like a pro",
+    "sports_fitness",
+    "Looking to pass on some of my dribbling skills to some other fellow football fans. I have been playing football since I was 5 years old and think I have some good skills to pass on to others wanting to learn."
+  );
+  await createPost(
+    "Florian",
+    "Ease stress and pain with self-massage",
+    "sports_fitness",
+    "If you're feeling tense or sore, massage therapy may help you feel better. Luckily, you don't always need to see a massage therapist to reap the rewards. For some types of ailments or simply for the joy of it, a self-massage can be beneficial, too. If you'd like to try self-massage for pain relief, I can teach you some of the best and safest self-massage techniques to try at home."
+  );
+  await createPost(
+    "Judith",
+    "Your first handstand",
+    "sports_fitness",
+    "A handstand is one of the coolest exercises ever, but it's also one of the most advanced moves to learn. But you are lucky and have come to the right place. I would consider myself advanced handstander. I can easily stand on my hands for hours on end if I feel like it and I do feel like it a lot - it is just so much fun! I will teach you how to do a handstand step-by-step, starting with the right warm-up, doing a handstand on the wall, until you can do a free-standing handstand."
+  );
+  await createPost(
+    "Tim",
+    "Get ready for your first triathlon",
+    "sports_fitness",
+    "I am an experienced triathlete and can help you plan your approach to the sport, which can be overwhelming. This is what I can help you with: - how to get started - how to effectively transition from another sport - how to create a realistic training plan  - how to know when you are ready for your first race - how to identify weaknesses and work on them - how to fit things into the rest of your life."
+  );
+  await createPost(
+    "Akio",
+    "Chess",
+    "sports_fitness",
+    "You want to learn chess to be able to beat your parents or grandparents? Or join your schools' or universities' chess club with a bit of a head start? I will be happy to help you with chess. My FIDE rating is currently 2100. Ask google to find out what that means, or I can tell you during our first session."
+  );
+  await createPost(
+    "Jessie",
+    "I will teach you to make pasta aglio e olio from scratch",
+    "cooking",
+    "I love to make pasta and I want to share with you the love for this simple, but amazing dish!"
+  );
+  await createPost(
+    "Kim",
+    "Most probably your favourite Udon bowl",
+    "cooking",
+    "I will teach you how to cook your favourite Udon bowl. You will learn how to properly cook the Udon noodles and how to pick the side ingredients that will taste you best. If I like you, I will also share my secret sauce recipe with you. ;-)"
+  );
+  await createPost(
+    "Stepanie",
+    "How to make your own jams",
+    "cooking",
+    "The recipes I would like to share here are my grandma's. She just made the best jam I have ever tasted and thanks to her dedication and pacience in teaching me how to make her jam myself, I believe mine are just as good. As I do not have grandchildren of my own (yet), I would love to spread the recipes as widely as I can. They are simply too good to not be shared."
+  );
+  await createPost(
+    "Hanna",
+    "Minion motive cake",
+    "cooking",
+    "I just love the minions movie, and I know I am not the only one! I have perfected my minion cake recipe over the course of 3 years and I believe it is now ready to be shared with the world. I am happy to share and assist to make the minion fans out there happy!"
+  );
+  await createPost(
+    "Vanessa",
+    "Energy balls to get you through the day",
+    "cooking",
+    "Are you a snack lover just like myself? Then I can only recommend you to always have some energy balls near by. I can teach you several different recipies with and witout nuts, coconut, different kinds of fruit. We will definitely find something that tastes you!"
+  );
+  await createPost(
+    "Jens",
+    "Sushi - made easy",
+    "cooking",
+    "You like sushi as much as I do and dislike its costs in the restaurants just as much? You feel the same way and would like to make your own sushi for your friends and yourself? Hit me up and I will teach you how to make your own sushi. It is very easy and even though I am not a professional chef, everyone has liked my sushi so far. ;-)"
+  );
+  await createPost(
+    "Guiseppe",
+    "Delicious tiramisu",
+    "cooking",
+    "Probably the best desert on earth and well...it is also quite easy to make it yourself, if you know how. I am happy to teach you how to make a really good tiramisu - the original way with coffee and bisquit."
+
   );
 };
 
