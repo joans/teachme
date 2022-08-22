@@ -112,8 +112,8 @@ app.get(
       });
       console.log("I ran until here!");
       console.log(user);
-      let like = await Likes.findOne({
-        where: { [Op.and]: [{ userID: user.id, postID: post.id }] },
+      let like = await Like.findOne({
+        where: { [Op.and]: [{ userID: user.id }, { postID: post.id }] },
       });
       if (!like) {
         const newLike = await Like.create({
@@ -123,7 +123,7 @@ app.get(
         return res.json(newLike);
       } else {
         await like.destroy();
-        return res.send("like deleted");
+        return res.json({ msg: "like deleted" });
       }
     } catch (err) {
       console.log(err);
