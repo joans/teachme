@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(User, { foreignKey: "userID", as: "user" });
       this.belongsTo(Category, { foreignKey: "categoryID", as: "category" });
-      this.hasMany(Like, { foreignKey: "postID", as: "likedBy" });
+      this.hasMany(Like, { foreignKey: "postUUID", as: "likedBy" });
     }
     toJSON() {
       // hide the "id" and "password"-field in the API as a default behaviour

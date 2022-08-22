@@ -8,12 +8,12 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      userID: {
-        type: DataTypes.INTEGER,
+      userUUID: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
-      postID: {
-        type: DataTypes.INTEGER,
+      postUUID: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
       createdAt: {

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ Post, Like }) {
       // define association here
       this.hasMany(Post, { foreignKey: "userID", as: "posts" });
-      this.hasMany(Like, { foreignKey: "userID", as: "likedPosts" });
+      this.hasMany(Like, { foreignKey: "userUUID", as: "likedPosts" });
     }
 
     // overrides the default JSON returned to the user of the API

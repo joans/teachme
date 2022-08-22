@@ -101,24 +101,18 @@ app.get(
   "/toggle_like_post/:postuuid",
   authJwt.verifyToken,
   async (req, res) => {
+    // toggles likes, if a like is already set, it is deleted by this route
+    // if a like is not set yet, it is created
     const postuuid = req.params.postuuid;
     const useruuid = req.userId;
     try {
-      const user = await User.findOne({
-        where: { uuid: useruuid },
-      });
-      const post = await Post.findOne({
-        where: { uuid: postuuid },
-      });
-      console.log("I ran until here!");
-      console.log(user);
       let like = await Like.findOne({
-        where: { [Op.and]: [{ userID: user.id }, { postID: post.id }] },
+        where: { [Op.and]: [{ userUUID: useruuid }, { postUUID: postuuid }] },
       });
       if (!like) {
         const newLike = await Like.create({
-          userID: user.id,
-          postID: post.id,
+          userUUID: useruuid,
+          postUUID: postuuid,
         });
         return res.json(newLike);
       } else {
@@ -130,6 +124,26 @@ app.get(
     }
   }
 );
+
+app.get("/fetch_likes/:useruuid", async (req, res) => {
+  // likes are public by default, no auth necessary!
+  // returns only a list of liked posts, nothing more
+  const { useruuid } = req.params;
+
+  try {
+    const likes = await Like.findAll({
+      where: { userUUID: useruuid },
+      attributes: { exclude: ["userUUID"] },
+    });
+    if (likes) {
+      return res.json(likes);
+    } else {
+      return res.json({ err: "Nothing found" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 app.post("/create_post", authJwt.verifyToken, async (req, res) => {
   const { userUUID, title, category, body } = req.body;

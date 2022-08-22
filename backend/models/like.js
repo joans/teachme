@@ -8,9 +8,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate({ Post, User }) {
-      this.belongsTo(Post, { foreignKey: "postID", as: "post" });
-      this.belongsTo(User, { foreignKey: "userID", as: "user" });
+      this.belongsTo(Post, { foreignKey: "postUUID", as: "post" });
+      this.belongsTo(User, { foreignKey: "userUUID", as: "user" });
       // define association here
+    }
+    toJSON() {
+      // hide the "id" and "password"-field in the API as a default behaviour
+      return {
+        ...this.get(),
+        id: undefined,
+        createdAt: undefined,
+        updatedAt: undefined,
+      };
     }
   }
   Like.init(
