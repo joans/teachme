@@ -106,18 +106,27 @@ app.get(
     const postuuid = req.params.postuuid;
     const useruuid = req.userId;
     try {
+      // find out if the like already exists
       let like = await Like.findOne({
         where: { [Op.and]: [{ userUUID: useruuid }, { postUUID: postuuid }] },
       });
       if (!like) {
-        const newLike = await Like.create({
-          userUUID: useruuid,
-          postUUID: postuuid,
+        // if no like exists (is found), then fetch the user and post object
+        // from the database to create the associations to their models
+        const user = await User.findOne({
+          where: { uuid: useruuid },
         });
-        return res.json(newLike);
+        const post = await Post.findOne({
+          where: { uuid: postuuid },
+        });
+        const newLike = await Like.create({
+          userUUID: user.uuid,
+          postUUID: post.uuid,
+        });
+        return res.json({ msg: "created like" });
       } else {
         await like.destroy();
-        return res.json({ msg: "like deleted" });
+        return res.json({ msg: "deleted like" });
       }
     } catch (err) {
       console.log(err);
