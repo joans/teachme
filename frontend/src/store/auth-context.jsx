@@ -4,7 +4,7 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   auth: {},
   onLogout: () => {},
-  onLogin: (email, password) => {},
+  onLogin: () => {},
 });
 
 export const AuthContextProvider = (props) => {
@@ -18,7 +18,7 @@ export const AuthContextProvider = (props) => {
     }
   }, []);
 
-  const loginFunction = (auth, email, password) => {
+  const loginFunction = (auth) => {
     // check email and password for validity on backend!
     setAuth(auth);
     localStorage.setItem("isLoggedIn", "1");
