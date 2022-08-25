@@ -173,9 +173,9 @@ app.get(
   }
 );
 
+// returns only a list of liked posts UUIDs, nothing more
 app.get("/fetch_likes/:useruuid", async (req, res) => {
   // likes are public by default, no auth necessary!
-  // returns only a list of liked posts, nothing more
   const { useruuid } = req.params;
 
   try {
@@ -197,7 +197,7 @@ app.get("/fetch_likes/:useruuid", async (req, res) => {
 // so each user can have a like-page with all their liked posts!
 app.get("/fetch_likes_posts/:useruuid", async (req, res) => {
   // likes are public by default, no auth necessary!
-  // returns only a list of liked posts, nothing more
+
   const { useruuid } = req.params;
 
   try {
