@@ -35,10 +35,9 @@ export const LikeContextProvider = (props) => {
   }, [useruuid]);
 
   const likeFunction = async (postuuid) => {
-    const res = await Axios.get(
-      `http://localhost:3307/toggle_like_post/${postuuid}`,
-      { headers: { "x-access-token": authAccessToken } }
-    );
+    await Axios.get(`http://localhost:3307/toggle_like_post/${postuuid}`, {
+      headers: { "x-access-token": authAccessToken },
+    });
     fetchLikes(useruuid);
   };
 
