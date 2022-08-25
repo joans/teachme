@@ -44,6 +44,21 @@ body {
   padding: var(--padding-mobile);
 }
 
+/* Button styling which is not visible as a button but only as its contained text item */
+.button-nooutline {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
+
 @media all and (min-width: 930px) {
   .page {
     padding: var(--padding-desktop-above) var(--padding-desktop-leftright);

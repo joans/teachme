@@ -43,7 +43,7 @@ app.put("/update_user", authJwt.verifyToken, async (req, res) => {
       password: bcrypt.hashSync(password),
       email,
     });
-      return res.json(dbUser);
+    return res.json(dbUser);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: err });

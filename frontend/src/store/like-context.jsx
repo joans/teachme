@@ -18,7 +18,13 @@ export const LikeContextProvider = (props) => {
       const res = await Axios.get(
         `http://localhost:3307/fetch_likes/${useruuid}`
       );
-      setLikes(res.data);
+      // unpack the likes returned from the backend. the likes from the backend are in JSON as follows:
+      // [{"postuuid": <postuuid0>}, {"postuuid": <postuuid1>}, {"postuuid": <postuuid2>}]
+      const likedPostsObjects = Object.values(res.data);
+      const likedPostsUuids = likedPostsObjects.map((item) => {
+        return item.postUUID;
+      });
+      setLikes(likedPostsUuids);
     } else {
       setLikes([]);
     }
@@ -33,7 +39,6 @@ export const LikeContextProvider = (props) => {
       `http://localhost:3307/toggle_like_post/${postuuid}`,
       { headers: { "x-access-token": authAccessToken } }
     );
-    console.log(res.data);
     fetchLikes(useruuid);
   };
 
