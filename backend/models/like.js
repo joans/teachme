@@ -1,15 +1,16 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Category extends Model {
+  class Like extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Post }) {
+    static associate({ Post, User }) {
+      this.belongsTo(Post, { foreignKey: "postUUID", as: "post" });
+      this.belongsTo(User, { foreignKey: "userUUID", as: "user" });
       // define association here
-      this.hasMany(Post, { foreignKey: "categoryID", as: "posts" });
     }
     toJSON() {
       // hide the "id" and "password"-field in the API as a default behaviour
@@ -21,29 +22,15 @@ module.exports = (sequelize, DataTypes) => {
       };
     }
   }
-  Category.init(
+  Like.init(
     {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      displayName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      symbol: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: false,
-      },
+      // name: DataTypes.STRING,
     },
     {
       sequelize,
-      tableName: "categories",
-      modelName: "Category",
+      tableName: "likes",
+      modelName: "Like",
     }
   );
-  return Category;
+  return Like;
 };

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { sequelize, User, Post, Category } = require("./models");
+const { sequelize, User, Post, Category, Like } = require("./models");
 const { Op } = require("sequelize");
 const { authJwt } = require("./middleware");
 const bcrypt = require("bcryptjs");
@@ -133,6 +133,63 @@ app.get("/user_lite/:uuid", async (req, res) => {
     }
   } catch (err) {
     return res.status(500).json({ error: err });
+  }
+});
+
+app.get(
+  "/toggle_like_post/:postuuid",
+  authJwt.verifyToken,
+  async (req, res) => {
+    // toggles likes, if a like is already set, it is deleted by this route
+    // if a like is not set yet, it is created
+    const postuuid = req.params.postuuid;
+    const useruuid = req.userId;
+    try {
+      // find out if the like already exists
+      let like = await Like.findOne({
+        where: { [Op.and]: [{ userUUID: useruuid }, { postUUID: postuuid }] },
+      });
+      if (!like) {
+        // if no like exists (is found), then fetch the user and post object
+        // from the database to create the associations to their models
+        const user = await User.findOne({
+          where: { uuid: useruuid },
+        });
+        const post = await Post.findOne({
+          where: { uuid: postuuid },
+        });
+        const newLike = await Like.create({
+          userUUID: user.uuid,
+          postUUID: post.uuid,
+        });
+        return res.json({ msg: "created like" });
+      } else {
+        await like.destroy();
+        return res.json({ msg: "deleted like" });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+app.get("/fetch_likes/:useruuid", async (req, res) => {
+  // likes are public by default, no auth necessary!
+  // returns only a list of liked posts, nothing more
+  const { useruuid } = req.params;
+
+  try {
+    const likes = await Like.findAll({
+      where: { userUUID: useruuid },
+      attributes: { exclude: ["userUUID"] },
+    });
+    if (likes) {
+      return res.json(likes);
+    } else {
+      return res.json({ err: "Nothing found" });
+    }
+  } catch (err) {
+    console.log(err);
   }
 });
 
@@ -307,42 +364,8 @@ app.get("/posts/:uuid", async (req, res) => {
   }
 });
 
-const createCategory = async (name, displayName) => {
-  try {
-    const category = await Category.create({
-      name: name,
-      displayName: displayName,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-// route for initializing the categories for the user
-const createDefaultCategories = () => {
-  createCategory("handicraft", "Handicraft");
-  createCategory("sports_fitness", "Sports/Fitness");
-  createCategory("art", "Art");
-  createCategory("cooking", "Cooking");
-};
-
-// // No public route for creating categories!
-// app.post("/categories/create", async (req, res) => {
-//   const { name, displayName } = req.body;
-
-//   createCategory(name, displayName);
-// });
-
 app.listen({ port: 3307 }, async () => {
   console.log("Running server http://localhost:3307");
   await sequelize.authenticate();
   console.log("Database Connected!");
 });
-
-// // Table creation with the following function:
-// async function main() {
-//   await sequelize.sync();
-//   createDefaultCategories();
-// }
-
-// main();

@@ -7,9 +7,10 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Post }) {
+    static associate({ Post, Like }) {
       // define association here
       this.hasMany(Post, { foreignKey: "userID", as: "posts" });
+      this.hasMany(Like, { foreignKey: "userUUID", as: "likedPosts" });
     }
 
     // overrides the default JSON returned to the user of the API
