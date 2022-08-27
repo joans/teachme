@@ -43,7 +43,7 @@ app.put("/update_user", authJwt.verifyToken, async (req, res) => {
       password: bcrypt.hashSync(password),
       email,
     });
-      return res.json(dbUser);
+    return res.json(dbUser);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: err });
@@ -173,9 +173,10 @@ app.get(
   }
 );
 
+// returns only a list of liked posts UUIDs, nothing more
 app.get("/fetch_likes/:useruuid", async (req, res) => {
   // likes are public by default, no auth necessary!
-  // returns only a list of liked posts, nothing more
+
   const { useruuid } = req.params;
 
   try {
@@ -185,6 +186,38 @@ app.get("/fetch_likes/:useruuid", async (req, res) => {
     });
     if (likes) {
       return res.json(likes);
+    } else {
+      return res.json({ err: "Nothing found" });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// this route fetches the likes for a user and returns the corresponding posts
+// so each user can have a like-page with all their liked posts!
+app.get("/fetch_likes_posts/:useruuid", async (req, res) => {
+  // likes are public by default, no auth necessary!
+
+  const { useruuid } = req.params;
+
+  try {
+    const likes = await Like.findAll({
+      where: { userUUID: useruuid },
+      attributes: { exclude: ["userUUID"] },
+    });
+    if (likes) {
+      // map the likes to a new list object with the correct "uuid" key instead
+      // of the "postUUID" key which is default for the likes object
+      const likedPostsUuidsSelect = likes.map((item) => {
+        return { uuid: item.postUUID };
+      });
+      const likedPosts = await Post.findAll({
+        where: { [Op.or]: likedPostsUuidsSelect },
+      });
+
+      return res.json(likedPosts);
+      // return res.json({ msg: "success" });
     } else {
       return res.json({ err: "Nothing found" });
     }
