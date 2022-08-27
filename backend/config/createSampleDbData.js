@@ -78,11 +78,11 @@ const createDefaultUsersAndPosts = async () => {
   await createUser("Tanja", "supersecret", "tanja@posteo.de");
   await createUser("David", "supersecret", "david@gmail.com");
   await createUser("Julia", "supersecret", "julia@hotmail.com");
-  await createUser("Tim", "supersecret", "tim@techlabs.org");
+  await createUser("Thomas", "supersecret", "tim@techlabs.org");
   await createUser("Vanessa", "supersecret", "vanessa@yahoo.de");
   await createUser("Akio", "supersecret", "akio@meta.com");
   await createUser("Sakura", "supersecret", "sakura@gmail.com");
-  await createUser("Kim", "supersecret", "kim@meta.com");
+  await createUser("Tina", "supersecret", "kim@meta.com");
   await createUser("Stephanie", "supersecret", "stephanie@posteo.net");
   await createUser("Guiseppe", "supersecret", "guiseppe@posteo.net");
   await createUser("Hanna", "supersecret", "hanna@skillpact.org");
@@ -173,7 +173,7 @@ const createDefaultUsersAndPosts = async () => {
     "A handstand is one of the coolest exercises ever, but it's also one of the most advanced moves to learn. But you are lucky and have come to the right place. I would consider myself advanced handstander. I can easily stand on my hands for hours on end if I feel like it and I do feel like it a lot - it is just so much fun! I will teach you how to do a handstand step-by-step, starting with the right warm-up, doing a handstand on the wall, until you can do a free-standing handstand."
   );
   await createPost(
-    "Tim",
+    "Thomas",
     "Get ready for your first triathlon",
     "sports_fitness",
     "I am an experienced triathlete and can help you plan your approach to the sport, which can be overwhelming. This is what I can help you with: - how to get started - how to effectively transition from another sport - how to create a realistic training plan  - how to know when you are ready for your first race - how to identify weaknesses and work on them - how to fit things into the rest of your life."
@@ -191,7 +191,7 @@ const createDefaultUsersAndPosts = async () => {
     "I love to make pasta and I want to share with you the love for this simple, but amazing dish!"
   );
   await createPost(
-    "Kim",
+    "Tina",
     "Most probably your favourite Udon bowl",
     "cooking",
     "I will teach you how to cook your favourite Udon bowl. You will learn how to properly cook the Udon noodles and how to pick the side ingredients that will taste you best. If I like you, I will also share my secret sauce recipe with you. ;-)"
@@ -225,7 +225,6 @@ const createDefaultUsersAndPosts = async () => {
     "Delicious tiramisu",
     "cooking",
     "Probably the best desert on earth and well...it is also quite easy to make it yourself, if you know how. I am happy to teach you how to make a really good tiramisu - the original way with coffee and bisquit."
-
   );
 };
 
