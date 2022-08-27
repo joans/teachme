@@ -7,15 +7,9 @@ import Card from "../UI/Card";
 import Button from "../UI/Button";
 import AuthContext from "../store/auth-context";
 import LikeContext from "../store/like-context";
-import singleOfferClasses from "../partials/SingleOffer.module.css";
 
 import { FaTimes } from "react-icons/fa";
-import {
-  AiFillStar,
-  AiOutlineStar,
-  AiFillDelete,
-  AiFillEdit,
-} from "react-icons/ai";
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 const PostDetail = () => {
   const [singlePost, updateSinglePost] = useState({
@@ -100,7 +94,7 @@ const PostDetail = () => {
             {singlePost.user.username}
           </Link>
         </p>
-        <div className={classes.icons}>
+        <div className={classes.interactions}>
           {!showEditButton && (
             <button
               onClick={handleLike}
@@ -112,24 +106,24 @@ const PostDetail = () => {
             </button>
           )}
           {showEditButton && (
-            <button
+            <Button
               onClick={() => {
                 navigate(`/offer/edit/${singlePost.uuid}`);
               }}
               variant="contained"
-              className={`button-nooutline ${classes.icon}`}
+              className="color-two"
             >
-              <AiFillEdit />
-            </button>
-          )}{" "}
+              Edit Offer
+            </Button>
+          )}
           {showEditButton && (
-            <button
+            <Button
               onClick={handleDeletePost}
               variant="contained"
-              className={`button-nooutline ${classes.icon}`}
+              className="color-three"
             >
-              <AiFillDelete />
-            </button>
+              Delete Offer
+            </Button>
           )}
         </div>
       </div>
