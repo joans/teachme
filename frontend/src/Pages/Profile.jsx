@@ -13,11 +13,23 @@ const Profile = () => {
   const [userData, updateUserData] = useState({
     usename: null,
     email: null,
+    createdAt: "1977",
     posts: [],
   });
   const authCtx = useContext(AuthContext);
 
   const { id } = useParams();
+  const formatDate = (date) => {
+    let dt = new Date(date);
+    const CustomFormatter = new Intl.DateTimeFormat("en-GB", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      // hour: "numeric",
+      // minute: "numeric",
+    });
+    return CustomFormatter.format(dt);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,13 +58,14 @@ const Profile = () => {
       </span>
       <h1>{userData.username}</h1>
       <p>{userData.email}</p>
-      <p>User since: {userData.createdAt}</p>
+      <p>User since: {formatDate(userData.createdAt)}</p>
       <h2>Offers</h2>
       {userData.posts.map((singleItem, key) => (
         <SingleOffer
           className=""
           key={key} // should be replaced by the offer ID later
           item={singleItem}
+          doTruncate={false}
         />
       ))}
     </Card>

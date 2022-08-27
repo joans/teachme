@@ -21,6 +21,7 @@ const SingleOffer = ({ item, className, doTruncate = true }) => {
   const authCtx = useContext(AuthContext);
   const likeCtx = useContext(LikeContext);
   const [postLiked, setPostLiked] = useState(false);
+  const [showLikeButton, setShowLikeButton] = useState(true);
 
   const handleLike = () => {
     likeCtx.toggleLike(item.uuid);

@@ -11,6 +11,7 @@
   --padding-mobile: 2%;
   --padding-desktop-leftright: 4%;
   --padding-desktop-above: 2rem;
+  --header-height: 5rem;
 }
 
 body {

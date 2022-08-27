@@ -94,17 +94,17 @@ const PostDetail = () => {
             {singlePost.user.username}
           </Link>
         </p>
+        {!showEditButton && (
+          <button
+            onClick={handleLike}
+            className={`${classes.icon} ${
+              !authCtx.isLoggedIn && "hidden"
+            } button-nooutline`}
+          >
+            {postLiked ? <AiFillStar /> : <AiOutlineStar />}
+          </button>
+        )}
         <div className={classes.interactions}>
-          {!showEditButton && (
-            <button
-              onClick={handleLike}
-              className={`${classes.icon} ${
-                !authCtx.isLoggedIn && "hidden"
-              } button-nooutline`}
-            >
-              {postLiked ? <AiFillStar /> : <AiOutlineStar />}
-            </button>
-          )}
           {showEditButton && (
             <Button
               onClick={() => {

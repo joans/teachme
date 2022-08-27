@@ -10,6 +10,7 @@ import Login from "./Pages/Login";
 import PostDetail from "./Pages/PostDetail";
 import Profile from "./Pages/Profile";
 import SearchResults from "./Pages/SearchResults";
+import Likes from "./Pages/Likes";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/user/:id" element={<Profile />} />
           <Route path="/search/:searchTerm" element={<SearchResults />} />
           <Route path="/offer/edit/:id" element={<CreateOfferHandler />} />
+          <Route path="/likes" element={<Likes />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
