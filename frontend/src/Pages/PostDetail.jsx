@@ -10,7 +10,12 @@ import LikeContext from "../store/like-context";
 import singleOfferClasses from "../partials/SingleOffer.module.css";
 
 import { FaTimes } from "react-icons/fa";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import {
+  AiFillStar,
+  AiOutlineStar,
+  AiFillDelete,
+  AiFillEdit,
+} from "react-icons/ai";
 
 const PostDetail = () => {
   const [singlePost, updateSinglePost] = useState({
@@ -95,36 +100,38 @@ const PostDetail = () => {
             {singlePost.user.username}
           </Link>
         </p>
-        <div className={singleOfferClasses.favorite}>
-          <button
-            onClick={handleLike}
-            className={`${classes["star-button"]} ${
-              !authCtx.isLoggedIn && "hidden"
-            } button-nooutline`}
-          >
-            {postLiked ? <AiFillStar /> : <AiOutlineStar />}
-          </button>
+        <div className={classes.icons}>
+          {!showEditButton && (
+            <button
+              onClick={handleLike}
+              className={`${classes.icon} ${
+                !authCtx.isLoggedIn && "hidden"
+              } button-nooutline`}
+            >
+              {postLiked ? <AiFillStar /> : <AiOutlineStar />}
+            </button>
+          )}
+          {showEditButton && (
+            <button
+              onClick={() => {
+                navigate(`/offer/edit/${singlePost.uuid}`);
+              }}
+              variant="contained"
+              className={`button-nooutline ${classes.icon}`}
+            >
+              <AiFillEdit />
+            </button>
+          )}{" "}
+          {showEditButton && (
+            <button
+              onClick={handleDeletePost}
+              variant="contained"
+              className={`button-nooutline ${classes.icon}`}
+            >
+              <AiFillDelete />
+            </button>
+          )}
         </div>
-        {showEditButton && (
-          <Button
-            onClick={() => {
-              navigate(`/offer/edit/${singlePost.uuid}`);
-            }}
-            variant="contained"
-            className="color-two"
-          >
-            Edit Offer
-          </Button>
-        )}{" "}
-        {showEditButton && (
-          <Button
-            onClick={handleDeletePost}
-            variant="contained"
-            className="color-three"
-          >
-            Delete Offer
-          </Button>
-        )}
       </div>
     </Card>
   );
