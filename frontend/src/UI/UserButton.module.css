@@ -22,7 +22,7 @@
   width: 100px;
   z-index: 100;
   transform: translate(-45%);
-  background-color: var(--bg-main);
+  background-color: var(--color-two);
   border: 1px solid var(--bg-two);
   border-radius: 5px;
   padding: 0.5rem;
@@ -34,12 +34,22 @@
 .menuItem {
   height: 50px;
   display: flex;
-  align-items: center;
   border-radius: 5px;
   padding: 0.5rem;
+  transition: background 300ms;
+  width: 90%;
 }
 
-.menuItem a {
+.menuItem * {
   text-decoration: none;
-  color: var(--color-main);
+  color: var(--color-three);
+  font-size: 1em;
+}
+
+.menuItem:hover {
+  background-color: var(--bg-three);
+}
+
+menuItem *:hover {
+  color: var(--color-three);
 }

@@ -52,14 +52,14 @@ const DropDownMenu = ({ setNavOpen }) => {
         <Link to={`/likes`}>My Likes</Link>
       </DropDownItem>
       <DropDownItem>
-        <Button
+        <button
           onClick={auth.onLogout}
           variant="contained"
-          className="color-two"
+          className="button-nooutline"
         >
           {/* <CgLogIn className={classes.icon} /> */}
           Log Out
-        </Button>
+        </button>
       </DropDownItem>
     </div>
   );
