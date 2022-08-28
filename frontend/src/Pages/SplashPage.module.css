@@ -1,7 +1,7 @@
 .team {
   background-image: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)
     ),
     url("../assets/homescreen_team_2000px_guetzli.jpg");
   /* margin-bottom: auto; */
@@ -10,13 +10,13 @@
   color: black;
   background-size: cover;
   background-position: center;
-  padding: 12px;
+  padding: 1em 1em 4em 1em;
   left: 0;
   border-radius: 1em;
-  z-index: -100;
   box-sizing: border-box;
 }
 .team h1 {
+  margin-top: 2em;
   font-weight: bolder;
 }
 
@@ -27,8 +27,13 @@
 .text {
   width: 50%;
   padding-left: 2em;
+  padding-bottom: 1em;
 }
 
-.team button {
+.button {
+  opacity: 100%;
   float: right;
+  width: 10em;
+  height: 3em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }

@@ -1,8 +1,8 @@
 .card {
   /* border: 2px solid var(--color-four); */
-  padding: 3%;
+  padding: 0.7em;
   border-radius: 1em;
-  margin: 1% auto;
+  margin: 0.1em auto;
   background-color: var(--bg-three);
 }
 
@@ -13,6 +13,6 @@
 @media all and (min-width: 820px) {
   .card {
     width: 60%;
-    padding: 2%;
+    padding: 1em;
   }
 }

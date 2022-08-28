@@ -1,9 +1,14 @@
 import React from "react";
 import classes from "./SplashPage.module.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../store/auth-context";
 import Button from "../UI/Button";
+import { useContext } from "react";
 
 const SplashPage = () => {
+  const navigate = useNavigate();
+  const authCtx = useContext(AuthContext);
+
   return (
     <div className={classes.team}>
       <h1>
@@ -23,7 +28,16 @@ const SplashPage = () => {
 
         <br />
       </div>
-      <Button class="color-three">Sign Up</Button>
+      {!authCtx.isLoggedIn && (
+        <Button
+          className={`${classes.button}`}
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          Sign Up
+        </Button>
+      )}
     </div>
   );
 };

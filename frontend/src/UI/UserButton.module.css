@@ -21,7 +21,7 @@
   position: absolute;
   top: 58px;
   width: 100px;
-  z-index: 100;
+  z-index: 6000;
   transform: translate(-45%);
   background-color: var(--color-two);
   border: 1px solid var(--bg-two);

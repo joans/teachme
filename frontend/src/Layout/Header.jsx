@@ -84,18 +84,7 @@ const Header = () => {
                 </Button>
               )}
             </li>
-            <li>
-              {!auth.isLoggedIn && (
-                <Button
-                  onClick={() => {
-                    navigate("/signup");
-                  }}
-                  className="color-three"
-                >
-                  Sign Up
-                </Button>
-              )}
-            </li>
+            <li></li>
           </ul>
         </div>
       </header>
