@@ -55,3 +55,12 @@
   display: none;
   font-size: larger;
 }
+
+@media all and (min-width: 930px) {
+  .hrule {
+    margin-left: var(--padding-desktop-leftright);
+    margin-right: var(--padding-desktop-leftright);
+    width: 92%;
+    box-sizing: border-box;
+  }
+}
