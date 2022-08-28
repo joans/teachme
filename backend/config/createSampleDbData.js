@@ -84,7 +84,7 @@ const createDefaultUsersAndPosts = async () => {
   await createUser("Sakura", "supersecret", "sakura@gmail.com");
   await createUser("Tina", "supersecret", "kim@meta.com");
   await createUser("Stephanie", "supersecret", "stephanie@posteo.net");
-  await createUser("Guiseppe", "supersecret", "guiseppe@posteo.net");
+  await createUser("Giuseppe", "supersecret", "giuseppe@posteo.net");
   await createUser("Hanna", "supersecret", "hanna@skillpact.org");
   await createUser("Judith", "supersecret", "judith@wordpress.com");
   await createUser("Florian", "supersecret", "florian@massage-for-all.de");
@@ -221,7 +221,7 @@ const createDefaultUsersAndPosts = async () => {
     "You like sushi as much as I do and dislike its costs in the restaurants just as much? You feel the same way and would like to make your own sushi for your friends and yourself? Hit me up and I will teach you how to make your own sushi. It is very easy and even though I am not a professional chef, everyone has liked my sushi so far. ;-)"
   );
   await createPost(
-    "Guiseppe",
+    "Giuseppe",
     "Delicious tiramisu",
     "cooking",
     "Probably the best desert on earth and well...it is also quite easy to make it yourself, if you know how. I am happy to teach you how to make a really good tiramisu - the original way with coffee and bisquit."
