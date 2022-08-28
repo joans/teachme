@@ -99,7 +99,6 @@ const Header = () => {
           </ul>
         </div>
       </header>
-      <hr className={classes.hrule} />
     </div>
   );
 };
