@@ -10,6 +10,7 @@ import Login from "./Pages/Login";
 import PostDetail from "./Pages/PostDetail";
 import Profile from "./Pages/Profile";
 import SearchResults from "./Pages/SearchResults";
+import Likes from "./Pages/Likes";
 import Footer from "./Layout/Footer";
 import Imprint from "./Pages/Imprint";
 import PrivacyStatement from "./Pages/PrivacyStatement";
@@ -33,6 +34,7 @@ function App() {
           <Route path="/imprint" element={<Imprint />} />
           <Route path="/privacy_statement" element={<PrivacyStatement />} />
           <Route path="/about_us" element={<AboutUs />} />
+          <Route path="/likes" element={<Likes />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

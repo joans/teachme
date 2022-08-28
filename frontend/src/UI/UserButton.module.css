@@ -1,0 +1,56 @@
+.userbutton {
+  --button-size: calc(var(--header-height) * 0.4);
+  width: var(--button-size);
+  height: var(--button-size);
+  background-color: var(--bg-two);
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+.userbutton:hover {
+  filter: brightness(1.5);
+}
+
+.dropdown {
+  position: absolute;
+  top: 58px;
+  width: 100px;
+  z-index: 100;
+  transform: translate(-45%);
+  background-color: var(--color-two);
+  border: 1px solid var(--bg-two);
+  border-radius: 5px;
+  padding: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuItem {
+  height: 50px;
+  display: flex;
+  border-radius: 5px;
+  padding: 0.5rem;
+  transition: background 300ms;
+  width: 90%;
+}
+
+.menuItem * {
+  text-decoration: none;
+  color: var(--color-three);
+  font-size: 1em;
+}
+
+.menuItem:hover {
+  background-color: var(--bg-three);
+}
+
+menuItem *:hover {
+  color: var(--color-three);
+}

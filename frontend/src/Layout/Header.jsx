@@ -5,6 +5,7 @@ import classes from "./Header.module.css";
 import { TiPlus, TiTags } from "react-icons/ti";
 
 import AuthContext from "../store/auth-context";
+import UserButton from "../UI/UserButton";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -33,14 +34,14 @@ const Header = () => {
             <input
               type="text"
               id="searchterm"
-              placeholder="Search Offers"
+              placeholder="Search Offers..."
               className={classes.input}
               value={searchTerm}
               onChange={(e) => {
                 updateSearchTerm(e.target.value);
               }}
             />
-            <Button className={classes["search-button"]}>Go</Button>
+            {/* <Button className={classes["search-button"]}>Go</Button> */}
           </form>
         </div>
         <div className={classes["right-side"]}>
@@ -61,14 +62,7 @@ const Header = () => {
             </li>
             <li>
               {auth.isLoggedIn ? (
-                <Button
-                  onClick={auth.onLogout}
-                  variant="contained"
-                  className="color-two"
-                >
-                  {/* <CgLogIn className={classes.icon} /> */}
-                  Log Out
-                </Button>
+                <UserButton />
               ) : (
                 <Button
                   onClick={() => {

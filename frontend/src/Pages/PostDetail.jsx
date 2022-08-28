@@ -8,7 +8,8 @@ import Button from "../UI/Button";
 import AuthContext from "../store/auth-context";
 import LikeContext from "../store/like-context";
 
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaUserCircle } from "react-icons/fa";
+import { TiTags } from "react-icons/ti";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 const PostDetail = () => {
@@ -87,24 +88,27 @@ const PostDetail = () => {
         </span>
         <h1>{singlePost.title}</h1>
         <p>{singlePost.body}</p>
-        <p>Category: {singlePost.category.displayName}</p>
         <p>
-          Posted by:{" "}
+          <TiTags /> {singlePost.category.displayName}
+        </p>
+        <p>
+          <FaUserCircle />
+          &nbsp;
           <Link to={`/user/${singlePost.user.uuid}`}>
             {singlePost.user.username}
           </Link>
         </p>
+        {!showEditButton && (
+          <button
+            onClick={handleLike}
+            className={`${classes.icon} ${
+              !authCtx.isLoggedIn && "hidden"
+            } button-nooutline`}
+          >
+            {postLiked ? <AiFillStar /> : <AiOutlineStar />}
+          </button>
+        )}
         <div className={classes.interactions}>
-          {!showEditButton && (
-            <button
-              onClick={handleLike}
-              className={`${classes.icon} ${
-                !authCtx.isLoggedIn && "hidden"
-              } button-nooutline`}
-            >
-              {postLiked ? <AiFillStar /> : <AiOutlineStar />}
-            </button>
-          )}
           {showEditButton && (
             <Button
               onClick={() => {

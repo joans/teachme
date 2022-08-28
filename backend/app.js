@@ -214,8 +214,10 @@ app.get("/fetch_likes_posts/:useruuid", async (req, res) => {
       });
       const likedPosts = await Post.findAll({
         where: { [Op.or]: likedPostsUuidsSelect },
+        include: ["category"],
       });
 
+      console.log(likedPosts);
       return res.json(likedPosts);
       // return res.json({ msg: "success" });
     } else {
