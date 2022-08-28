@@ -7,6 +7,7 @@ import signUpClasses from "../Pages/SignUp.module.css";
 import SingleOffer from "../partials/SingleOffer";
 
 import { FaTimes } from "react-icons/fa";
+import { AiOutlineMail } from "react-icons/ai";
 
 const Profile = () => {
   const [errMsg, updateErrMsg] = useState();
@@ -19,17 +20,34 @@ const Profile = () => {
   const authCtx = useContext(AuthContext);
 
   const { id } = useParams();
-  const formatDate = (date) => {
-    let dt = new Date(date);
-    const CustomFormatter = new Intl.DateTimeFormat("en-GB", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      // hour: "numeric",
-      // minute: "numeric",
-    });
-    return CustomFormatter.format(dt);
-  };
+
+  function timeSince(input) {
+    const date = new Date(input);
+    var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = seconds / 31536000;
+
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,8 +75,12 @@ const Profile = () => {
         {errMsg}
       </span>
       <h1>{userData.username}</h1>
-      <p>{userData.email}</p>
-      <p>User since: {formatDate(userData.createdAt)}</p>
+      <p>
+        <AiOutlineMail />
+        &nbsp;
+        {userData.email}
+      </p>
+      <p>User since: {timeSince(userData.createdAt)}</p>
       <h2>Offers</h2>
       {userData.posts.map((singleItem, key) => (
         <SingleOffer
