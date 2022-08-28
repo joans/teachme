@@ -1,16 +1,16 @@
 .complete-container {
   display: flex;
+  flex-direction: column;
   /* padding: 5em 0 0 6em; */
 }
 
 .category-picker {
   display: flex;
-  flex-direction: column;
-  width: 10em;
+  flex-direction: row;
   box-sizing: border-box;
-  height: 5em;
-  margin: 1em 2em 0 0;
+  margin: 0.5em 0 0 0;
   box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .category-picker * {
@@ -32,4 +32,21 @@
 
 .custom-button {
   width: 10em;
+  margin: 0.2em 0.2em 0.2em 0;
+}
+
+@media all and (min-width: 930px) {
+  .complete-container {
+    flex-direction: row;
+  }
+  .category-picker {
+    display: flex;
+    flex-direction: column;
+    width: 10em;
+    box-sizing: border-box;
+    height: 5em;
+    margin: 1em 2em 0 0;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+  }
 }

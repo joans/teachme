@@ -43,6 +43,17 @@ const createPost = async (username, title, category, body) => {
   }
 };
 
+const createUserDetails = async (
+  username,
+  gender,
+  aboutMeText,
+  interestedIn,
+  languages
+) => {
+  const dbUser = await User.findOne({ where: { username } });
+  await dbUser.update({ gender, aboutMeText, interestedIn, languages });
+};
+
 // route for initializing the categories for the user
 const createDefaultCategories = () => {
   createCategory(
@@ -100,11 +111,25 @@ const createDefaultUsersAndPosts = async () => {
     "art",
     "I can help you create professional-looking pictures for your business, online shop, social media, etc. I will teach you everything about equipment, lighting, positioning of your products, etc."
   );
+  await createUserDetails(
+    "Tanja",
+    "female",
+    "Hi, I am Tanja, I am a professional photographer based in Hamburg. I grew up in Bogota, Colombia and moved here quite recently. I would love to teach my passion to other people.",
+    "meeting people, photograhy, cooking",
+    "spanish, english"
+  );
   await createPost(
     "Jens",
     "Learn how to use photoshop",
     "art",
     "Touch up, manipulate, or recreate your imagination in photoshop. I will teach you fundamental skills to get started in photoshop."
+  );
+  await createUserDetails(
+    "Jens",
+    "male",
+    "Hi I am Jens and I am interested in cooking and learning new skills. I love to inspire people and help them learn new skills!",
+    "cooking, photography, freediving",
+    "german, english"
   );
   await createPost(
     "Sakura",
@@ -112,11 +137,25 @@ const createDefaultUsersAndPosts = async () => {
     "art",
     "I am an interior designer and I am on a mission to make as many homes feel like home as possible. If you are looking for decoration tips, do not hesitate to contact me. I will help you make the most comfortable version of your home with the available things you already own."
   );
+  await createUserDetails(
+    "Sakura",
+    "diverse",
+    "Hello people! My name is Sakura and I am an interior Designer. I saw how German people deccorate their homes and I am interested to help you out!",
+    "art, sports, languages",
+    "japanese, english"
+  );
   await createPost(
     "Akio",
     "Cartoon styled art",
     "art",
     "Hello, I can teach you how to do very simple cartoon drawing! Once you get to know these basics, you can become an artist or cartoonist in no time!"
+  );
+  await createUserDetails(
+    "Akio",
+    "female",
+    "Welcome to my Profile! I am Akio and I like to draw in my free time. Since I was little, drawing was a hobby of mine. I am also interested in travelling and photography.",
+    "art, travelling",
+    "german, english"
   );
   await createPost(
     "Stephanie",

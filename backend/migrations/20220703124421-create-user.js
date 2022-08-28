@@ -26,6 +26,22 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      gender: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      aboutMeText: {
+        type: DataTypes.STRING(500),
+        allowNull: true,
+      },
+      interestedIn: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      languages: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,

@@ -30,8 +30,15 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.put("/update_user", authJwt.verifyToken, async (req, res) => {
-  const { username, password, email } = req.body;
+app.put("/users/update/core", authJwt.verifyToken, async (req, res) => {
+  // no password since password is not stored in the front end
+  // so if user would want to change something about them
+  // they would always have to type in their password
+  // likewise, if a user would like to change his password
+  // they would not need to confirm their current password
+  // which is bad design.
+  const { username, email, gender, aboutMeText, interestedIn, languages } =
+    req.body;
   const userUUID = req.userId;
 
   try {
@@ -40,10 +47,36 @@ app.put("/update_user", authJwt.verifyToken, async (req, res) => {
     });
     await dbUser.update({
       username,
-      password: bcrypt.hashSync(password),
       email,
+      gender,
+      aboutMeText,
+      interestedIn,
+      languages,
     });
     return res.json(dbUser);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ error: err });
+  }
+});
+
+app.put("/users/update/password", authJwt.verifyToken, async (req, res) => {
+  const { prevPassword, newPassword } = req.body;
+  const userUUID = req.userId;
+
+  try {
+    const dbUser = await User.findOne({
+      where: { uuid: userUUID },
+    });
+    const passwordValid = bcrypt.compareSync(prevPassword, dbUser.password);
+    if (passwordValid) {
+      await dbUser.update({
+        password: newPassword,
+      });
+      return res.json(dbUser);
+    } else {
+      return res.json({ msg: "invalid Password" });
+    }
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: err });
@@ -63,14 +96,14 @@ app.post("/login", async (req, res) => {
         return res.status(404).send({ error: "User Not found." });
       }
       console.log("username: " + password + "found");
-      var passwordIsValid = bcrypt.compareSync(password, user.password);
+      const passwordIsValid = bcrypt.compareSync(password, user.password);
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
           error: "Invalid Password!",
         });
       }
-      var token = jwt.sign({ uuid: user.uuid }, config.secret, {
+      const token = jwt.sign({ uuid: user.uuid }, config.secret, {
         expiresIn: 86400, // 24 hours
       });
       // alternatively for cookies use this code:
@@ -337,7 +370,7 @@ app.get("/posts", async (req, res) => {
   try {
     const posts = await Post.findAll({
       include: ["user", "category"],
-      limit: 12,
+      limit: 16,
       order: [["createdAt", "DESC"]],
       // Code appends the user data to the corresponding post data
     });

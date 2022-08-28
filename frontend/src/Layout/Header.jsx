@@ -4,6 +4,8 @@ import Button from "../UI/Button";
 import classes from "./Header.module.css";
 import { TiPlus, TiTags } from "react-icons/ti";
 
+import headerImg from "../assets/Skillpact_logo_transparent.png";
+
 import AuthContext from "../store/auth-context";
 import UserButton from "../UI/UserButton";
 
@@ -24,8 +26,14 @@ const Header = () => {
         <div className={classes["left-side"]}>
           <h1>
             <Link to="/" className={classes.link}>
-              <span className={classes["s-icon"]}>skill</span>
-              <span className={classes.text}>pact</span>
+              <span className={classes["s-icon"]}>
+                <img
+                  src={headerImg}
+                  className={classes.headerImg}
+                  alt="Skillpact Logo"
+                />
+              </span>
+              <span className={classes.text}>skillpact</span>
             </Link>
           </h1>
         </div>

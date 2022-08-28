@@ -25,6 +25,12 @@
   margin-top: var(--header-height);
 }
 
+.headerImg {
+  height: calc(var(--header-height) * 0.5);
+  vertical-align: middle;
+  margin-right: 0.2em;
+}
+
 .icon {
   vertical-align: middle;
   height: 2rem;

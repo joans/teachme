@@ -5,49 +5,52 @@ import AuthContext from "../store/auth-context";
 import Card from "../UI/Card";
 import signUpClasses from "../Pages/SignUp.module.css";
 import SingleOffer from "../partials/SingleOffer";
+import classes from "./Profile.module.css";
 
 import { FaTimes } from "react-icons/fa";
-import { AiOutlineMail } from "react-icons/ai";
+import { AiOutlineMail, AiFillLike } from "react-icons/ai";
+import { BsGenderTrans } from "react-icons/bs";
+import { MdOutlineLanguage } from "react-icons/md";
+
+function timeSince(input) {
+  const date = new Date(input);
+  var seconds = Math.floor((new Date() - date) / 1000);
+
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+    return Math.floor(interval) + " years";
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    return Math.floor(interval) + " months";
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return Math.floor(interval) + " days";
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return Math.floor(interval) + " hours";
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return Math.floor(interval) + " minutes";
+  }
+  return Math.floor(seconds) + " seconds";
+}
 
 const Profile = () => {
   const [errMsg, updateErrMsg] = useState();
   const [userData, updateUserData] = useState({
     usename: null,
     email: null,
-    createdAt: "1977",
+    createdAt: null,
     posts: [],
   });
   const authCtx = useContext(AuthContext);
 
   const { id } = useParams();
-
-  function timeSince(input) {
-    const date = new Date(input);
-    var seconds = Math.floor((new Date() - date) / 1000);
-
-    var interval = seconds / 31536000;
-
-    if (interval > 1) {
-      return Math.floor(interval) + " years";
-    }
-    interval = seconds / 2592000;
-    if (interval > 1) {
-      return Math.floor(interval) + " months";
-    }
-    interval = seconds / 86400;
-    if (interval > 1) {
-      return Math.floor(interval) + " days";
-    }
-    interval = seconds / 3600;
-    if (interval > 1) {
-      return Math.floor(interval) + " hours";
-    }
-    interval = seconds / 60;
-    if (interval > 1) {
-      return Math.floor(interval) + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
-  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,12 +78,8 @@ const Profile = () => {
         {errMsg}
       </span>
       <h1>{userData.username}</h1>
-      <p>
-        <AiOutlineMail />
-        &nbsp;
-        {userData.email}
-      </p>
-      <p>User since: {timeSince(userData.createdAt)}</p>
+      <UserDetails userData={userData} />
+
       <h2>Offers</h2>
       {userData.posts.map((singleItem, key) => (
         <SingleOffer
@@ -91,6 +90,39 @@ const Profile = () => {
         />
       ))}
     </Card>
+  );
+};
+
+const UserDetails = ({ userData }) => {
+  return (
+    <>
+      {userData.aboutMeText && (
+        <p className={`${classes.aboutme} ${classes.entry}`}>
+          {userData.aboutMeText}
+        </p>
+      )}
+      <SingleDataItem symbol={<AiOutlineMail />} text={userData.email} />
+      <SingleDataItem symbol={<BsGenderTrans />} text={userData.gender} />
+      <SingleDataItem symbol={<AiFillLike />} text={userData.interestedIn} />
+      <SingleDataItem
+        symbol={<MdOutlineLanguage />}
+        text={userData.languages}
+      />
+
+      <p>User since: {timeSince(userData.createdAt)}</p>
+    </>
+  );
+};
+
+const SingleDataItem = ({ symbol, text }) => {
+  return (
+    <>
+      {text && (
+        <p className={classes.entry}>
+          {symbol} {text}
+        </p>
+      )}
+    </>
   );
 };
 

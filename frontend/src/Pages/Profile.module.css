@@ -1,0 +1,33 @@
+:root {
+  --margin-left: 40px;
+  --icon-color: #7a7a7a;
+}
+
+.aboutme {
+  margin: 0 0 0 var(--margin-left);
+}
+
+.aboutme:before {
+  display: block;
+  margin-bottom: calc(var(--margin-left) * -2);
+  position: relative;
+  left: calc(var(--margin-left) * -1);
+  content: "\201C";
+  font-size: calc(var(--margin-left) * 2);
+  font-family: Georgia, serif;
+  color: var(--icon-color);
+}
+
+.entry {
+  align-items: center;
+}
+
+.entry svg {
+  font-size: var(--margin-left);
+  color: var(--icon-color);
+  vertical-align: middle;
+}
+
+.symbol {
+  font-size: var(--margin-left);
+}
