@@ -13,7 +13,7 @@ const UserButton = () => {
   return (
     <>
       <NavItem navOpen={navOpen} setNavOpen={setNavOpen}>
-        <DropDownMenu />
+        <DropDownMenu setNavOpen={setNavOpen} />
       </NavItem>
     </>
   );
@@ -46,10 +46,24 @@ const DropDownMenu = ({ setNavOpen }) => {
   return (
     <div className={classes.dropdown}>
       <DropDownItem>
-        <Link to={`/user/${auth.auth.uuid}`}>My Profile</Link>
+        <Link
+          to={`/user/${auth.auth.uuid}`}
+          onClick={() => {
+            setNavOpen(false);
+          }}
+        >
+          My Profile
+        </Link>
       </DropDownItem>
       <DropDownItem>
-        <Link to={`/likes`}>My Likes</Link>
+        <Link
+          to={`/likes`}
+          onClick={() => {
+            setNavOpen(false);
+          }}
+        >
+          My Likes
+        </Link>
       </DropDownItem>
       <DropDownItem>
         <button
