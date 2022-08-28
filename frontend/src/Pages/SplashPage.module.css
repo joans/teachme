@@ -1,0 +1,34 @@
+.team {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("../assets/homescreen_team_2000px_guetzli.jpg");
+  /* margin-bottom: auto; */
+  font-size: medium;
+  line-height: 1.6;
+  color: black;
+  background-size: cover;
+  background-position: center;
+  padding: 12px;
+  left: 0;
+  border-radius: 1em;
+  z-index: -100;
+  box-sizing: border-box;
+}
+.team h1 {
+  font-weight: bolder;
+}
+
+.team span {
+  width: 5em;
+}
+
+.text {
+  width: 50%;
+  padding-left: 2em;
+}
+
+.team button {
+  float: right;
+}
