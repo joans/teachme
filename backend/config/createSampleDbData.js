@@ -110,7 +110,7 @@ const createDefaultUsersAndPosts = async () => {
     "male",
     "I am David, 32 years old and from the UK. I draw as a hobby and I am a Computer scientist by profession. Looking forward to getting to know other art lovers.",
     "drawing, travelling, reading",
-    "English"
+    "english"
   );
   await createPost(
     "Tanja",
@@ -123,7 +123,7 @@ const createDefaultUsersAndPosts = async () => {
     "female",
     "Hi, I am Tanja. I am a professional photographer based in Hamburg. I grew up in Bogota, Colombia and moved here quite recently. I would love to teach my passion to other people.",
     "meeting people, photograhy, cooking",
-    "Spanish, English"
+    "spanish, english"
   );
   await createPost(
     "Jens",
@@ -136,7 +136,7 @@ const createDefaultUsersAndPosts = async () => {
     "male",
     "Hi, I am Jens and I am interested in cooking and learning new skills. I love to inspire people and help them learn new skills!",
     "cooking, photography, freediving",
-    "German, English"
+    "german, english"
   );
   await createPost(
     "Sakura",
@@ -149,7 +149,7 @@ const createDefaultUsersAndPosts = async () => {
     "diverse",
     "Hello people! My name is Sakura and I am an Interior Designer. I saw how German people decorate their homes and I am interested to help you out!",
     "art, sports, languages",
-    "Japanese, English"
+    "japanese, english"
   );
   await createPost(
     "Akio",
@@ -162,7 +162,7 @@ const createDefaultUsersAndPosts = async () => {
     "male",
     "Welcome to my Profile! I am Akio and I like to draw in my free time. Since I was little, drawing was a hobby of mine. I am also interested in travelling and photography.",
     "art, travelling",
-    "Japanese, German, English"
+    "japanese, german, english"
   );
   await createPost(
     "Stephanie",
@@ -175,7 +175,7 @@ const createDefaultUsersAndPosts = async () => {
     "female",
     "Hello everyone! I am Stephanie. I am from Hamburg and love the city, but I am also a huge fan of the countryside and loved spending the summers at my grandparents' farm. This is also where I had the idea for my first novel.",
     "writing, cooking, backing",
-    "German, English"
+    "german, english"
   );
   await createPost(
     "Julia",
@@ -188,7 +188,7 @@ const createDefaultUsersAndPosts = async () => {
     "female",
     "Hi, I am Julia. I love breaking chlichés, so I bought an old farm house and renovated it by myself. I am always looking for a next fun project - maybe we could start one together?!",
     "DIY, gardening, dogs",
-    "French, English"
+    "french, english"
   );
   await createPost(
     "Sakura",
@@ -219,7 +219,7 @@ const createDefaultUsersAndPosts = async () => {
     "male",
     "Hey guys, I am Stefan. I am a personal fitness trainer. I am currently studying to become a doctor and work as an instructor at a local gym on the side. Always up for a nice sports actiivty!",
     "sports, muscles, partying",
-    "German, English"
+    "german, english"
   );
   await createPost(
     "Vanessa",
@@ -232,7 +232,7 @@ const createDefaultUsersAndPosts = async () => {
     "diverse",
     "Hello, I am Vanessa. I play soccer in a local team and I am interested in everything that has to do with a healty diet. Anyone else who is a real health foodie?",
     "cooking, fitness, soccer",
-    "Dutch, English"
+    "dutch, english"
   );
   await createPost(
     "Florian",
@@ -305,7 +305,7 @@ const createDefaultUsersAndPosts = async () => {
     "male",
     "Hello everyone, my name is Guiseppe. I am from Italy and have moved to Germany for studying. I would like to get to know some new people and thought it would be nice to connect over food.",
     "getting to know new people, deserts, foreign cultures",
-    "Italian, English"
+    "italian, english"
   );
 };
 
