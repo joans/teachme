@@ -301,7 +301,7 @@ const createDefaultUsersAndPosts = async () => {
     "Probably the best desert on earth and well...it is also quite easy to make it yourself, if you know how. I am happy to teach you how to make a really good tiramisu - the original way with coffee and bisquit."
   );
   await createUserDetails(
-    "Guiseppe",
+    "Giuseppe",
     "male",
     "Hello everyone, my name is Guiseppe. I am from Italy and have moved to Germany for studying. I would like to get to know some new people and thought it would be nice to connect over food.",
     "getting to know new people, deserts, foreign cultures",
