@@ -25,6 +25,12 @@ const Footer = () => {
       {/* Footer navigation */}
       <ul className={classes.footer_nav}>
         <li>
+          <Link to="/about_us" className={classes.footer_link}>
+            {" "}
+            <span>About us</span>
+          </Link>
+        </li>
+        <li>
           <Link to="/privacy_statement" className={classes.footer_link}>
             {" "}
             <span>Privacy Statement</span>
@@ -34,12 +40,6 @@ const Footer = () => {
           <Link to="/imprint" className={classes.footer_link}>
             {" "}
             <span>Imprint</span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/about_us" className={classes.footer_link}>
-            {" "}
-            <span>About us</span>
           </Link>
         </li>
       </ul>
