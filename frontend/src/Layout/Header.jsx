@@ -84,7 +84,6 @@ const Header = () => {
                 </Button>
               )}
             </li>
-            <li></li>
           </ul>
         </div>
       </header>
