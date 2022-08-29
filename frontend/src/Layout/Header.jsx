@@ -84,22 +84,9 @@ const Header = () => {
                 </Button>
               )}
             </li>
-            <li>
-              {!auth.isLoggedIn && (
-                <Button
-                  onClick={() => {
-                    navigate("/signup");
-                  }}
-                  className="color-three"
-                >
-                  Sign Up
-                </Button>
-              )}
-            </li>
           </ul>
         </div>
       </header>
-      <hr className={classes.hrule} />
     </div>
   );
 };

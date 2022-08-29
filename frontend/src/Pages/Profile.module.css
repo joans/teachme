@@ -16,10 +16,12 @@
   font-size: calc(var(--margin-left) * 2);
   font-family: Georgia, serif;
   color: var(--icon-color);
+  z-index: -20;
 }
 
 .entry {
   align-items: center;
+  z-index: -20;
 }
 
 .entry svg {

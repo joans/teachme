@@ -1,5 +1,9 @@
 /* TODO: Implement responsive design */
 
+.header + * {
+  margin-top: calc(var(--header-height) * 1.2);
+}
+
 .header-content {
   position: absolute;
   top: 0;
@@ -18,11 +22,13 @@
   background-color: var(--color-main);
 }
 
-.hrule {
-  border-bottom: 10px solid black;
+.header-content:after {
+  content: "";
+  border-top: 10px solid var(--bg-four);
   width: 96%;
-  /* margin: 0; */
-  margin-top: var(--header-height);
+  position: absolute;
+  top: var(--header-height);
+  height: 10px;
 }
 
 .headerImg {
@@ -52,7 +58,7 @@
   /* background-repeat: no-repeat; */
   padding: 1em;
   border-radius: 3em;
-  border: 1px solid grey;
+  border: 1px solid var(--bg-four);
   width: 6em;
 }
 .search-button {
@@ -83,7 +89,7 @@
 .link {
   text-decoration: none;
   font-weight: bold;
-  color: var(--color-three);
+  color: var(--bg-four);
 }
 
 @media all and (min-width: 930px) {
@@ -95,13 +101,14 @@
     position: fixed;
     padding: 0 var(--padding-desktop-leftright);
   }
-  .hrule {
-    position: fixed;
-    border-bottom: 10px solid var(--bg-four);
-    margin: 0 var(--padding-desktop-leftright);
+
+  .header-content:after {
+    content: "";
+    border-top: 10px solid var(--bg-four);
     width: 92%;
-    box-sizing: border-box;
-    z-index: -10;
+    position: fixed;
+    top: var(--header-height);
+    height: 10px;
   }
 
   .form {

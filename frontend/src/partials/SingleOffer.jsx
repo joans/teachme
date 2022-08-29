@@ -17,11 +17,10 @@ const truncate = (string, maxlength = 30, doTruncate = true) => {
     : string;
 };
 
-const SingleOffer = ({ item, className, doTruncate = true }) => {
+const SingleOffer = ({ item, className, doTruncate = true, icon }) => {
   const authCtx = useContext(AuthContext);
   const likeCtx = useContext(LikeContext);
   const [postLiked, setPostLiked] = useState(false);
-  const [showLikeButton, setShowLikeButton] = useState(true);
 
   const handleLike = () => {
     likeCtx.toggleLike(item.uuid);
@@ -42,6 +41,7 @@ const SingleOffer = ({ item, className, doTruncate = true }) => {
   // console.log(item);
   return (
     <div className={`${classes.singleCard} ${className}`}>
+      <div className={classes.icon}>{icon}</div>
       <h2 className={classes.title}>
         <Link to={`/offer/${item.uuid}`}>
           {truncate(item.title, 20, doTruncate)}

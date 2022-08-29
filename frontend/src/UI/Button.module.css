@@ -4,6 +4,7 @@
   padding: 0.8rem 0.5rem;
   font-weight: bold;
   cursor: pointer;
+  transition: background 300ms;
 }
 
 .button:hover {

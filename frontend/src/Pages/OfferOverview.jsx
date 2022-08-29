@@ -5,6 +5,7 @@ import signUpClasses from "../Pages/SignUp.module.css";
 import Axios from "axios";
 
 import { FaTimes } from "react-icons/fa";
+// import { GiCookingPot } from "react-icons/gi";
 
 const OfferOverview = () => {
   const [posts, updatePosts] = useState([]);
@@ -31,7 +32,10 @@ const OfferOverview = () => {
       </span>
       {posts.map((singleItem, key) => (
         <SingleOffer
-          className={classes.offerCard}
+          // icon={<GiCookingPot />}
+          className={`${classes.offerCard} ${
+            classes[singleItem.category.name]
+          }`}
           key={key}
           item={singleItem}
         />
