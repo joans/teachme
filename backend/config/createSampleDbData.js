@@ -303,7 +303,7 @@ const createDefaultUsersAndPosts = async () => {
   await createUserDetails(
     "Giuseppe",
     "male",
-    "Hello everyone, my name is Guiseppe. I am from Italy and have moved to Germany for studying. I would like to get to know some new people and thought it would be nice to connect over food.",
+    "Hello everyone, my name is Giuseppe. I am from Italy and have moved to Germany for studying. I would like to get to know some new people and thought it would be nice to connect over food.",
     "getting to know new people, deserts, foreign cultures",
     "italian, english"
   );
