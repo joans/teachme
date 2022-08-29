@@ -12,6 +12,16 @@ import { AiOutlineMail, AiFillLike } from "react-icons/ai";
 import { BsGenderTrans } from "react-icons/bs";
 import { MdOutlineLanguage } from "react-icons/md";
 
+function capitalize(str) {
+  if (str) {
+    const singleWordCapitalized = (str) => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+
+    return str.split(" ").map(singleWordCapitalized).join(" ");
+  }
+}
+
 function timeSince(input) {
   const date = new Date(input);
   var seconds = Math.floor((new Date() - date) / 1000);
@@ -43,9 +53,10 @@ function timeSince(input) {
 const Profile = () => {
   const [errMsg, updateErrMsg] = useState();
   const [userData, updateUserData] = useState({
-    usename: null,
+    username: null,
     email: null,
     createdAt: null,
+    interestedIn: null,
     posts: [],
   });
   const authCtx = useContext(AuthContext);
@@ -103,10 +114,13 @@ const UserDetails = ({ userData }) => {
       )}
       <SingleDataItem symbol={<AiOutlineMail />} text={userData.email} />
       <SingleDataItem symbol={<BsGenderTrans />} text={userData.gender} />
-      <SingleDataItem symbol={<AiFillLike />} text={userData.interestedIn} />
+      <SingleDataItem
+        symbol={<AiFillLike />}
+        text={capitalize(userData.interestedIn)}
+      />
       <SingleDataItem
         symbol={<MdOutlineLanguage />}
-        text={userData.languages}
+        text={capitalize(userData.languages)}
       />
 
       <p>User since: {timeSince(userData.createdAt)}</p>
