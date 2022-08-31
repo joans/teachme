@@ -99,7 +99,7 @@ const SignUp = () => {
     const postFormData = async () => {
       try {
         const resp = await Axios.post(
-          "http://localhost:3307/register",
+          `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/register`,
           newUser
         );
         console.log(resp.data);

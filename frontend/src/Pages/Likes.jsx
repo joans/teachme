@@ -17,7 +17,7 @@ const Likes = () => {
         const useruuid = authCtx.auth.uuid;
         if (useruuid) {
           const res = await Axios.get(
-            `http://localhost:3307/fetch_likes_posts/${useruuid}`
+            `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/fetch_likes_posts/${useruuid}`
           );
           updateLikedPosts(res.data);
         }

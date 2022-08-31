@@ -14,7 +14,9 @@ const OfferOverview = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await Axios.get("http://localhost:3307/posts");
+        const res = await Axios.get(
+          `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/posts`
+        );
         updatePosts(res.data);
       } catch (err) {
         updateErrMsg(err.message);

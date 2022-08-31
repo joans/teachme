@@ -35,7 +35,10 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const resp = await Axios.post("http://localhost:3307/login", user);
+      const resp = await Axios.post(
+        `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/login`,
+        user
+      );
       console.log(resp.data);
       auth.onLogin(resp.data);
       navigate("/");

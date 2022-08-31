@@ -66,9 +66,12 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await Axios.get(`http://localhost:3307/users/${id}`, {
-          headers: { "x-access-token": authCtx.auth.accessToken },
-        });
+        const res = await Axios.get(
+          `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/users/${id}`,
+          {
+            headers: { "x-access-token": authCtx.auth.accessToken },
+          }
+        );
         // For test purposes only: Pick a random index from the array and use this users uuid as a login param
         updateUserData(res.data);
         console.log(res.data);

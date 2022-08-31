@@ -7,6 +7,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("./config/auth.config");
 
+const appPort = process.env.PORT || 3307;
+
 const app = express();
 // for cookie-parsing:
 // const cookies = require("cookie-parser");
@@ -432,8 +434,8 @@ app.get("/posts/:uuid", async (req, res) => {
   }
 });
 
-app.listen({ port: 3307 }, async () => {
-  console.log("Running server http://localhost:3307");
+app.listen({ port: appPort }, async () => {
+  console.log(`Running server http://localhost:${appPort}`);
   await sequelize.authenticate();
   console.log("Database Connected!");
 });

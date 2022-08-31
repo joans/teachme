@@ -16,7 +16,9 @@ const Categories = () => {
     // fetch posts from backend
     const fetchData = async () => {
       try {
-        const res = await Axios.get("http://localhost:3307/categories_entries");
+        const res = await Axios.get(
+          `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/categories_entries`
+        );
         updateOrigPosts(res.data);
         updateFilteredPosts(res.data);
       } catch (err) {

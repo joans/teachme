@@ -39,7 +39,9 @@ const PostDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await Axios.get(`http://localhost:3307/posts/${id}`);
+        const res = await Axios.get(
+          `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/posts/${id}`
+        );
         updateSinglePost(res.data);
       } catch (err) {
         const completeErrorBackend = JSON.parse(err.request.response);
@@ -56,7 +58,7 @@ const PostDetail = () => {
   const handleDeletePost = async () => {
     try {
       await Axios.delete(
-        `http://localhost:3307/delete_post/${singlePost.uuid}`,
+        `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/delete_post/${singlePost.uuid}`,
         {
           headers: { "x-access-token": authCtx.auth.accessToken },
         }

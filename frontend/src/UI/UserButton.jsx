@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
-import Button from "./Button";
 import AuthContext from "../store/auth-context";
 import classes from "./UserButton.module.css";
 
 import { BiUser } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 const UserButton = () => {
   const [navOpen, setNavOpen] = useState(false);
