@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const db = require("../models");
+require("dotenv").config();
+
 const User = db.user;
 verifyToken = (req, res, next) => {
   // cookie-version of the code:
