@@ -7,6 +7,7 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
 require("dotenv").config();
+// import { ConnectionString } from "connection-string";
 
 const devConfig = {
   database: process.env.MYSQL_DB,
@@ -14,19 +15,20 @@ const devConfig = {
   password: process.env.MYSQL_PW,
   host: process.env.MYSQL_HOST,
   port: process.env.MYSQL_PORT,
-  dialect: "mysql",
+  dialect: process.env.MYSQL_DIALECT,
 };
 
-const deployConfig = {
-  connectionString: process.env.CLEARDB_DATABASE_URL, // heroku cleardb addon
-};
+// const conString = new ConnectionString(process.env.CLEARDB_DATABASE_URL);
+
+// const deployConfig = {
+//   connectionString: process.env.CLEARDB_DATABASE_URL, // heroku cleardb addon
+//   dialect: "mysql",
+// };
 
 const db = {};
 
 let sequelize;
-sequelize = new Sequelize(
-  process.env.NODE_ENV === "production" ? deployConfig : devConfig
-);
+sequelize = new Sequelize(devConfig);
 // if (config.use_env_variable) {
 //   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 // } else {
