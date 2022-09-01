@@ -6,6 +6,7 @@ const { authJwt } = require("./middleware");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("./config/auth.config");
+const path = require("path");
 
 const appPort = process.env.PORT || 3307;
 
@@ -13,6 +14,11 @@ const app = express();
 // for cookie-parsing:
 // const cookies = require("cookie-parser");
 
+if (process.env.NODE_ENV === "production") {
+  //server static content
+  // npm run build
+  app.use(express.static(path.join(__dirname, "frontend/build")));
+}
 app.use(express.json());
 app.use(cors());
 // app.use(cookies());

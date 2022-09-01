@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node index.js",
+    "heroku-postbuild": "node config/createSampleDbData.js && cd frontend && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
