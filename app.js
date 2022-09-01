@@ -5,14 +5,16 @@ const { Op } = require("sequelize");
 const { authJwt } = require("./middleware");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require("./config/auth.config");
 const path = require("path");
+require("dotenv").config();
 
 const appPort = process.env.PORT || 3307;
 
 const app = express();
 // for cookie-parsing:
 // const cookies = require("cookie-parser");
+
+app.use(express.static(path.join(__dirname, "frontend/build")));
 
 if (process.env.NODE_ENV === "production") {
   //server static content
@@ -111,7 +113,7 @@ app.post("/login", async (req, res) => {
           error: "Invalid Password!",
         });
       }
-      const token = jwt.sign({ uuid: user.uuid }, config.secret, {
+      const token = jwt.sign({ uuid: user.uuid }, process.env.CONFIG_SECRET, {
         expiresIn: 86400, // 24 hours
       });
       // alternatively for cookies use this code:
