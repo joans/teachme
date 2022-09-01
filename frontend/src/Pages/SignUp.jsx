@@ -98,10 +98,7 @@ const SignUp = () => {
 
     const postFormData = async () => {
       try {
-        const resp = await Axios.post(
-          `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/register`,
-          newUser
-        );
+        const resp = await Axios.post(`/register`, newUser);
         console.log(resp.data);
         navigate("/login");
         // Maybe navigate to a "success" page, where the user gets informed about the login success?

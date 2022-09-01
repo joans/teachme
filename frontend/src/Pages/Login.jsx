@@ -35,10 +35,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const resp = await Axios.post(
-        `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/login`,
-        user
-      );
+      const resp = await Axios.post(`/login`, user);
       console.log(resp.data);
       auth.onLogin(resp.data);
       navigate("/");

@@ -80,9 +80,7 @@ const CreateOffer = ({ id }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await Axios.get(
-          `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/categories`
-        );
+        const res = await Axios.get(`/categories`);
         updateCategories(res.data);
       } catch (err) {
         const completeErrorBackend = JSON.parse(err.request.response);
@@ -103,9 +101,7 @@ const CreateOffer = ({ id }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await Axios.get(
-          `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/posts/${id}`
-        );
+        const res = await Axios.get(`/posts/${id}`);
         const { category, title, body } = res.data;
         console.log(res.data);
         updateNewArticle({
@@ -146,12 +142,12 @@ const CreateOffer = ({ id }) => {
       category: newArticle.category,
       body: newArticle.offerText,
     };
-    let dataEndpoint = `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/create_post`;
+    let dataEndpoint = `/create_post`;
 
     if (id) {
       // if there is an id use it to update the post
       payloadData = { ...payloadData, postUUID: id };
-      dataEndpoint = `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/update_post`;
+      dataEndpoint = `/update_post`;
 
       Axios.put(dataEndpoint, payloadData, {
         headers: { "x-access-token": authCtx.auth.accessToken },

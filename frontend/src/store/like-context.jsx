@@ -15,9 +15,7 @@ export const LikeContextProvider = (props) => {
 
   const fetchLikes = async (useruuid) => {
     if (useruuid) {
-      const res = await Axios.get(
-        `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/fetch_likes/${useruuid}`
-      );
+      const res = await Axios.get(`/fetch_likes/${useruuid}`);
       // unpack the likes returned from the backend. the likes from the backend are in JSON as follows:
       // [{"postuuid": <postuuid0>}, {"postuuid": <postuuid1>}, {"postuuid": <postuuid2>}]
       const likedPostsObjects = Object.values(res.data);
@@ -35,12 +33,9 @@ export const LikeContextProvider = (props) => {
   }, [useruuid]);
 
   const likeFunction = async (postuuid) => {
-    await Axios.get(
-      `${process.env.REACT_APP_PUBLIC_URL}:${process.env.REACT_APP_NODE_PORT_NUMBER}/toggle_like_post/${postuuid}`,
-      {
-        headers: { "x-access-token": authAccessToken },
-      }
-    );
+    await Axios.get(`/toggle_like_post/${postuuid}`, {
+      headers: { "x-access-token": authAccessToken },
+    });
     fetchLikes(useruuid);
   };
 
