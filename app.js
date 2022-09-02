@@ -14,7 +14,7 @@ const app = express();
 // for cookie-parsing:
 // const cookies = require("cookie-parser");
 
-app.use(express.static(path.join(__dirname, "frontend/build")));
+// app.use(express.static(path.join(__dirname, "frontend/build")));
 
 if (process.env.NODE_ENV === "production") {
   //server static content
@@ -440,6 +440,10 @@ app.get("/posts/:uuid", async (req, res) => {
 
     return res.status(500).json({ error: `Could not find any Post` });
   }
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/build/index.html"));
 });
 
 app.listen({ port: appPort }, async () => {
